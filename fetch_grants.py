@@ -120,6 +120,29 @@ def _coords(city):
     return CITY_COORDS.get((city or "").strip().lower())
 
 
+def _titlecase_addr(s):
+    # IRS addresses are ALL-CAPS; title-case but keep state abbr / common tokens tidy.
+    return " ".join(w if w.upper() in ("NE", "NW", "SE", "SW", "PO", "US") else w.capitalize()
+                    for w in (s or "").split())
+
+
+def fetch_address(ein):
+    """Best-effort street address from ProPublica's org-detail endpoint (the
+    search endpoint only returns city/state). Returns formatted string or ''."""
+    try:
+        d = _get_json(f"https://projects.propublica.org/nonprofits/api/v2/organizations/{ein}.json")
+    except (urllib.error.URLError, TimeoutError, ValueError, OSError):
+        return ""
+    o = d.get("organization", {}) or {}
+    street = _titlecase_addr(o.get("address") or "")
+    city = _titlecase_addr(o.get("city") or "")
+    st = (o.get("state") or "").strip()
+    zc = (o.get("zipcode") or "").split("-")[0].strip()
+    parts = [p for p in [street, ", ".join(x for x in [city, st] if x)] if p]
+    line = ", ".join(parts)
+    return f"{line} {zc}".strip() if zc else line
+
+
 def log(msg):
     print(f"[fetch_grants] {msg}", file=sys.stderr)
 
@@ -277,6 +300,7 @@ def fetch_prospects():
                     "name": name,
                     "funder": name,
                     "location": ", ".join(p for p in [city, st] if p),
+                    "address": fetch_address(ein),
                     "city": city,
                     "state": st,
                     "lat": latlng[0] if latlng else None,

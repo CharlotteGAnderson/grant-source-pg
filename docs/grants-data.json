@@ -5,9 +5,9 @@
     "type": "501(c)(3) Community Land Trust",
     "mission": "Affordable homeownership for first-time and BIPOC buyers across six counties in Oregon and SW Washington.",
     "address": "541 NE 20th Ave., Ste. 220, Portland, OR 97232",
-    "updated": "2026-06-26"
+    "updated": "2026-06-27"
   },
-  "generated_at": "2026-06-27T06:33:56Z",
+  "generated_at": "2026-06-27T17:07:16Z",
   "sources": [
     "curated",
     "Grants.gov",
@@ -714,6 +714,7 @@
       "name": "Awakening Community Foundation",
       "funder": "Awakening Community Foundation",
       "location": "Central Point, OR",
+      "address": "1082 Glengrove Ave, Central Point, OR 97502",
       "city": "Central Point",
       "state": "OR",
       "lat": 42.38,
@@ -730,6 +731,7 @@
       "name": "Banks Community Foundation",
       "funder": "Banks Community Foundation",
       "location": "Banks, OR",
+      "address": "PO Box 355, Banks, OR 97106",
       "city": "Banks",
       "state": "OR",
       "lat": 45.62,
@@ -746,6 +748,7 @@
       "name": "Benton Community Foundation",
       "funder": "Benton Community Foundation",
       "location": "Corvallis, OR",
+      "address": "340 NW 5th St, Corvallis, OR 97330",
       "city": "Corvallis",
       "state": "OR",
       "lat": 44.56,
@@ -762,6 +765,7 @@
       "name": "Better & Better Housing Foundation",
       "funder": "Better & Better Housing Foundation",
       "location": "Hubbard, OR",
+      "address": "PO Box 645, Hubbard, OR 97032",
       "city": "Hubbard",
       "state": "OR",
       "lat": 45.18,
@@ -778,6 +782,7 @@
       "name": "Blanchet Community Foundation",
       "funder": "Blanchet Community Foundation",
       "location": "Salem, OR",
+      "address": "2007 State St, Salem, OR 97301",
       "city": "Salem",
       "state": "OR",
       "lat": 44.94,
@@ -794,6 +799,7 @@
       "name": "Bridgeway Community Foundation",
       "funder": "Bridgeway Community Foundation",
       "location": "Salem, OR",
+      "address": "250 Church St SE Ste 202, Salem, OR 97301",
       "city": "Salem",
       "state": "OR",
       "lat": 44.94,
@@ -810,6 +816,7 @@
       "name": "Carlton Community Foundation",
       "funder": "Carlton Community Foundation",
       "location": "Carlton, OR",
+      "address": "PO Box 1191, Carlton, OR 97111",
       "city": "Carlton",
       "state": "OR",
       "lat": 45.29,
@@ -826,6 +833,7 @@
       "name": "Charbonneau Community Foundation",
       "funder": "Charbonneau Community Foundation",
       "location": "Wilsonville, OR",
+      "address": "31160 SW Country View Loop, Wilsonville, OR 97070",
       "city": "Wilsonville",
       "state": "OR",
       "lat": 45.3,
@@ -842,6 +850,7 @@
       "name": "Childrens Housing Foundation",
       "funder": "Childrens Housing Foundation",
       "location": "Beavercreek, OR",
+      "address": "PO Box 157, Beavercreek, OR 97004",
       "city": "Beavercreek",
       "state": "OR",
       "lat": null,
@@ -858,6 +867,7 @@
       "name": "Coburg Community Foundation",
       "funder": "Coburg Community Foundation",
       "location": "Coburg, OR",
+      "address": "PO Box 8104, Coburg, OR 97408",
       "city": "Coburg",
       "state": "OR",
       "lat": null,
@@ -874,6 +884,7 @@
       "name": "Community Bridges Foundation",
       "funder": "Community Bridges Foundation",
       "location": "Grants Pass, OR",
+      "address": "229 NE Beacon Dr, Grants Pass, OR 97526",
       "city": "Grants Pass",
       "state": "OR",
       "lat": 42.44,
@@ -890,6 +901,7 @@
       "name": "Community Empowerment Foundation",
       "funder": "Community Empowerment Foundation",
       "location": "Portland, OR",
+      "address": "3611 SE 28th Ave Unit 118, Portland, OR 97202",
       "city": "Portland",
       "state": "OR",
       "lat": 45.52,
@@ -906,6 +918,7 @@
       "name": "Dallas Community Foundation",
       "funder": "Dallas Community Foundation",
       "location": "Dallas, OR",
+      "address": "PO Box 1001, Dallas, OR 97338",
       "city": "Dallas",
       "state": "OR",
       "lat": 44.92,
@@ -922,6 +935,7 @@
       "name": "Dcc Community Foundation",
       "funder": "Dcc Community Foundation",
       "location": "Damascus, OR",
+      "address": "20080 SE Highway 212, Damascus, OR 97089",
       "city": "Damascus",
       "state": "OR",
       "lat": null,
@@ -938,6 +952,7 @@
       "name": "Ems Community Foundation",
       "funder": "Ems Community Foundation",
       "location": "Eugene, OR",
+      "address": "PO Box 10911, Eugene, OR 97440",
       "city": "Eugene",
       "state": "OR",
       "lat": 44.05,
@@ -954,6 +969,7 @@
       "name": "Estacada Community Foundation",
       "funder": "Estacada Community Foundation",
       "location": "Estacada, OR",
+      "address": "PO Box 1498, Estacada, OR 97023",
       "city": "Estacada",
       "state": "OR",
       "lat": null,
@@ -970,6 +986,7 @@
       "name": "Gorge Community Foundation",
       "funder": "Gorge Community Foundation",
       "location": "Hood River, OR",
+      "address": "PO Box 1711, Hood River, OR 97031",
       "city": "Hood River",
       "state": "OR",
       "lat": 45.71,
@@ -986,6 +1003,7 @@
       "name": "Heppner Community Foundation",
       "funder": "Heppner Community Foundation",
       "location": "Heppner, OR",
+      "address": "PO Box 12, Heppner, OR 97836",
       "city": "Heppner",
       "state": "OR",
       "lat": null,
@@ -1002,6 +1020,7 @@
       "name": "Hillsdale Community Foundation",
       "funder": "Hillsdale Community Foundation",
       "location": "Portland, OR",
+      "address": "1528 SW Pendleton St, Portland, OR 97239",
       "city": "Portland",
       "state": "OR",
       "lat": 45.52,
@@ -1018,6 +1037,7 @@
       "name": "Jf Housing Foundation",
       "funder": "Jf Housing Foundation",
       "location": "Coos Bay, OR",
+      "address": "1685 Shorepines Dr, Coos Bay, OR 97420",
       "city": "Coos Bay",
       "state": "OR",
       "lat": 43.37,
@@ -1034,6 +1054,7 @@
       "name": "Jls Community Foundation",
       "funder": "Jls Community Foundation",
       "location": "Scappoose, OR",
+      "address": "51673 Columbia River Hwy, Scappoose, OR 97056",
       "city": "Scappoose",
       "state": "OR",
       "lat": null,
@@ -1050,6 +1071,7 @@
       "name": "Jls Community Foundation",
       "funder": "Jls Community Foundation",
       "location": "Scappoose, OR",
+      "address": "51673 Columbia River Hwy, Scappoose, OR 97056",
       "city": "Scappoose",
       "state": "OR",
       "lat": null,
@@ -1066,6 +1088,7 @@
       "name": "Kindheart Housing Foundation Inc",
       "funder": "Kindheart Housing Foundation Inc",
       "location": "Portland, OR",
+      "address": "3019 SE 145th Ave, Portland, OR 97236",
       "city": "Portland",
       "state": "OR",
       "lat": 45.52,
@@ -1082,6 +1105,7 @@
       "name": "Maps Community Foundation",
       "funder": "Maps Community Foundation",
       "location": "Salem, OR",
+      "address": "PO Box 12398, Salem, OR 97309",
       "city": "Salem",
       "state": "OR",
       "lat": 44.94,
@@ -1098,6 +1122,7 @@
       "name": "Oregon Community Foundation",
       "funder": "Oregon Community Foundation",
       "location": "Portland, OR",
+      "address": "1221 SW Yamhill St Ste, Portland, OR 97205",
       "city": "Portland",
       "state": "OR",
       "lat": 45.52,
@@ -1114,6 +1139,7 @@
       "name": "Oregon Recovery Housing Foundation",
       "funder": "Oregon Recovery Housing Foundation",
       "location": "Molalla, OR",
+      "address": "304 N Cole Ave, Molalla, OR 97038",
       "city": "Molalla",
       "state": "OR",
       "lat": 45.15,
@@ -1130,6 +1156,7 @@
       "name": "Parkrose Community Foundation",
       "funder": "Parkrose Community Foundation",
       "location": "Portland, OR",
+      "address": "3839 NE 122nd Ave, Portland, OR 97230",
       "city": "Portland",
       "state": "OR",
       "lat": 45.52,
@@ -1146,6 +1173,7 @@
       "name": "Philomath Community Foundation",
       "funder": "Philomath Community Foundation",
       "location": "Philomath, OR",
+      "address": "PO Box 1000, Philomath, OR 97370",
       "city": "Philomath",
       "state": "OR",
       "lat": null,
@@ -1162,6 +1190,7 @@
       "name": "Toledo Community Foundation",
       "funder": "Toledo Community Foundation",
       "location": "Toledo, OR",
+      "address": "PO Box 32, Toledo, OR 97391",
       "city": "Toledo",
       "state": "OR",
       "lat": null,
@@ -1178,6 +1207,7 @@
       "name": "United Community Foundation",
       "funder": "United Community Foundation",
       "location": "Salem, OR",
+      "address": "455 Bliler Ave NE, Salem, OR 97301",
       "city": "Salem",
       "state": "OR",
       "lat": 44.94,
@@ -1192,15 +1222,15 @@
   ],
   "news": [
     {
-      "id": "news-9848640887",
-      "title": "New affordable homes paired with services open in the heart of Portland’s Central Eastside - oregonmetro.gov",
-      "source": "oregonmetro.gov",
-      "date": "2026-06-24",
-      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxObURtXzFkeE5CYmFLdHh3YS1SSUZDY3hES3lKdXo5dzdpdWgzeXJmbDZZbFJMM1NHLTVZc0xOek5tRG1CUWRocWNYVjlDVmY5aWhUenNCeXdyUllwaDhHUzM2WVRybVpMZVA4X3VzcjBSNWFRZHM4cFpEaURTaDk3SXNsTjF6Z05FWlhXZXBJUENQckRmSUNONWF3a005U0xTYmtxVlpnRXRkbXFmQkJv?oc=5",
+      "id": "news-4494216696",
+      "title": "SEI expands with housing development arm - The Business Journals",
+      "source": "The Business Journals",
+      "date": "2026-06-25",
+      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPTGVkaXR2dFh5T2lKa2IwWm10aWdjTnRhRUwxM1FZZVFQTFA4aFdNZ3JGT18wN0hrbDJ4dkp6MVBIWFdwdnh1MFF5X2ZRc2RxSDZLckhEN01WYnhZZUxKalNadnVJM180SEV4VzB6a0djaHhuVUNrZVhoakt0cER5NVB3S1Zzd2lORzBGdHBjdEo1MFJ5U1YycjVFVDJ1QQ?oc=5",
       "topic": "Housing"
     },
     {
-      "id": "news-8590644789",
+      "id": "news-7400965671",
       "title": "Dwight Capital Refis Oregon Apartments With $39M HUD Loan - Commercial Observer",
       "source": "Commercial Observer",
       "date": "2026-06-24",
@@ -1208,7 +1238,7 @@
       "topic": "Funding"
     },
     {
-      "id": "news-8014174371",
+      "id": "news-6170644298",
       "title": "We don’t have to compromise land use laws to have housing - Capital Press",
       "source": "Capital Press",
       "date": "2026-06-23",
@@ -1216,7 +1246,7 @@
       "topic": "Housing"
     },
     {
-      "id": "news-4286590418",
+      "id": "news-1559836879",
       "title": "Senate passes housing legislative package in overwhelming bipartisan fashion - MyCentralOregon.com",
       "source": "MyCentralOregon.com",
       "date": "2026-06-23",
@@ -1224,7 +1254,15 @@
       "topic": "Policy"
     },
     {
-      "id": "news-2394029698",
+      "id": "news-7939053918",
+      "title": "Ashe Community Land Trust featured at Democratic Women of Ashe meeting - Ashe Post & Times",
+      "source": "Ashe Post & Times",
+      "date": "2026-06-22",
+      "url": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxQd203Ri1zUGVqSjRrYlhiYkF2NFd4N09nWERVZlhDOHFmLW1fcWUyaElNV0J2T2hsSmZpRHhEV19zVnlXYldJYzB6R05rdHZsZHBfeXBsdTZGNWJyZGlLdEtyWjYyb3I5ZXJsa1Fpdkw0QlVKMkNyY3JuVnlFcWFsUFZGSFZUOHJGX3Z3NnRfcUNfeFB3V0xzSmdzRFpRT1ZzRTM4b3NOejBKMUV1YjhrSi0yZUlUSTZrNDVRcW01cThucHpKOFQzendXMUJISWs4WGNXREVpdmNodFZxWHM0OEl5R3RSR3RMdERMa0FKNA?oc=5",
+      "topic": "Housing"
+    },
+    {
+      "id": "news-9662840724",
       "title": "How many people live in subsidized housing in Oregon County, MO? - USAFacts",
       "source": "USAFacts",
       "date": "2026-06-19",
@@ -1232,7 +1270,7 @@
       "topic": "Government"
     },
     {
-      "id": "news-7075249010",
+      "id": "news-6972331180",
       "title": "Recent State Actions Related to Immigrants’ Access to Services and Immigration Enforcement - KFF",
       "source": "KFF",
       "date": "2026-06-16",
@@ -1240,7 +1278,7 @@
       "topic": "Funding"
     },
     {
-      "id": "news-4918439507",
+      "id": "news-8968711561",
       "title": "Podcast: How Missing Middle Housing Can Help Close Affordability Gap - National Association of Home Builders | NAHB",
       "source": "National Association of Home Builders | NAHB",
       "date": "2026-06-16",
@@ -1248,7 +1286,7 @@
       "topic": "Housing"
     },
     {
-      "id": "news-7356745466",
+      "id": "news-3970234221",
       "title": "Oregon’s Sen. Wyden brings back housing affordability bill - The News Guard",
       "source": "The News Guard",
       "date": "2026-06-15",
@@ -1256,7 +1294,7 @@
       "topic": "Policy"
     },
     {
-      "id": "news-1335289429",
+      "id": "news-418775595",
       "title": "Central Oregon Nonprofits Receive Funding from OnPoint - The Source - Bend, Oregon - The Source - Bend, Oregon",
       "source": "The Source - Bend, Oregon",
       "date": "2026-06-12",
@@ -1264,7 +1302,7 @@
       "topic": "Funding"
     },
     {
-      "id": "news-2032667981",
+      "id": "news-3297390879",
       "title": "COVID Mortage Help Deadline Approaches For Oregon Homeowners - FM News 101 KXL",
       "source": "FM News 101 KXL",
       "date": "2026-06-12",
@@ -1272,7 +1310,7 @@
       "topic": "Housing"
     },
     {
-      "id": "news-8636653870",
+      "id": "news-4169497592",
       "title": "Oregon’s Sen. Wyden brings back housing affordability bill - Oregon Capital Chronicle",
       "source": "Oregon Capital Chronicle",
       "date": "2026-06-11",
@@ -1280,7 +1318,7 @@
       "topic": "Policy"
     },
     {
-      "id": "news-840886986",
+      "id": "news-8926315676",
       "title": "Data: 13% of Vancouver-Portland homes less than half-mile from bus, rail stop - Camas-Washougal Post-Record",
       "source": "Camas-Washougal Post-Record",
       "date": "2026-06-11",
@@ -1288,7 +1326,7 @@
       "topic": "Housing"
     },
     {
-      "id": "news-415878805",
+      "id": "news-5510125387",
       "title": "Section 8 Project-Based Rental Assistance - Center on Budget and Policy Priorities",
       "source": "Center on Budget and Policy Priorities",
       "date": "2026-06-11",
@@ -1296,7 +1334,7 @@
       "topic": "Policy"
     },
     {
-      "id": "news-2317073050",
+      "id": "news-5602196251",
       "title": "Major Portland affordable housing provider could close in 6 months, leader tells city - OregonLive.com",
       "source": "OregonLive.com",
       "date": "2026-06-09",
@@ -1304,7 +1342,7 @@
       "topic": "Housing"
     },
     {
-      "id": "news-1580668406",
+      "id": "news-434800359",
       "title": "Mayor Wilson warns Portland’s affordable housing system is on verge of financial collapse - KOIN.com",
       "source": "KOIN.com",
       "date": "2026-06-08",
@@ -1312,7 +1350,7 @@
       "topic": "Funding"
     },
     {
-      "id": "news-2189807492",
+      "id": "news-5147994057",
       "title": "Nearly 75 Southern Oregon nonprofits reap $2.25 million in Walker Fund grants; see list - Rogue Valley Times",
       "source": "Rogue Valley Times",
       "date": "2026-06-05",
@@ -1320,7 +1358,7 @@
       "topic": "Funding"
     },
     {
-      "id": "news-3247523029",
+      "id": "news-8909405368",
       "title": "OCF grant will help transitional housing in Jackson County - kobi5.com",
       "source": "kobi5.com",
       "date": "2026-06-05",
@@ -1328,15 +1366,7 @@
       "topic": "Funding"
     },
     {
-      "id": "news-7851047540",
-      "title": "Harger: HUD pulls funding from Housing First. King County spent 20 years and billions on it. It got worse - MyNorthwest.com",
-      "source": "MyNorthwest.com",
-      "date": "2026-06-05",
-      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTFA4SzV2cXVUWko5Nk9jN3RGR045Um1xRVJEem1feDg1cWh1ZVF1RW5SOFdVdURuMUY3YVlqMG5NVVpTU1dSYTNneFBmTG84WFktVkVzdFF6elV1bDE2M3lLclZoaXF5M1BUNXlBcU5RenQ5VDJnNkpZYmpjRWRXQVE?oc=5",
-      "topic": "Funding"
-    },
-    {
-      "id": "news-9145984920",
+      "id": "news-1901404983",
       "title": "A low-income housing program is pouring big money into housing many Oregonians can’t afford - Oregon Public Broadcasting - OPB",
       "source": "Oregon Public Broadcasting - OPB",
       "date": "2026-06-03",
@@ -1344,7 +1374,7 @@
       "topic": "Housing"
     },
     {
-      "id": "news-7831782928",
+      "id": "news-5194018925",
       "title": "Clackamas County, Metro break ground on Clackamas Heights redevelopment - Clackamas County",
       "source": "Clackamas County",
       "date": "2026-06-03",
@@ -1352,7 +1382,7 @@
       "topic": "Government"
     },
     {
-      "id": "news-3372235689",
+      "id": "news-319252330",
       "title": "Partners for Affordable Housing Working to Ensure Homes for Everyone - The Source - Bend, Oregon",
       "source": "The Source - Bend, Oregon",
       "date": "2026-06-03",
@@ -1360,7 +1390,7 @@
       "topic": "Housing"
     },
     {
-      "id": "news-7114331233",
+      "id": "news-9601631231",
       "title": "After Months of “Political Football,” Council Funds Housing for Black Portlanders - Portland Mercury",
       "source": "Portland Mercury",
       "date": "2026-06-03",
@@ -1368,7 +1398,7 @@
       "topic": "Funding"
     },
     {
-      "id": "news-6200331177",
+      "id": "news-3249106043",
       "title": "City Council Allots $2.5 Million to Housing Projects in North and Northeast Portland - Willamette Week",
       "source": "Willamette Week",
       "date": "2026-06-03",
@@ -1376,7 +1406,7 @@
       "topic": "Funding"
     },
     {
-      "id": "news-6212772175",
+      "id": "news-9579181566",
       "title": "Rising rents drive demand for affordable housing solutions - The Clackamas Print",
       "source": "The Clackamas Print",
       "date": "2026-06-03",
@@ -1384,15 +1414,23 @@
       "topic": "Housing"
     },
     {
-      "id": "news-1216808481",
-      "title": "NEWS RELEASE: City and County Bolster Emergency Rent Assistance Efforts with $5M - Multnomah County",
-      "source": "Multnomah County",
+      "id": "news-7614890555",
+      "title": "Hillside Park Redevelopment - Clackamas County",
+      "source": "Clackamas County",
+      "date": "2026-06-03",
+      "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTFBicXEybm1ycm4xbXBJVXhpOEdxVG9KcDRwSjQwdW9sMjZzVWhmZzdBX1NueW1tNHNKRGtZUWl2aEZtUHdnSGdnT201VkMzbGhOeDl5dGpjaUdWZ0lLSWVub3gxV3dwbGZWOUtHVjhWNkFxTlE?oc=5",
+      "topic": "Government"
+    },
+    {
+      "id": "news-2002137326",
+      "title": "City and County Bolster Emergency Rent Assistance Efforts with $5M - Portland.gov",
+      "source": "Portland.gov",
       "date": "2026-06-02",
-      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOYzZZRWlESUxPY0FuZ1hFYUxfaWQ2bG9uSlNpRG1WTjRVNFpSQlZ3M1ZUcW1yQUdVZ3czTUdwdnlQX2t4bVR5NmNLSWhnWHFmVmxnZG4wRVFDeTNCY241bmZpdkJFUlVIWU84bURqY2xNVWVuZ1QweWtuX1M5alhRbFNUV2g3cXJUMnY3T0NseFVhb0tXWTNDQUNUY0w?oc=5",
+      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQbjdsQW9ZdUphUTJGcGJwQ0czYkNXVFdNal9ucTVRS3NlZDFWSTJfR1pySkVpYjZrRjBMWnpvNE0zUHM0QVdwa1F1dDkwWHZyQjY0OWZxUXdWMXVLdjE0T25mTzJWbWhmaTV6NXAyN3FZSW9NM0UxT2l3dExzRUVJa2VRZjJlLU0tUjBKNjJnc3pJRmt3QlN1bngzbzEzQlN5dUVvV3Nn?oc=5",
       "topic": "Funding"
     },
     {
-      "id": "news-3369225343",
+      "id": "news-8241750144",
       "title": "Old Saco church poised to become affordable housing - The Portland Press Herald",
       "source": "The Portland Press Herald",
       "date": "2026-06-02",
@@ -1400,7 +1438,7 @@
       "topic": "Housing"
     },
     {
-      "id": "news-7606077806",
+      "id": "news-7077800172",
       "title": "Rent and utility aid available for 2020 wildfire survivors in eight Oregon counties - KTVZ",
       "source": "KTVZ",
       "date": "2026-06-01",
@@ -1408,7 +1446,7 @@
       "topic": "Housing"
     },
     {
-      "id": "news-4164958027",
+      "id": "news-8172195334",
       "title": "New affordable housing community in Wilsonville features ground level food bank, transit center and food hall - oregonmetro.gov",
       "source": "oregonmetro.gov",
       "date": "2026-05-29",
@@ -1416,20 +1454,12 @@
       "topic": "Housing"
     },
     {
-      "id": "news-5399101227",
+      "id": "news-8794108556",
       "title": "HUD Launches Investigation of Portland-Area County Over Race-Based Homelessness Programs - freebeacon.com",
       "source": "freebeacon.com",
       "date": "2026-05-29",
       "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxNV0VQdlJhNDBYRTJQTVd3QmE2OXRfYUpRMFhxVldLV1lTeXFfSXZFeXNBQjdZazdmTld5NWpoN1lzWTNtMThoanY3OU1kdm5UQ2dyZnM0cmhaX0JITEVKQXN1TTRuVF9GZ3VnNDVrcDZRSWRrbEdfX3pFS0VHRTFwTEJWdEx2RjNfcDROOGxsOEJoWnByQjd6c3dkM2VaOFJBNlQ0UXpyb3NfWDZFclJYcVpiQzJtZklSYldsMUo1WmJWb0Rmb3FLeUNhZUpYUQ?oc=5",
       "topic": "Funding"
-    },
-    {
-      "id": "news-7119195189",
-      "title": "Nearly 1,000 Oregon households bought homes with this lending program last year - theoutlookonline.com",
-      "source": "theoutlookonline.com",
-      "date": "2026-05-28",
-      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPVm9nOEtlWjRyeGFEQmNsZGNweFY4T3htc2JfNlpQazRYd0NKemRKSXloXzhObTE1TVRjczdHSTBfNDNVRnNXZW5vdzlOWTFtcE1YU0Rza2E1X1pOTEVRY0c0XzhOa1pQODFzeXIyZUZfRDFLaEpiazRnWFNRdUZPOGlZNTFsRUlSTzd2elFoWlZjam9UclZRSndmbGhGdFdxQnoyVXJ0NVlsclZmSFhNenRmMk9iR3l1SWhR?oc=5",
-      "topic": "Housing"
     }
   ]
 }

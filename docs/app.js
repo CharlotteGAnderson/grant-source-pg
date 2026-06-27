@@ -297,7 +297,7 @@ function renderFunders() {
   }
   body.innerHTML = list.map((p) => `<tr>
       <td class="cell-name"><b>${esc(p.name)}</b><div class="fit">EIN ${esc(p.ein || "—")}</div></td>
-      <td class="hide-sm funder">${esc(p.location || "—")}</td>
+      <td class="hide-sm funder">${esc(p.address || p.location || "—")}</td>
       <td class="hide-sm funder">${esc(p.matched_on || "—")}</td>
       <td class="links"><a class="primary" href="${esc(safeUrl(p.url))}" target="_blank" rel="noopener noreferrer">990 profile ↗</a></td>
     </tr>`).join("");
@@ -340,12 +340,18 @@ function renderFunderMap() {
     });
     const profile = (p.url && safeUrl(p.url) !== "#")
       ? `<a class="m-btn primary" href="${esc(safeUrl(p.url))}" target="_blank" rel="noopener noreferrer">Open 990 profile &#8599;</a>` : "";
+    const addr = p.address
+      ? `<div class="fp-loc">&#127968; ${esc(p.address)}</div>` : "";
     m.bindPopup(
       `<div class="fp-cat">${esc(CAT_LABEL[p.matched_on] || p.matched_on || "Local funder")}</div>
        <h4>${esc(p.name)}</h4>
+       ${addr}
        <div class="fp-loc">&#128205; ${esc(p.location || "")}${p.ein ? " &middot; EIN " + esc(p.ein) : ""}</div>
        <p class="fp-sum">${esc(p.summary || "")}</p>${profile}`,
-      { maxWidth: 260 });
+      // autoPan + padding so a popup near the top/edge is never clipped by the
+      // map frame; maxHeight gives the popup its own scroll if content is long.
+      { maxWidth: 260, maxHeight: 300, autoPan: true, keepInView: true,
+        autoPanPaddingTopLeft: [24, 56], autoPanPaddingBottomRight: [24, 24] });
     m.bindTooltip(esc(p.name));
     m.addTo(funderLayer);
     pts.push([p.lat, p.lng]);
@@ -397,11 +403,11 @@ function renderNews() {
     return;
   }
   grid.innerHTML = list.map((n) => `
-    <a class="news-card" href="${esc(safeUrl(n.url))}" target="_blank" rel="noopener noreferrer">
+    <div class="news-card" role="button" tabindex="0" data-news-id="${esc(n.id)}">
       <span class="news-topic nt-${esc(n.topic)}">${esc(n.topic)}</span>
       <div class="nt">${esc(n.title)}</div>
       <div class="nm"><span>${esc(n.source || "")}</span><span>${n.date ? fmtDate(n.date) : ""}</span></div>
-    </a>`).join("");
+    </div>`).join("");
 }
 
 /* ---------- sorting headers ---------- */
@@ -504,14 +510,51 @@ function fillModal(g) {
   if (wg) wg.addEventListener("click", () => downloadWord(g));
 }
 
-function openModal(id) {
-  const g = DATA.grants.find((x) => x.id === id);
-  if (!g) return;
-  fillModal(g);
+function showModal() {
   $("#modalOverlay").hidden = false;
   $("#grantModal").classList.add("open");
   $("#grantModal").setAttribute("aria-hidden", "false");
   document.addEventListener("keydown", modalEsc);
+}
+
+function openModal(id) {
+  const g = DATA.grants.find((x) => x.id === id);
+  if (!g) return;
+  fillModal(g);
+  showModal();
+}
+
+// Two-sentence brief generated from the headline + topic. The full article text
+// can't be fetched (Google News links don't resolve to the publisher and there's
+// no key), so this is an honest relevance brief, not a scrape of the article body.
+const NEWS_RELEVANCE_NOTE = {
+  Housing: "It covers a Pacific-Northwest housing or affordability development. Worth a scan for sites, partners, or market signals that affect permanently affordable homeownership.",
+  Funding: "It involves grants, capital, or investment in regional housing. Open it to check whether a funder, program, or deadline could fit Proud Ground.",
+  Policy: "It concerns housing legislation or policy in Oregon/Washington. Policy shifts can change what a community land trust is able to build or fund.",
+  Government: "It involves a government housing program or agency action. It may surface public funding or rule changes relevant to a community land trust.",
+};
+function newsBrief(n) {
+  const s1 = `${n.source ? n.source + " reports" : "This story"}: “${n.title}”${n.date ? " (" + fmtDate(n.date) + ")" : ""}.`;
+  const s2 = NEWS_RELEVANCE_NOTE[n.topic] || "Surfaced for its relevance to affordable housing and community land trusts in the Pacific Northwest.";
+  return [s1, s2];
+}
+
+function openNewsModal(id) {
+  const n = (DATA.news || []).find((x) => x.id === id);
+  if (!n) return;
+  const [s1, s2] = newsBrief(n);
+  $("#modalContent").innerHTML = `
+    <div class="badges"><span class="news-topic nt-${esc(n.topic)}">${esc(n.topic)}</span></div>
+    <h2 id="modalTitle">${esc(n.title)}</h2>
+    <div class="m-funder">${esc(n.source || "")}${n.date ? " &middot; " + fmtDate(n.date) : ""}</div>
+    <h3>In brief</h3>
+    <p class="m-body">${esc(s1)}</p>
+    <p class="m-body">${esc(s2)}</p>
+    <p class="m-body" style="font-size:.78rem;color:var(--ink-mute)">Auto-generated relevance note from the headline &mdash; read the full article for the complete story.</p>
+    <div class="m-actions">
+      <a class="m-btn primary" href="${esc(safeUrl(n.url))}" target="_blank" rel="noopener noreferrer">Read full article &#8599;</a>
+    </div>`;
+  showModal();
 }
 function closeModal() {
   modalGrant = null;
@@ -610,6 +653,9 @@ $("#miniViewAll").addEventListener("click", () => {
   buildOppFilters(); renderOpps(); switchTab("opps");
 });
 $("#newsSearch").addEventListener("input", (e) => { newsQuery = e.target.value; renderNews(); });
+function newsOpen(e) { const el = e.target.closest("[data-news-id]"); if (el) openNewsModal(el.dataset.newsId); }
+$("#newsGrid").addEventListener("click", newsOpen);
+$("#newsGrid").addEventListener("keydown", (e) => { if ((e.key === "Enter" || e.key === " ") && e.target.classList.contains("news-card")) { e.preventDefault(); openNewsModal(e.target.dataset.newsId); } });
 
 buildOppFilters();
 buildFunderCatFilters();
