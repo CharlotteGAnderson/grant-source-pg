@@ -120,6 +120,8 @@ function buildDoc(g) {
 
 (async () => {
   for (const g of data.grants) {
+    if (!g.deadline) continue;             // need a deadline for the Key Facts table
+    if (g.source && g.source !== "curated") continue; // only curated grants get a Word summary (the UI only links those)
     const doc = buildDoc(g);
     const buf = await Packer.toBuffer(doc);
     fs.writeFileSync(path.join(outDir, `${g.id}.docx`), buf);

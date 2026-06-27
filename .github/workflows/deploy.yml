@@ -4,6 +4,10 @@ on:
   push:
     branches: [ main ]
   workflow_dispatch:
+  schedule:
+    # Twice daily (UTC) ≈ early morning and late afternoon Pacific.
+    - cron: "0 14 * * *"
+    - cron: "0 1 * * *"
 
 permissions:
   contents: read
@@ -33,8 +37,8 @@ jobs:
       - name: Install Node deps
         run: npm install docx --no-fund --no-audit
 
-      - name: Sync data into docs/
-        run: cp grants-data.json docs/grants-data.json
+      - name: Fetch live data (curated + Grants.gov + ProPublica)
+        run: python3 fetch_grants.py
 
       - name: Build calendar (.ics)
         run: python3 build_ics.py

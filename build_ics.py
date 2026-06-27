@@ -36,8 +36,13 @@ lines = [
     "X-WR-CALDESC:Grant and funding deadlines relevant to Proud Ground (CLT).",
 ]
 
+events = 0
 for g in data["grants"]:
-    d = datetime.date.fromisoformat(g["deadline"])
+    # Auto-pulled entries could lack a usable deadline; skip rather than crash.
+    try:
+        d = datetime.date.fromisoformat(g.get("deadline", ""))
+    except (ValueError, TypeError):
+        continue
     dt = d.strftime("%Y%m%d")
     dt_end = (d + datetime.timedelta(days=1)).strftime("%Y%m%d")
     uid = hashlib.sha1((g["id"] + g["deadline"]).encode()).hexdigest()[:16] + "@proudground"
@@ -74,10 +79,11 @@ for g in data["grants"]:
         "END:VEVENT",
     ]
     lines.extend(ev)
+    events += 1
 
 lines.append("END:VCALENDAR")
 
 out_path = os.path.join(HERE, "docs", "proudground-grants.ics")
 with open(out_path, "w", newline="") as f:
     f.write("\r\n".join(lines) + "\r\n")
-print("Wrote", out_path, "with", len(data["grants"]), "events")
+print("Wrote", out_path, "with", events, "events")

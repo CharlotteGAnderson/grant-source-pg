@@ -8,7 +8,7 @@ X-WR-TIMEZONE:America/Los_Angeles
 X-WR-CALDESC:Grant and funding deadlines relevant to Proud Ground (CLT).
 BEGIN:VEVENT
 UID:58036bf9b81a268f@proudground
-DTSTAMP:20260627T004834Z
+DTSTAMP:20260627T013318Z
 DTSTART;VALUE=DATE:20260626
 DTEND;VALUE=DATE:20260627
 SUMMARY:Grant deadline: Oregon Capacity Building & Community Grant Progra
@@ -41,8 +41,357 @@ DESCRIPTION:1 week until Oregon Capacity Building & Community Grant Progr
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
+UID:6546792f34c5b511@proudground
+DTSTAMP:20260627T013318Z
+DTSTART;VALUE=DATE:20260706
+DTEND;VALUE=DATE:20260707
+SUMMARY:Grant deadline: FY 2025 Rural Capacity Building for Community Dev
+ elopment and Affordable Housing Grants (RCB) (Department of Housing and 
+ Urban Development (via Grants.gov))
+DESCRIPTION:Funder: Department of Housing and Urban Development (via Gran
+ ts.gov)\nAmount: See funder page\nStatus: Federal – open\nFit: Review 
+ – federal housing/community-development program\; confirm nonprofit/CL
+ T eligibility.\n\nDeadline detail: Federal opportunity CPD-2600-DC-0008.
+  Close date 07/06/2026. Confirm the exact deadline and any cycle on Gran
+ ts.gov.\n\nEligibility: See listing. Many HUD/USDA/Treasury housing prog
+ rams include nonprofits and CLTs.\n\nApply: https://www.grants.gov/searc
+ h-results-detail/362089
+URL:https://www.grants.gov/search-results-detail/362089
+TRANSP:TRANSPARENT
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P30D
+ACTION:DISPLAY
+DESCRIPTION:30 days until FY 2025 Rural Capacity Building for Community D
+ evelopment and Affordable Housing Grants (RCB) deadline
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:1 week until FY 2025 Rural Capacity Building for Community De
+ velopment and Affordable Housing Grants (RCB) deadline
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:b792af16efd1fcc7@proudground
+DTSTAMP:20260627T013318Z
+DTSTART;VALUE=DATE:20260706
+DTEND;VALUE=DATE:20260707
+SUMMARY:Grant deadline: Section 4 Capacity Building for Community Develop
+ ment and Affordable Housing (Department of Housing and Urban Development
+  (via Grants.gov))
+DESCRIPTION:Funder: Department of Housing and Urban Development (via Gran
+ ts.gov)\nAmount: See funder page\nStatus: Federal – open\nFit: Review 
+ – federal housing/community-development program\; confirm nonprofit/CL
+ T eligibility.\n\nDeadline detail: Federal opportunity CPD-2600-DC-0007.
+  Close date 07/06/2026. Confirm the exact deadline and any cycle on Gran
+ ts.gov.\n\nEligibility: See listing. Many HUD/USDA/Treasury housing prog
+ rams include nonprofits and CLTs.\n\nApply: https://www.grants.gov/searc
+ h-results-detail/362709
+URL:https://www.grants.gov/search-results-detail/362709
+TRANSP:TRANSPARENT
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P30D
+ACTION:DISPLAY
+DESCRIPTION:30 days until Section 4 Capacity Building for Community Devel
+ opment and Affordable Housing deadline
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:1 week until Section 4 Capacity Building for Community Develo
+ pment and Affordable Housing deadline
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:f05d44f59621f1c5@proudground
+DTSTAMP:20260627T013318Z
+DTSTART;VALUE=DATE:20260713
+DTEND;VALUE=DATE:20260714
+SUMMARY:Grant deadline: Project Rental Assistance Program of Section 811 
+ Supportive Housing for Persons with Disabilities FY 2026 (Department of 
+ Housing and Urban Development (via Grants.gov))
+DESCRIPTION:Funder: Department of Housing and Urban Development (via Gran
+ ts.gov)\nAmount: See funder page\nStatus: Federal – open\nFit: Review 
+ – federal housing/community-development program\; confirm nonprofit/CL
+ T eligibility.\n\nDeadline detail: Federal opportunity HSG-2600-DC-0053.
+  Close date 07/13/2026. Confirm the exact deadline and any cycle on Gran
+ ts.gov.\n\nEligibility: See listing. Many HUD/USDA/Treasury housing prog
+ rams include nonprofits and CLTs.\n\nApply: https://www.grants.gov/searc
+ h-results-detail/362350
+URL:https://www.grants.gov/search-results-detail/362350
+TRANSP:TRANSPARENT
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P30D
+ACTION:DISPLAY
+DESCRIPTION:30 days until Project Rental Assistance Program of Section 81
+ 1 Supportive Housing for Persons with Disabilities FY 2026 deadline
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:1 week until Project Rental Assistance Program of Section 811
+  Supportive Housing for Persons with Disabilities FY 2026 deadline
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:8a340da8720bc8c6@proudground
+DTSTAMP:20260627T013318Z
+DTSTART;VALUE=DATE:20260713
+DTEND;VALUE=DATE:20260714
+SUMMARY:Grant deadline: Mass Market Solutions for Leveraging Robotics and
+  AI Technologies for Home Construction Demonstration (Department of Hous
+ ing and Urban Development (via Grants.gov))
+DESCRIPTION:Funder: Department of Housing and Urban Development (via Gran
+ ts.gov)\nAmount: See funder page\nStatus: Federal – open\nFit: Review 
+ – federal housing/community-development program\; confirm nonprofit/CL
+ T eligibility.\n\nDeadline detail: Federal opportunity PDR-2600-DC-029Q.
+  Close date 07/13/2026. Confirm the exact deadline and any cycle on Gran
+ ts.gov.\n\nEligibility: See listing. Many HUD/USDA/Treasury housing prog
+ rams include nonprofits and CLTs.\n\nApply: https://www.grants.gov/searc
+ h-results-detail/362360
+URL:https://www.grants.gov/search-results-detail/362360
+TRANSP:TRANSPARENT
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P30D
+ACTION:DISPLAY
+DESCRIPTION:30 days until Mass Market Solutions for Leveraging Robotics a
+ nd AI Technologies for Home Construction Demonstration deadline
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:1 week until Mass Market Solutions for Leveraging Robotics an
+ d AI Technologies for Home Construction Demonstration deadline
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:79f12f1e60fe41c1@proudground
+DTSTAMP:20260627T013318Z
+DTSTART;VALUE=DATE:20260714
+DTEND;VALUE=DATE:20260715
+SUMMARY:Grant deadline: OVW Fiscal Year 2026 Transitional Housing Assista
+ nce Grants for Victims of Domestic Violence\, Dating Violence\, Sexual A
+ ssault\, and Stalking Program (Office on Violence Against Women (via Gra
+ nts.gov))
+DESCRIPTION:Funder: Office on Violence Against Women (via Grants.gov)\nAm
+ ount: See funder page\nStatus: Federal – open\nFit: Review – federal
+  housing/community-development program\; confirm nonprofit/CLT eligibili
+ ty.\n\nDeadline detail: Federal opportunity O-OVW-2026-172624. Close dat
+ e 07/14/2026. Confirm the exact deadline and any cycle on Grants.gov.\n\
+ nEligibility: See listing. Many HUD/USDA/Treasury housing programs inclu
+ de nonprofits and CLTs.\n\nApply: https://www.grants.gov/search-results-
+ detail/362667
+URL:https://www.grants.gov/search-results-detail/362667
+TRANSP:TRANSPARENT
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P30D
+ACTION:DISPLAY
+DESCRIPTION:30 days until OVW Fiscal Year 2026 Transitional Housing Assis
+ tance Grants for Victims of Domestic Violence\, Dating Violence\, Sexual
+  Assault\, and Stalking Program deadline
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:1 week until OVW Fiscal Year 2026 Transitional Housing Assist
+ ance Grants for Victims of Domestic Violence\, Dating Violence\, Sexual 
+ Assault\, and Stalking Program deadline
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:4702063bbb8f4f0e@proudground
+DTSTAMP:20260627T013318Z
+DTSTART;VALUE=DATE:20260715
+DTEND;VALUE=DATE:20260716
+SUMMARY:Grant deadline: Self-Help Homeownership Opportunity Program (SHOP
+ ) (Department of Housing and Urban Development (via Grants.gov))
+DESCRIPTION:Funder: Department of Housing and Urban Development (via Gran
+ ts.gov)\nAmount: See funder page\nStatus: Federal – open\nFit: Review 
+ – federal housing/community-development program\; confirm nonprofit/CL
+ T eligibility.\n\nDeadline detail: Federal opportunity CPD-2600-DC-0019.
+  Close date 07/15/2026. Confirm the exact deadline and any cycle on Gran
+ ts.gov.\n\nEligibility: See listing. Many HUD/USDA/Treasury housing prog
+ rams include nonprofits and CLTs.\n\nApply: https://www.grants.gov/searc
+ h-results-detail/362826
+URL:https://www.grants.gov/search-results-detail/362826
+TRANSP:TRANSPARENT
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P30D
+ACTION:DISPLAY
+DESCRIPTION:30 days until Self-Help Homeownership Opportunity Program (SH
+ OP) deadline
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:1 week until Self-Help Homeownership Opportunity Program (SHO
+ P) deadline
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:8692945cc0354b11@proudground
+DTSTAMP:20260627T013318Z
+DTSTART;VALUE=DATE:20260720
+DTEND;VALUE=DATE:20260721
+SUMMARY:Grant deadline: Housing Policy Research Grant Notice of Funding O
+ pportunity (Department of Housing and Urban Development (via Grants.gov)
+ )
+DESCRIPTION:Funder: Department of Housing and Urban Development (via Gran
+ ts.gov)\nAmount: See funder page\nStatus: Federal – open\nFit: Review 
+ – federal housing/community-development program\; confirm nonprofit/CL
+ T eligibility.\n\nDeadline detail: Federal opportunity PDR-2600-DC-029M.
+  Close date 07/20/2026. Confirm the exact deadline and any cycle on Gran
+ ts.gov.\n\nEligibility: See listing. Many HUD/USDA/Treasury housing prog
+ rams include nonprofits and CLTs.\n\nApply: https://www.grants.gov/searc
+ h-results-detail/361988
+URL:https://www.grants.gov/search-results-detail/361988
+TRANSP:TRANSPARENT
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P30D
+ACTION:DISPLAY
+DESCRIPTION:30 days until Housing Policy Research Grant Notice of Funding
+  Opportunity deadline
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:1 week until Housing Policy Research Grant Notice of Funding 
+ Opportunity deadline
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:44c17df71abbbdb8@proudground
+DTSTAMP:20260627T013318Z
+DTSTART;VALUE=DATE:20260723
+DTEND;VALUE=DATE:20260724
+SUMMARY:Grant deadline: Continuum of Care Builds (CoC Builds) (Department
+  of Housing and Urban Development (via Grants.gov))
+DESCRIPTION:Funder: Department of Housing and Urban Development (via Gran
+ ts.gov)\nAmount: See funder page\nStatus: Federal – open\nFit: Review 
+ – federal housing/community-development program\; confirm nonprofit/CL
+ T eligibility.\n\nDeadline detail: Federal opportunity CPD-2600-DC-025A.
+  Close date 07/23/2026. Confirm the exact deadline and any cycle on Gran
+ ts.gov.\n\nEligibility: See listing. Many HUD/USDA/Treasury housing prog
+ rams include nonprofits and CLTs.\n\nApply: https://www.grants.gov/searc
+ h-results-detail/362073
+URL:https://www.grants.gov/search-results-detail/362073
+TRANSP:TRANSPARENT
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P30D
+ACTION:DISPLAY
+DESCRIPTION:30 days until Continuum of Care Builds (CoC Builds) deadline
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:1 week until Continuum of Care Builds (CoC Builds) deadline
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:bd7fb65273a3a2bb@proudground
+DTSTAMP:20260627T013318Z
+DTSTART;VALUE=DATE:20260803
+DTEND;VALUE=DATE:20260804
+SUMMARY:Grant deadline: FY26 Pathways to Removing Obstacles to Housing (P
+ RO Housing) (Department of Housing and Urban Development (via Grants.gov
+ ))
+DESCRIPTION:Funder: Department of Housing and Urban Development (via Gran
+ ts.gov)\nAmount: See funder page\nStatus: Federal – open\nFit: Review 
+ – federal housing/community-development program\; confirm nonprofit/CL
+ T eligibility.\n\nDeadline detail: Federal opportunity CPD-2600-DC-0098.
+  Close date 08/03/2026. Confirm the exact deadline and any cycle on Gran
+ ts.gov.\n\nEligibility: See listing. Many HUD/USDA/Treasury housing prog
+ rams include nonprofits and CLTs.\n\nApply: https://www.grants.gov/searc
+ h-results-detail/362005
+URL:https://www.grants.gov/search-results-detail/362005
+TRANSP:TRANSPARENT
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P30D
+ACTION:DISPLAY
+DESCRIPTION:30 days until FY26 Pathways to Removing Obstacles to Housing 
+ (PRO Housing) deadline
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:1 week until FY26 Pathways to Removing Obstacles to Housing (
+ PRO Housing) deadline
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:0149a7c70890cce0@proudground
+DTSTAMP:20260627T013318Z
+DTSTART;VALUE=DATE:20260803
+DTEND;VALUE=DATE:20260804
+SUMMARY:Grant deadline: Lead-Safe and Healthy Homes Financing Demonstrati
+ on (Department of Housing and Urban Development (via Grants.gov))
+DESCRIPTION:Funder: Department of Housing and Urban Development (via Gran
+ ts.gov)\nAmount: See funder page\nStatus: Federal – open\nFit: Review 
+ – federal housing/community-development program\; confirm nonprofit/CL
+ T eligibility.\n\nDeadline detail: Federal opportunity LHC-2600-DC-0032.
+  Close date 08/03/2026. Confirm the exact deadline and any cycle on Gran
+ ts.gov.\n\nEligibility: See listing. Many HUD/USDA/Treasury housing prog
+ rams include nonprofits and CLTs.\n\nApply: https://www.grants.gov/searc
+ h-results-detail/362370
+URL:https://www.grants.gov/search-results-detail/362370
+TRANSP:TRANSPARENT
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P30D
+ACTION:DISPLAY
+DESCRIPTION:30 days until Lead-Safe and Healthy Homes Financing Demonstra
+ tion deadline
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:1 week until Lead-Safe and Healthy Homes Financing Demonstrat
+ ion deadline
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:5fa57edfd8efa401@proudground
+DTSTAMP:20260627T013318Z
+DTSTART;VALUE=DATE:20260810
+DTEND;VALUE=DATE:20260811
+SUMMARY:Grant deadline: Youth Homelessness NOFO for FY2024 and FY2025 (De
+ partment of Housing and Urban Development (via Grants.gov))
+DESCRIPTION:Funder: Department of Housing and Urban Development (via Gran
+ ts.gov)\nAmount: See funder page\nStatus: Federal – open\nFit: Review 
+ – federal housing/community-development program\; confirm nonprofit/CL
+ T eligibility.\n\nDeadline detail: Federal opportunity CPD-2600-DC-0035.
+  Close date 08/10/2026. Confirm the exact deadline and any cycle on Gran
+ ts.gov.\n\nEligibility: See listing. Many HUD/USDA/Treasury housing prog
+ rams include nonprofits and CLTs.\n\nApply: https://www.grants.gov/searc
+ h-results-detail/362002
+URL:https://www.grants.gov/search-results-detail/362002
+TRANSP:TRANSPARENT
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P30D
+ACTION:DISPLAY
+DESCRIPTION:30 days until Youth Homelessness NOFO for FY2024 and FY2025 d
+ eadline
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:1 week until Youth Homelessness NOFO for FY2024 and FY2025 de
+ adline
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 UID:ae05141d905d9f71@proudground
-DTSTAMP:20260627T004834Z
+DTSTAMP:20260627T013318Z
 DTSTART;VALUE=DATE:20260815
 DTEND;VALUE=DATE:20260816
 SUMMARY:Grant deadline: Fall Community Grants Cycle (Oregon Community Fou
@@ -73,8 +422,40 @@ DESCRIPTION:1 week until Fall Community Grants Cycle deadline
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
+UID:7a29237e3435dbe7@proudground
+DTSTAMP:20260627T013318Z
+DTSTART;VALUE=DATE:20260826
+DTEND;VALUE=DATE:20260827
+SUMMARY:Grant deadline: FY 2026 Continuum of Care Competition and Youth H
+ omelessness Demonstration Program Grants NOFO (Department of Housing and
+  Urban Development (via Grants.gov))
+DESCRIPTION:Funder: Department of Housing and Urban Development (via Gran
+ ts.gov)\nAmount: See funder page\nStatus: Federal – open\nFit: Review 
+ – federal housing/community-development program\; confirm nonprofit/CL
+ T eligibility.\n\nDeadline detail: Federal opportunity CPD-2600-DC-0025.
+  Close date 08/26/2026. Confirm the exact deadline and any cycle on Gran
+ ts.gov.\n\nEligibility: See listing. Many HUD/USDA/Treasury housing prog
+ rams include nonprofits and CLTs.\n\nApply: https://www.grants.gov/searc
+ h-results-detail/361999
+URL:https://www.grants.gov/search-results-detail/361999
+TRANSP:TRANSPARENT
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P30D
+ACTION:DISPLAY
+DESCRIPTION:30 days until FY 2026 Continuum of Care Competition and Youth
+  Homelessness Demonstration Program Grants NOFO deadline
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:1 week until FY 2026 Continuum of Care Competition and Youth 
+ Homelessness Demonstration Program Grants NOFO deadline
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 UID:d0c88c14c280cb85@proudground
-DTSTAMP:20260627T004834Z
+DTSTAMP:20260627T013318Z
 DTSTART;VALUE=DATE:20261231
 DTEND;VALUE=DATE:20270101
 SUMMARY:Grant deadline: Housing Program — General Operating & Project S
@@ -105,8 +486,131 @@ DESCRIPTION:1 week until Housing Program — General Operating & Project
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
+UID:bfae72a7336facc6@proudground
+DTSTAMP:20260627T013318Z
+DTSTART;VALUE=DATE:20261231
+DTEND;VALUE=DATE:20270101
+SUMMARY:Grant deadline: Housing Development Grant Program (HDGP / Trust F
+ und) (Oregon Housing and Community Services (OHCS))
+DESCRIPTION:Funder: Oregon Housing and Community Services (OHCS)\nAmount:
+  Varies by NOFA round\nStatus: Monitor for next NOFA\nFit: Medium – HD
+ GP centers on multifamily/rental\, but OHCS administers multiple homeown
+ ership and development resources worth tracking.\n\nDeadline detail: Awa
+ rded via competitive Notice of Funding Availability (NOFA) rounds announ
+ ced periodically. Monitor OHCS for the next NOFA.\n\nEligibility: Nonpro
+ fit housing developers\, local housing authorities\, Tribal housing enti
+ ties\, and for/nonprofit sponsors depending on program.\n\nApply: https:
+ //www.oregon.gov/ohcs/development/pages/grants-tax-credit-programs.aspx
+URL:https://www.oregon.gov/ohcs/development/pages/grants-tax-credit-progr
+ ams.aspx
+TRANSP:TRANSPARENT
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P30D
+ACTION:DISPLAY
+DESCRIPTION:30 days until Housing Development Grant Program (HDGP / Trust
+  Fund) deadline
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:1 week until Housing Development Grant Program (HDGP / Trust 
+ Fund) deadline
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:4c3700bee5694065@proudground
+DTSTAMP:20260627T013318Z
+DTSTART;VALUE=DATE:20261231
+DTEND;VALUE=DATE:20270101
+SUMMARY:Grant deadline: Strategic Projects: Program & Staff / Equipment &
+  Technology Grants (M.J. Murdock Charitable Trust)
+DESCRIPTION:Funder: M.J. Murdock Charitable Trust\nAmount: Capacity-build
+ ing grants\; recipient cofunds at least 50% of costs\nStatus: Rolling in
+ quiry\nFit: Medium-High – PNW-focused funder of 501(c)(3) capacity bui
+ lding\; values diversified funding and community flourishing.\n\nDeadlin
+ e detail: Rolling consideration\; Murdock uses an inquiry-then-proposal 
+ process. Confirm current process on Murdock's site.\n\nEligibility: 501(
+ c)(3) nonprofits and tribal entities in the Pacific Northwest. Requires 
+ recipient to cover at least 50% of project costs.\n\nApply: https://murd
+ ocktrust.org/
+URL:https://murdocktrust.org/
+TRANSP:TRANSPARENT
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P30D
+ACTION:DISPLAY
+DESCRIPTION:30 days until Strategic Projects: Program & Staff / Equipment
+  & Technology Grants deadline
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:1 week until Strategic Projects: Program & Staff / Equipment 
+ & Technology Grants deadline
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:f9c1ec0e8956efef@proudground
+DTSTAMP:20260627T013318Z
+DTSTART;VALUE=DATE:20261231
+DTEND;VALUE=DATE:20270101
+SUMMARY:Grant deadline: Tenant & Housing Justice Grant (Social Justice Fu
+ nd Northwest)
+DESCRIPTION:Funder: Social Justice Fund Northwest\nAmount: Grassroots org
+ anizing support\nStatus: Annual – verify window\nFit: Medium – cente
+ rs tenant/housing-justice organizing\; relevance depends on Proud Ground
+ 's advocacy/organizing activities.\n\nDeadline detail: Annual cycle. Con
+ firm 2026/2027 open window on SJF NW's site.\n\nEligibility: Grassroots 
+ organizations in ID\, MT\, OR\, WA\, and/or WY using a community-organiz
+ ing framework\; prioritizes communities underrepresented in traditional 
+ grantmaking.\n\nApply: https://www.socialjusticefund.org/
+URL:https://www.socialjusticefund.org/
+TRANSP:TRANSPARENT
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P30D
+ACTION:DISPLAY
+DESCRIPTION:30 days until Tenant & Housing Justice Grant deadline
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:1 week until Tenant & Housing Justice Grant deadline
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:0c82898e69347b8e@proudground
+DTSTAMP:20260627T013318Z
+DTSTART;VALUE=DATE:20261231
+DTEND;VALUE=DATE:20270101
+SUMMARY:Grant deadline: Community Grants & Sponsorships (OnPoint Communit
+ y Credit Union)
+DESCRIPTION:Funder: OnPoint Community Credit Union\nAmount: Varies\nStatu
+ s: Rolling – verify\nFit: Medium – local PNW credit union funding ec
+ onomic opportunity and community development\, including financial educa
+ tion and community development.\n\nDeadline detail: Rolling/periodic. Co
+ nfirm current open application on OnPoint's community giving page.\n\nEl
+ igibility: Nonprofits aligned with Economic Opportunity and Community Vi
+ tality focus areas (PNW).\n\nApply: https://www.onpointcu.com/about/comm
+ unity/
+URL:https://www.onpointcu.com/about/community/
+TRANSP:TRANSPARENT
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P30D
+ACTION:DISPLAY
+DESCRIPTION:30 days until Community Grants & Sponsorships deadline
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:1 week until Community Grants & Sponsorships deadline
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 UID:158d66ee6b61a3f1@proudground
-DTSTAMP:20260627T004834Z
+DTSTAMP:20260627T013318Z
 DTSTART;VALUE=DATE:20270501
 DTEND;VALUE=DATE:20270502
 SUMMARY:Grant deadline: Competitive Affordable Housing Program (AHP) (Fed
@@ -140,7 +644,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:b0e314b107a79a0c@proudground
-DTSTAMP:20260627T004834Z
+DTSTAMP:20260627T013318Z
 DTSTART;VALUE=DATE:20270515
 DTEND;VALUE=DATE:20270516
 SUMMARY:Grant deadline: Housing Affordability Breakthrough Challenge (Wel
@@ -173,8 +677,40 @@ DESCRIPTION:1 week until Housing Affordability Breakthrough Challenge dea
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
+UID:2e7b53652cd4f615@proudground
+DTSTAMP:20260627T013318Z
+DTSTART;VALUE=DATE:20270609
+DTEND;VALUE=DATE:20270610
+SUMMARY:Grant deadline: Authority to Accept Unsolicited Proposals for Res
+ earch Partnerships Notice of Intent (NOI) (Department of Housing and Urb
+ an Development (via Grants.gov))
+DESCRIPTION:Funder: Department of Housing and Urban Development (via Gran
+ ts.gov)\nAmount: See funder page\nStatus: Federal – open\nFit: Review 
+ – federal housing/community-development program\; confirm nonprofit/CL
+ T eligibility.\n\nDeadline detail: Federal opportunity PDR-2600-DC-0USP.
+  Close date 06/09/2027. Confirm the exact deadline and any cycle on Gran
+ ts.gov.\n\nEligibility: See listing. Many HUD/USDA/Treasury housing prog
+ rams include nonprofits and CLTs.\n\nApply: https://www.grants.gov/searc
+ h-results-detail/362364
+URL:https://www.grants.gov/search-results-detail/362364
+TRANSP:TRANSPARENT
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P30D
+ACTION:DISPLAY
+DESCRIPTION:30 days until Authority to Accept Unsolicited Proposals for R
+ esearch Partnerships Notice of Intent (NOI) deadline
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:1 week until Authority to Accept Unsolicited Proposals for Re
+ search Partnerships Notice of Intent (NOI) deadline
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 UID:59d06f4e7ec761e0@proudground
-DTSTAMP:20260627T004834Z
+DTSTAMP:20260627T013318Z
 DTSTART;VALUE=DATE:20270701
 DTEND;VALUE=DATE:20270702
 SUMMARY:Grant deadline: Neighborhood Builders® (Bank of America Charitab
@@ -203,129 +739,6 @@ BEGIN:VALARM
 TRIGGER:-P7D
 ACTION:DISPLAY
 DESCRIPTION:1 week until Neighborhood Builders® deadline
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:bfae72a7336facc6@proudground
-DTSTAMP:20260627T004834Z
-DTSTART;VALUE=DATE:20261231
-DTEND;VALUE=DATE:20270101
-SUMMARY:Grant deadline: Housing Development Grant Program (HDGP / Trust F
- und) (Oregon Housing and Community Services (OHCS))
-DESCRIPTION:Funder: Oregon Housing and Community Services (OHCS)\nAmount:
-  Varies by NOFA round\nStatus: Monitor for next NOFA\nFit: Medium – HD
- GP centers on multifamily/rental\, but OHCS administers multiple homeown
- ership and development resources worth tracking.\n\nDeadline detail: Awa
- rded via competitive Notice of Funding Availability (NOFA) rounds announ
- ced periodically. Monitor OHCS for the next NOFA.\n\nEligibility: Nonpro
- fit housing developers\, local housing authorities\, Tribal housing enti
- ties\, and for/nonprofit sponsors depending on program.\n\nApply: https:
- //www.oregon.gov/ohcs/development/pages/grants-tax-credit-programs.aspx
-URL:https://www.oregon.gov/ohcs/development/pages/grants-tax-credit-progr
- ams.aspx
-TRANSP:TRANSPARENT
-STATUS:CONFIRMED
-BEGIN:VALARM
-TRIGGER:-P30D
-ACTION:DISPLAY
-DESCRIPTION:30 days until Housing Development Grant Program (HDGP / Trust
-  Fund) deadline
-END:VALARM
-BEGIN:VALARM
-TRIGGER:-P7D
-ACTION:DISPLAY
-DESCRIPTION:1 week until Housing Development Grant Program (HDGP / Trust 
- Fund) deadline
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:4c3700bee5694065@proudground
-DTSTAMP:20260627T004834Z
-DTSTART;VALUE=DATE:20261231
-DTEND;VALUE=DATE:20270101
-SUMMARY:Grant deadline: Strategic Projects: Program & Staff / Equipment &
-  Technology Grants (M.J. Murdock Charitable Trust)
-DESCRIPTION:Funder: M.J. Murdock Charitable Trust\nAmount: Capacity-build
- ing grants\; recipient cofunds at least 50% of costs\nStatus: Rolling in
- quiry\nFit: Medium-High – PNW-focused funder of 501(c)(3) capacity bui
- lding\; values diversified funding and community flourishing.\n\nDeadlin
- e detail: Rolling consideration\; Murdock uses an inquiry-then-proposal 
- process. Confirm current process on Murdock's site.\n\nEligibility: 501(
- c)(3) nonprofits and tribal entities in the Pacific Northwest. Requires 
- recipient to cover at least 50% of project costs.\n\nApply: https://murd
- ocktrust.org/
-URL:https://murdocktrust.org/
-TRANSP:TRANSPARENT
-STATUS:CONFIRMED
-BEGIN:VALARM
-TRIGGER:-P30D
-ACTION:DISPLAY
-DESCRIPTION:30 days until Strategic Projects: Program & Staff / Equipment
-  & Technology Grants deadline
-END:VALARM
-BEGIN:VALARM
-TRIGGER:-P7D
-ACTION:DISPLAY
-DESCRIPTION:1 week until Strategic Projects: Program & Staff / Equipment 
- & Technology Grants deadline
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:f9c1ec0e8956efef@proudground
-DTSTAMP:20260627T004834Z
-DTSTART;VALUE=DATE:20261231
-DTEND;VALUE=DATE:20270101
-SUMMARY:Grant deadline: Tenant & Housing Justice Grant (Social Justice Fu
- nd Northwest)
-DESCRIPTION:Funder: Social Justice Fund Northwest\nAmount: Grassroots org
- anizing support\nStatus: Annual – verify window\nFit: Medium – cente
- rs tenant/housing-justice organizing\; relevance depends on Proud Ground
- 's advocacy/organizing activities.\n\nDeadline detail: Annual cycle. Con
- firm 2026/2027 open window on SJF NW's site.\n\nEligibility: Grassroots 
- organizations in ID\, MT\, OR\, WA\, and/or WY using a community-organiz
- ing framework\; prioritizes communities underrepresented in traditional 
- grantmaking.\n\nApply: https://www.socialjusticefund.org/
-URL:https://www.socialjusticefund.org/
-TRANSP:TRANSPARENT
-STATUS:CONFIRMED
-BEGIN:VALARM
-TRIGGER:-P30D
-ACTION:DISPLAY
-DESCRIPTION:30 days until Tenant & Housing Justice Grant deadline
-END:VALARM
-BEGIN:VALARM
-TRIGGER:-P7D
-ACTION:DISPLAY
-DESCRIPTION:1 week until Tenant & Housing Justice Grant deadline
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:0c82898e69347b8e@proudground
-DTSTAMP:20260627T004834Z
-DTSTART;VALUE=DATE:20261231
-DTEND;VALUE=DATE:20270101
-SUMMARY:Grant deadline: Community Grants & Sponsorships (OnPoint Communit
- y Credit Union)
-DESCRIPTION:Funder: OnPoint Community Credit Union\nAmount: Varies\nStatu
- s: Rolling – verify\nFit: Medium – local PNW credit union funding ec
- onomic opportunity and community development\, including financial educa
- tion and community development.\n\nDeadline detail: Rolling/periodic. Co
- nfirm current open application on OnPoint's community giving page.\n\nEl
- igibility: Nonprofits aligned with Economic Opportunity and Community Vi
- tality focus areas (PNW).\n\nApply: https://www.onpointcu.com/about/comm
- unity/
-URL:https://www.onpointcu.com/about/community/
-TRANSP:TRANSPARENT
-STATUS:CONFIRMED
-BEGIN:VALARM
-TRIGGER:-P30D
-ACTION:DISPLAY
-DESCRIPTION:30 days until Community Grants & Sponsorships deadline
-END:VALARM
-BEGIN:VALARM
-TRIGGER:-P7D
-ACTION:DISPLAY
-DESCRIPTION:1 week until Community Grants & Sponsorships deadline
 END:VALARM
 END:VEVENT
 END:VCALENDAR
