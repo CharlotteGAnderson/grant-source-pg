@@ -16,16 +16,6 @@ Everything is generated from a single file: **`grants-data.json`**.
 
 ---
 
-## Live site
-
-Once deployed (see below), the site is served from the `docs/` folder at:
-
-```
-https://<your-github-username>.github.io/<repo-name>/
-```
-
----
-
 ## Repository layout
 
 ```
@@ -44,39 +34,6 @@ proudground-grants/
         └── <grant-id>.docx   ← one Word summary per grant
 ```
 
-## One-time deployment
-
-1. Create a new repository on GitHub and push this folder to the `main` branch:
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial grant tracker"
-   git branch -M main
-   git remote add origin https://github.com/<you>/<repo>.git
-   git push -u origin main
-   ```
-2. In the repo, go to **Settings → Pages**.
-3. Under **Build and deployment → Source**, choose **GitHub Actions**.
-   (The included workflow rebuilds the calendar and Word docs, then deploys.)
-4. Wait for the **Actions** tab to show a green check. Your site is live.
-
-> Prefer no Actions? You can instead set Pages **Source** to "Deploy from a branch",
-> branch `main`, folder `/docs`. In that case, rerun the two build scripts locally
-> whenever you edit the data (see below) and commit the regenerated files.
-
-## Updating opportunities
-
-1. Edit **`grants-data.json`** — add, remove, or change entries in the `grants` array.
-2. Commit and push. The GitHub Action regenerates the `.ics` calendar and all `.docx`
-   summaries and redeploys automatically.
-
-To rebuild locally instead:
-```bash
-cp grants-data.json docs/grants-data.json
-python3 build_ics.py            # rebuilds docs/proudground-grants.ics
-npm install docx                # first time only
-node build_docs.js              # rebuilds docs/grant-summaries/*.docx
-```
 
 ### Grant entry fields
 
