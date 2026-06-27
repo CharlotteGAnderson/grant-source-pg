@@ -339,7 +339,9 @@ function renderFunderMap() {
     if (n > 1) { const a = n * 2.2; x += Math.cos(a) * (4 + n); y += Math.sin(a) * (4 + n); }
     const color = CAT_COLOR[p.matched_on] || "#2f6b5e";
     return `<circle class="dot" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="6" fill="${color}"
-      data-name="${esc(p.name)}" data-loc="${esc(p.location || "")}" data-url="${esc(safeUrl(p.url))}">
+      data-name="${esc(p.name)}" data-loc="${esc(p.location || "")}" data-url="${esc(safeUrl(p.url))}"
+      data-cat="${esc(CAT_LABEL[p.matched_on] || p.matched_on || "")}" data-ein="${esc(p.ein || "")}"
+      data-summary="${esc(p.summary || "")}">
       <title>${esc(p.name)} — ${esc(p.location || "")}</title></circle>`;
   }).join("");
   const labels = MAP_LANDMARKS.map(([nm, la, ln]) => {
@@ -353,11 +355,70 @@ function renderFunderMap() {
      <polygon class="land" points="${polyPoints(OR_OUTLINE)}"/>
      ${labels}${dots}`;
 
+  mapView = { x: 0, y: 0, w: MAP_BOX.W, h: MAP_BOX.H };  // reset zoom on (re)render
+  applyMapView();
+  closeFunderPopup();
+
   const total = DATA.prospects.filter((p) => p.lat != null).length;
   $("#mapNote").textContent =
     `Showing ${list.length} mapped funder${list.length === 1 ? "" : "s"}` +
     (funderCat === "all" ? ` of ${total} with known locations.` : ` in "${CAT_LABEL[funderCat]}".`) +
-    " Some funders without a recognized city are listed in the table only.";
+    " Scroll or use +/− to zoom, drag to pan, and click a dot for details.";
+}
+
+/* ---------- funder map: zoom / pan / popup ---------- */
+let mapView = { x: 0, y: 0, w: MAP_BOX.W, h: MAP_BOX.H };
+
+function applyMapView() {
+  const svg = $("#funderMap"); if (!svg) return;
+  const v = mapView;
+  svg.setAttribute("viewBox", `${v.x.toFixed(2)} ${v.y.toFixed(2)} ${v.w.toFixed(2)} ${v.h.toFixed(2)}`);
+  const s = v.w / MAP_BOX.W;  // keep dots/labels a roughly constant on-screen size
+  svg.querySelectorAll(".dot").forEach((d) => d.setAttribute("r", (6 * s).toFixed(2)));
+  svg.querySelectorAll(".lbl").forEach((t) => t.setAttribute("font-size", (11 * s).toFixed(2)));
+}
+function clampMapView() {
+  const v = mapView;
+  v.w = Math.max(8, Math.min(MAP_BOX.W, v.w));
+  v.h = v.w * (MAP_BOX.H / MAP_BOX.W);
+  v.x = Math.max(0, Math.min(MAP_BOX.W - v.w, v.x));
+  v.y = Math.max(0, Math.min(MAP_BOX.H - v.h, v.y));
+}
+function mapZoom(factor, cx, cy) {
+  const v = mapView;
+  cx = cx == null ? v.x + v.w / 2 : cx;
+  cy = cy == null ? v.y + v.h / 2 : cy;
+  const rx = (cx - v.x) / v.w, ry = (cy - v.y) / v.h;
+  v.w *= factor; clampMapView();
+  v.x = cx - rx * v.w; v.y = cy - ry * v.h; clampMapView();
+  applyMapView();
+}
+function clientToSvg(svg, clientX, clientY) {
+  const r = svg.getBoundingClientRect(), v = mapView;
+  return [v.x + (clientX - r.left) / r.width * v.w, v.y + (clientY - r.top) / r.height * v.h];
+}
+function closeFunderPopup() { const p = $("#funderPop"); if (p) p.hidden = true; }
+function openFunderPopup(dot, clientX, clientY) {
+  const pop = $("#funderPop"), wrap = $("#funderMap").closest(".map-wrap");
+  if (!pop) return;
+  const d = dot.dataset;
+  const profile = d.url && d.url !== "#"
+    ? `<a class="m-btn primary" href="${esc(d.url)}" target="_blank" rel="noopener noreferrer">Open 990 profile &#8599;</a>` : "";
+  pop.innerHTML =
+    `<button class="fp-close" type="button" aria-label="Close">&times;</button>
+     <div class="fp-cat">${esc(d.cat || "Local funder")}</div>
+     <h4>${esc(d.name)}</h4>
+     <div class="fp-loc">&#128205; ${esc(d.loc || "")}${d.ein ? " &middot; EIN " + esc(d.ein) : ""}</div>
+     <p class="fp-sum">${esc(d.summary || "")}</p>
+     ${profile}`;
+  const r = wrap.getBoundingClientRect();
+  let left = clientX - r.left, top = clientY - r.top;
+  left = Math.max(8, Math.min(r.width - 248, left));
+  top = Math.max(8, Math.min(r.height - 40, top));
+  pop.style.left = left + "px";
+  pop.style.top = top + "px";
+  pop.hidden = false;
+  pop.querySelector(".fp-close").addEventListener("click", closeFunderPopup);
 }
 
 function buildFunderCatFilters() {
@@ -608,23 +669,54 @@ $("#miniViewAll").addEventListener("click", () => {
 });
 $("#newsSearch").addEventListener("input", (e) => { newsQuery = e.target.value; renderNews(); });
 
-// Funder map: hover tooltip + click to open the 990 profile.
+// Funder map: scroll/buttons to zoom, drag to pan, click a dot for a popup.
 (() => {
   const map = $("#funderMap"), tip = $("#mapTip"), wrap = map.closest(".map-wrap");
-  const show = (e) => {
-    const dot = e.target.closest(".dot"); if (!dot) { tip.hidden = true; return; }
+  let dragging = false, moved = false, sx = 0, sy = 0, sView = null;
+
+  map.addEventListener("wheel", (e) => {
+    e.preventDefault();
+    const [cx, cy] = clientToSvg(map, e.clientX, e.clientY);
+    mapZoom(e.deltaY < 0 ? 1 / 1.25 : 1.25, cx, cy);
+    tip.hidden = true;
+  }, { passive: false });
+
+  map.addEventListener("mousedown", (e) => {
+    dragging = true; moved = false; sx = e.clientX; sy = e.clientY;
+    sView = { ...mapView }; map.style.cursor = "grabbing";
+  });
+  window.addEventListener("mousemove", (e) => {
+    if (dragging) {
+      const r = map.getBoundingClientRect();
+      const dx = e.clientX - sx, dy = e.clientY - sy;
+      if (Math.abs(dx) + Math.abs(dy) > 4) moved = true;
+      mapView.x = sView.x - dx / r.width * sView.w;
+      mapView.y = sView.y - dy / r.height * sView.h;
+      clampMapView(); applyMapView();
+      tip.hidden = true;
+      return;
+    }
+    const dot = e.target.closest && e.target.closest(".dot");  // hover name tooltip
+    if (!dot) { tip.hidden = true; return; }
     const r = wrap.getBoundingClientRect();
     tip.innerHTML = `${esc(dot.dataset.name)}<small>${esc(dot.dataset.loc)}</small>`;
     tip.style.left = (e.clientX - r.left) + "px";
     tip.style.top = (e.clientY - r.top) + "px";
     tip.hidden = false;
-  };
-  map.addEventListener("mousemove", show);
-  map.addEventListener("mouseleave", () => { tip.hidden = true; });
-  map.addEventListener("click", (e) => {
-    const dot = e.target.closest(".dot");
-    if (dot && dot.dataset.url && dot.dataset.url !== "#") window.open(dot.dataset.url, "_blank", "noopener,noreferrer");
   });
+  window.addEventListener("mouseup", () => { if (dragging) { dragging = false; map.style.cursor = "grab"; } });
+  map.addEventListener("mouseleave", () => { tip.hidden = true; });
+
+  map.addEventListener("click", (e) => {
+    if (moved) return;                       // was a pan, not a click
+    const dot = e.target.closest(".dot");
+    if (dot) { tip.hidden = true; openFunderPopup(dot, e.clientX, e.clientY); }
+    else closeFunderPopup();
+  });
+
+  $("#mapZoomIn").addEventListener("click", () => mapZoom(1 / 1.4));
+  $("#mapZoomOut").addEventListener("click", () => mapZoom(1.4));
+  $("#mapReset").addEventListener("click", () => { mapView = { x: 0, y: 0, w: MAP_BOX.W, h: MAP_BOX.H }; applyMapView(); closeFunderPopup(); });
 })();
 
 buildOppFilters();
