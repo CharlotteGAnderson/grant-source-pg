@@ -100,6 +100,11 @@ function buildDoc(g) {
         new Paragraph({ heading: HeadingLevel.HEADING_2, children: [new TextRun("Summary & Why It Fits")] }),
         new Paragraph({ children: [new TextRun({ text: g.summary, size: 22 })] }),
 
+        ...(g.pg_application ? [
+          new Paragraph({ heading: HeadingLevel.HEADING_2, children: [new TextRun("How This Applies to Proud Ground")] }),
+          new Paragraph({ children: [new TextRun({ text: g.pg_application, size: 22 })] }),
+        ] : []),
+
         new Paragraph({ heading: HeadingLevel.HEADING_2, children: [new TextRun("Application Checklist \u2014 What You\u2019ll Need")] }),
         ...neededParas,
 

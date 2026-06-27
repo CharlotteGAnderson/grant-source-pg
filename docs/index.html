@@ -168,6 +168,47 @@
     padding:12px 16px;border-radius:10px;margin:12px 0;background:var(--accent);color:#fff;box-shadow:var(--shadow-sm)}
   .dl-btn.ghost{background:var(--panel);color:var(--brand-dk);border:1px solid var(--line)}
 
+  /* ---- overview mini-table ---- */
+  .mini-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
+  .mini-head h2{margin:0}
+  .mini-viewall{background:var(--panel);border:1px solid var(--line);color:var(--brand-dk);
+    border-radius:9px;padding:8px 12px;font:inherit;font-size:.82rem;font-weight:700;cursor:pointer;white-space:nowrap}
+  .mini-viewall:hover{border-color:var(--brand)}
+  .mini-table tbody td{padding:11px 14px}
+  .mini-table .nm{font-weight:700;color:var(--ink)}
+  .mini-table .fn{font-size:.78rem;color:var(--ink-mute)}
+  tr.rowlink{cursor:pointer}
+  tr.rowlink:hover{background:var(--panel)}
+  #ovActiveBar{margin-bottom:12px}
+
+  /* ---- opportunity detail modal ---- */
+  .modal-overlay{position:fixed;inset:0;background:rgba(23,34,32,.5);z-index:110;opacity:0;animation:fade .2s ease forwards}
+  .modal{position:fixed;z-index:120;top:50%;left:50%;transform:translate(-50%,-48%) scale(.98);
+    width:620px;max-width:94vw;max-height:88vh;overflow-y:auto;background:var(--card);border-radius:16px;
+    box-shadow:0 24px 70px rgba(23,34,32,.35);opacity:0;pointer-events:none;transition:.22s}
+  .modal.open{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
+  .modal-close{position:absolute;top:14px;right:14px;background:var(--panel);border:1px solid var(--line);
+    width:34px;height:34px;border-radius:9px;font-size:1.4rem;line-height:1;cursor:pointer;color:var(--ink-soft);z-index:2}
+  #modalContent{padding:26px 28px 28px}
+  .modal h2{margin:6px 0 2px;font-size:1.35rem;line-height:1.25;color:var(--ink);padding-right:30px}
+  .modal .m-funder{font-size:.9rem;color:var(--ink-soft);font-weight:600;margin-bottom:14px}
+  .modal .m-facts{display:grid;grid-template-columns:auto 1fr;gap:8px 16px;background:var(--panel);
+    border:1px solid var(--line);border-radius:11px;padding:14px 16px;font-size:.88rem;margin:14px 0}
+  .modal .m-facts dt{font-weight:700;color:var(--brand-dk)}
+  .modal .m-facts dd{margin:0;color:var(--ink)}
+  .modal h3{font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--ink);margin:20px 0 6px}
+  .modal p.m-body{font-size:.92rem;color:var(--ink-soft);margin:0 0 6px}
+  .modal .m-pg{background:#eef5f2;border-left:3px solid var(--brand);border-radius:0 10px 10px 0;
+    padding:12px 16px;font-size:.9rem;color:var(--ink);margin-top:6px}
+  .modal .m-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+  .m-btn{display:inline-flex;align-items:center;gap:7px;text-decoration:none;font-weight:700;font-size:.88rem;
+    padding:11px 16px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--brand-dk);cursor:pointer;font-family:inherit}
+  .m-btn.primary{background:var(--brand-dk);color:#fff;border-color:var(--brand-dk)}
+  .m-btn.accent{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .detail-btn{font-size:.78rem;font-weight:700;padding:6px 11px;border-radius:7px;border:1px solid var(--line);
+    color:var(--brand-dk);background:var(--panel);cursor:pointer;font-family:inherit;margin-left:6px}
+  .detail-btn:hover{border-color:var(--brand)}
+
   @media(max-width:680px){
     .hide-sm{display:none}
     nav.tabs{order:3;width:100%}
@@ -212,9 +253,22 @@
       </div>
     </div>
     <div class="panel">
-      <h2>Closing soonest</h2>
-      <p class="sub">Next deadlines &mdash; act on these first</p>
-      <ul class="soon-list" id="soonList"></ul>
+      <div class="mini-head">
+        <div>
+          <h2 id="miniTitle">Closing soonest</h2>
+          <p class="sub">Click a KPI or chart above to filter &mdash; click any row for details</p>
+        </div>
+        <button type="button" id="miniViewAll" class="mini-viewall">View all in Opportunities &rarr;</button>
+      </div>
+      <div id="ovActiveBar"></div>
+      <div class="table-wrap">
+        <table class="mini-table">
+          <thead><tr>
+            <th>Opportunity</th><th class="hide-sm">Source</th><th>Deadline</th><th>Countdown</th>
+          </tr></thead>
+          <tbody id="miniBody"></tbody>
+        </table>
+      </div>
     </div>
     <div class="legend">
       <span><span class="badge b-curated">Curated</span> hand-researched local funders</span>
@@ -225,7 +279,7 @@
 
   <!-- OPPORTUNITIES -->
   <section class="tabpanel" id="tab-opps">
-    <div class="note"><b>Tip:</b> Click any column header to sort. &ldquo;Curated&rdquo; rows are vetted; &ldquo;Federal&rdquo; rows are auto-pulled&mdash;always confirm eligibility and deadlines on the funder&rsquo;s page before investing time.</div>
+    <div class="note"><b>Tip:</b> Click any row to open full details &amp; a downloadable Word summary, or a column header to sort. &ldquo;Curated&rdquo; rows are vetted; &ldquo;Federal&rdquo; rows are auto-pulled&mdash;always confirm eligibility and deadlines on the funder&rsquo;s page before investing time.</div>
     <div class="toolbar">
       <div class="filters" id="oppFilters"></div>
       <div class="search"><input id="oppSearch" type="search" placeholder="Search opportunities&hellip;" aria-label="Search opportunities"></div>
@@ -316,6 +370,13 @@
     <p class="muted">Deadlines marked &ldquo;verify&rdquo; are recurring programs whose next exact date should be confirmed on the funder&rsquo;s site. Re-download anytime &mdash; the file refreshes with the data.</p>
   </div>
 </aside>
+
+<!-- Opportunity detail modal -->
+<div class="modal-overlay" id="modalOverlay" hidden></div>
+<div class="modal" id="grantModal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalTitle">
+  <button class="modal-close" id="modalClose" type="button" aria-label="Close details">&times;</button>
+  <div id="modalContent"></div>
+</div>
 
 <!-- Pinned + Subresource Integrity: if the CDN file is ever tampered with, the
      browser refuses to run it (hash mismatch). crossorigin/referrer hardened. -->

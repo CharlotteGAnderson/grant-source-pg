@@ -12,9 +12,12 @@ const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov
 let DATA = { grants: [], prospects: [] };
 let lastGenerated = null;
 let oppFilter = "all";
-let oppMonth = null;     // YYYY-MM set by clicking a chart bar
+let oppMonth = null;     // YYYY-MM set by clicking a chart bar (full Opportunities tab)
 let monthKeys = [];      // month buckets behind the deadlines chart (index -> YYYY-MM)
 let oppQuery = "";
+let ovFilter = "all";    // overview mini-table filter (set by KPI / chart clicks)
+let ovMonth = null;      // overview mini-table month filter
+let modalGrant = null;   // grant currently shown in the detail modal
 let oppSort = { key: "deadline", dir: 1 };
 let funderQuery = "";
 let funderSort = { key: "name", dir: 1 };
@@ -97,35 +100,66 @@ function renderKpis() {
   ).join("");
 }
 
-// Jump to the Opportunities tab with a given filter (also used by KPIs + charts).
-function goToOpps(filter) {
-  oppMonth = null;
-  oppFilter = filter || "all";
-  buildOppFilters();
-  renderOpps();
-  switchTab("opps");
+const FILTER_LABEL = {
+  all: "Closing soonest", soon: "Closing within 120 days", big: "Awards of $100k+",
+  federal: "Live federal grants", curated: "Curated local funders", high: "Strong fit",
+};
+
+// Shared matcher used by both the overview mini-table and the full Opportunities table.
+function matchOpps({ filter, month, query }) {
+  let list = [...DATA.grants];
+  if (month) list = list.filter((g) => (g.deadline || "").slice(0, 7) === month);
+  if (filter === "curated") list = list.filter((g) => g.source === "curated");
+  else if (filter === "federal") list = list.filter((g) => g.source === "Grants.gov");
+  else if (filter === "soon") list = list.filter((g) => { const d = daysUntil(g.deadline); return d != null && d >= 0 && d <= 120; });
+  else if (filter === "high") list = list.filter((g) => /high/i.test(g.fit || ""));
+  else if (filter === "big") list = list.filter((g) => (g.amount_max || 0) >= 100000);
+  if (query) {
+    const q = query.toLowerCase();
+    list = list.filter((g) => `${g.name} ${g.funder} ${g.summary} ${g.fit}`.toLowerCase().includes(q));
+  }
+  return list;
 }
 
+function byDeadline(a, b) { return (a.deadline || "9999") < (b.deadline || "9999") ? -1 : 1; }
+
+// KPI / chart clicks filter the overview mini-table in place (stay on Overview).
 function kpiActivate(e) {
   const el = e.target.closest(".kpi.click");
   if (!el) return;
-  if (el.dataset.tab === "funders") switchTab("funders");
-  else goToOpps(el.dataset.filter || "all");
+  if (el.dataset.tab === "funders") { switchTab("funders"); return; }
+  ovMonth = null;
+  ovFilter = el.dataset.filter || "all";
+  renderMini();
+  $("#miniBody").closest(".panel").scrollIntoView({ behavior: "smooth", block: "nearest" });
 }
 
-function renderSoon() {
-  const open = DATA.grants
-    .filter((x) => { const d = daysUntil(x.deadline); return d != null && d >= 0; })
-    .sort((a, b) => new Date(a.deadline) - new Date(b.deadline))
-    .slice(0, 6);
-  if (!open.length) { $("#soonList").innerHTML = '<li class="empty">No dated deadlines right now.</li>'; return; }
-  $("#soonList").innerHTML = open.map((g) => {
+function renderOvActiveBar() {
+  const bar = $("#ovActiveBar");
+  let label = null;
+  if (ovMonth) { const [y, m] = ovMonth.split("-"); label = `Deadlines in ${MONTHS[+m - 1]} ${y}`; }
+  else if (ovFilter !== "all") label = FILTER_LABEL[ovFilter] || ovFilter;
+  if (!label) { bar.innerHTML = ""; return; }
+  bar.innerHTML = `<div class="monthbar"><span class="pill">${esc(label)} <button type="button" id="ovClear" aria-label="Clear filter">&times;</button></span></div>`;
+  $("#ovClear").addEventListener("click", () => { ovFilter = "all"; ovMonth = null; renderMini(); });
+}
+
+function renderMini() {
+  renderOvActiveBar();
+  $("#miniTitle").textContent = ovMonth
+    ? "Filtered opportunities"
+    : (FILTER_LABEL[ovFilter] || "Opportunities");
+  const list = matchOpps({ filter: ovFilter, month: ovMonth }).sort(byDeadline).slice(0, 8);
+  const body = $("#miniBody");
+  if (!list.length) { body.innerHTML = '<tr><td colspan="4"><div class="empty">No opportunities match.</div></td></tr>'; return; }
+  body.innerHTML = list.map((g) => {
     const c = countdown(g.deadline);
-    return `<li>
-      <span class="soon-when badge ${c.cls}">${esc(c.txt.replace("Due in ", "").replace(" days", "d"))}</span>
-      <span class="soon-name"><b>${esc(g.name)}</b><span>${esc(g.funder)} · ${fmtDate(g.deadline)}</span></span>
-      ${sourceBadge(g.source)}
-    </li>`;
+    return `<tr class="rowlink" data-id="${esc(g.id)}" tabindex="0">
+      <td><div class="nm">${esc(g.name)}</div><div class="fn">${esc(g.funder)}</div></td>
+      <td class="hide-sm">${sourceBadge(g.source)}</td>
+      <td class="deadline">${fmtDate(g.deadline)}</td>
+      <td><span class="count badge ${c.cls}">${esc(c.txt)}</span></td>
+    </tr>`;
   }).join("");
 }
 
@@ -151,7 +185,7 @@ function renderCharts() {
     data: { labels, datasets: [{ data: keys.map((k) => byMonth[k]), backgroundColor: css("--brand"), borderRadius: 5, maxBarThickness: 38 }] },
     options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
       onHover: pointer,
-      onClick: (e, els) => { if (els.length) { oppMonth = monthKeys[els[0].index]; oppFilter = "all"; buildOppFilters(); renderOpps(); switchTab("opps"); } },
+      onClick: (e, els) => { if (els.length) { ovMonth = monthKeys[els[0].index]; ovFilter = "all"; renderMini(); $("#miniBody").closest(".panel").scrollIntoView({ behavior: "smooth", block: "nearest" }); } },
       scales: { y: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: css("--line-soft") } }, x: { grid: { display: false } } } },
   });
 
@@ -170,9 +204,11 @@ function renderCharts() {
       onClick: (e, els) => {
         if (!els.length) return;
         const i = els[0].index;
-        if (i === 0) goToOpps("curated");
-        else if (i === 1) goToOpps("federal");
-        else switchTab("funders");
+        if (i === 2) { switchTab("funders"); return; }
+        ovMonth = null;
+        ovFilter = i === 0 ? "curated" : "federal";
+        renderMini();
+        $("#miniBody").closest(".panel").scrollIntoView({ behavior: "smooth", block: "nearest" });
       },
       plugins: { legend: { position: "bottom", labels: { boxWidth: 12, font: { size: 12 } } } } },
   });
@@ -189,17 +225,7 @@ function buildOppFilters() {
 }
 
 function filteredOpps() {
-  let list = [...DATA.grants];
-  if (oppMonth) list = list.filter((g) => (g.deadline || "").slice(0, 7) === oppMonth);
-  if (oppFilter === "curated") list = list.filter((g) => g.source === "curated");
-  else if (oppFilter === "federal") list = list.filter((g) => g.source === "Grants.gov");
-  else if (oppFilter === "soon") list = list.filter((g) => { const d = daysUntil(g.deadline); return d != null && d >= 0 && d <= 120; });
-  else if (oppFilter === "high") list = list.filter((g) => /high/i.test(g.fit || ""));
-  else if (oppFilter === "big") list = list.filter((g) => (g.amount_max || 0) >= 100000);
-  if (oppQuery) {
-    const q = oppQuery.toLowerCase();
-    list = list.filter((g) => `${g.name} ${g.funder} ${g.summary} ${g.fit}`.toLowerCase().includes(q));
-  }
+  let list = matchOpps({ filter: oppFilter, month: oppMonth, query: oppQuery });
   const { key, dir } = oppSort;
   list.sort((a, b) => {
     let av, bv;
@@ -228,9 +254,7 @@ function renderOpps() {
   if (!list.length) { body.innerHTML = '<tr><td colspan="6"><div class="empty">No opportunities match.</div></td></tr>'; return; }
   body.innerHTML = list.map((g) => {
     const c = countdown(g.deadline);
-    const docx = g.source === "curated"
-      ? `<a href="grant-summaries/${esc(encodeURIComponent(g.id))}.docx" download>Word</a>` : "";
-    return `<tr>
+    return `<tr class="rowlink" data-id="${esc(g.id)}" tabindex="0">
       <td class="cell-name">
         <b>${esc(g.name)}</b>
         <div class="funder">${esc(g.funder)}</div>
@@ -240,7 +264,7 @@ function renderOpps() {
       <td class="hide-sm amount">${esc(g.amount || "—")}</td>
       <td class="deadline">${fmtDate(g.deadline)}</td>
       <td><span class="count badge ${c.cls}">${esc(c.txt)}</span></td>
-      <td class="links"><a class="primary" href="${esc(safeUrl(g.url))}" target="_blank" rel="noopener noreferrer">Apply ↗</a>${docx}</td>
+      <td class="links"><a class="primary" href="${esc(safeUrl(g.url))}" target="_blank" rel="noopener noreferrer">Apply ↗</a><button class="detail-btn" type="button" data-id="${esc(g.id)}">Details</button></td>
     </tr>`;
   }).join("");
 }
@@ -330,8 +354,101 @@ function closeDrawer() {
 function drawerEsc(e) { if (e.key === "Escape") closeDrawer(); }
 
 function renderAll() {
-  renderKpis(); renderSoon(); renderCharts();
+  renderKpis(); renderMini(); renderCharts();
   renderOpps(); renderFunders(); renderMeta();
+  if (modalGrant) { const g = DATA.grants.find((x) => x.id === modalGrant.id); if (g) fillModal(g); }
+}
+
+/* ---------- opportunity detail modal + Word export ---------- */
+function pgApplication(g) {
+  if (g.pg_application) return g.pg_application;
+  return "As an Oregon-based 501(c)(3) Community Land Trust, Proud Ground may be a strong fit for this funder's affordable-housing and community-development priorities. Confirm eligibility, then frame the request around a current Proud Ground need such as land acquisition, homebuyer support, or organizational capacity.";
+}
+
+function fillModal(g) {
+  modalGrant = g;
+  const c = countdown(g.deadline);
+  const needed = (g.needed || []).map((n) => `<li>${esc(n)}</li>`).join("");
+  const wordBtn = g.source === "curated"
+    ? `<a class="m-btn accent" href="grant-summaries/${esc(encodeURIComponent(g.id))}.docx" download>&#128196; Download Word summary</a>`
+    : `<button class="m-btn accent" type="button" id="wordGen">&#128196; Download Word summary</button>`;
+  $("#modalContent").innerHTML = `
+    <div class="badges">${sourceBadge(g.source)} <span class="badge ${c.cls}">${esc(g.status || c.txt)}</span></div>
+    <h2 id="modalTitle">${esc(g.name)}</h2>
+    <div class="m-funder">${esc(g.funder)}</div>
+    <dl class="m-facts">
+      <dt>Due date</dt><dd>${fmtDate(g.deadline)} &middot; ${esc(c.txt)}</dd>
+      <dt>Award</dt><dd>${esc(g.amount || "See funder page")}</dd>
+      <dt>Eligible uses</dt><dd>${esc(g.use || "See funder page")}</dd>
+      <dt>Eligibility</dt><dd>${esc(g.eligibility || "See funder page")}</dd>
+    </dl>
+    <h3>Summary</h3>
+    <p class="m-body">${esc(g.summary || "")}</p>
+    <h3>How this applies to Proud Ground</h3>
+    <div class="m-pg">${esc(pgApplication(g))}</div>
+    ${needed ? `<h3>What you'll need</h3><ul class="m-body">${needed}</ul>` : ""}
+    <div class="m-actions">
+      <a class="m-btn primary" href="${esc(safeUrl(g.url))}" target="_blank" rel="noopener noreferrer">Visit funder site &#8599;</a>
+      ${wordBtn}
+    </div>`;
+  const wg = $("#wordGen");
+  if (wg) wg.addEventListener("click", () => downloadWord(g));
+}
+
+function openModal(id) {
+  const g = DATA.grants.find((x) => x.id === id);
+  if (!g) return;
+  fillModal(g);
+  $("#modalOverlay").hidden = false;
+  $("#grantModal").classList.add("open");
+  $("#grantModal").setAttribute("aria-hidden", "false");
+  document.addEventListener("keydown", modalEsc);
+}
+function closeModal() {
+  modalGrant = null;
+  $("#grantModal").classList.remove("open");
+  $("#grantModal").setAttribute("aria-hidden", "true");
+  $("#modalOverlay").hidden = true;
+  document.removeEventListener("keydown", modalEsc);
+}
+function modalEsc(e) { if (e.key === "Escape") closeModal(); }
+
+// Auto-generate a Word document from the CURRENT data (federal/auto entries).
+// Because it builds from live data every time, it always reflects the latest
+// refresh; curated entries instead link to their pre-built .docx.
+function downloadWord(g) {
+  const c = countdown(g.deadline);
+  const row = (k, v) => `<tr><td style="background:#eef3f1;font-weight:bold;color:#1d4940;padding:6px 10px;border:1px solid #ddd">${esc(k)}</td><td style="padding:6px 10px;border:1px solid #ddd">${esc(v)}</td></tr>`;
+  const needed = (g.needed || []).map((n) => `<li>${esc(n)}</li>`).join("");
+  const html = `<!DOCTYPE html><html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+    <head><meta charset="utf-8"><title>${esc(g.name)}</title></head>
+    <body style="font-family:Arial,sans-serif;color:#1f2d2b;font-size:11pt">
+      <p style="font-size:8pt;letter-spacing:1px;color:#46605c"><b>PROUD GROUND &bull; GRANT OPPORTUNITY SUMMARY</b></p>
+      <h1 style="color:#1d4940;font-size:17pt;margin:0">${esc(g.name)}</h1>
+      <p style="color:#46605c;font-weight:bold;margin:2px 0 14px">${esc(g.funder)}</p>
+      <h2 style="color:#c8732f;font-size:12pt">Key Facts</h2>
+      <table style="border-collapse:collapse;width:100%">
+        ${row("Deadline", fmtDate(g.deadline) + " (" + c.txt + ")")}
+        ${row("Status", g.status || "")}
+        ${row("Award amount", g.amount || "See funder page")}
+        ${row("Eligible uses", g.use || "See funder page")}
+        ${row("Eligibility", g.eligibility || "See funder page")}
+      </table>
+      <h2 style="color:#c8732f;font-size:12pt">Summary</h2>
+      <p>${esc(g.summary || "")}</p>
+      <h2 style="color:#c8732f;font-size:12pt">How This Applies to Proud Ground</h2>
+      <p>${esc(pgApplication(g))}</p>
+      ${needed ? `<h2 style="color:#c8732f;font-size:12pt">What You'll Need</h2><ul>${needed}</ul>` : ""}
+      <h2 style="color:#c8732f;font-size:12pt">Where to Apply</h2>
+      <p>${esc(safeUrl(g.url))}</p>
+      <hr><p style="font-size:8pt;color:#46605c"><i>Auto-generated ${esc(new Date().toLocaleDateString())} from live data for Proud Ground (EIN 93-1290320), a 501(c)(3) Community Land Trust. Research aid only &mdash; confirm all details on the funder's official page before applying.</i></p>
+    </body></html>`;
+  const blob = new Blob(["﻿", html], { type: "application/msword" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = `${g.id}.doc`;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
 }
 
 async function load(announce) {
@@ -366,6 +483,23 @@ $("#kpis").addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key =
 $("#calBtn").addEventListener("click", openDrawer);
 $("#calClose").addEventListener("click", closeDrawer);
 $("#drawerOverlay").addEventListener("click", closeDrawer);
+
+// Row / Details clicks open the detail modal (Apply link keeps its own action).
+function rowOpen(e) {
+  if (e.target.closest("a")) return;            // let "Apply" links work
+  const el = e.target.closest("[data-id]");
+  if (el) openModal(el.dataset.id);
+}
+$("#oppBody").addEventListener("click", rowOpen);
+$("#miniBody").addEventListener("click", rowOpen);
+$("#oppBody").addEventListener("keydown", (e) => { if ((e.key === "Enter" || e.key === " ") && e.target.classList.contains("rowlink")) { e.preventDefault(); openModal(e.target.dataset.id); } });
+$("#miniBody").addEventListener("keydown", (e) => { if ((e.key === "Enter" || e.key === " ") && e.target.classList.contains("rowlink")) { e.preventDefault(); openModal(e.target.dataset.id); } });
+$("#modalClose").addEventListener("click", closeModal);
+$("#modalOverlay").addEventListener("click", closeModal);
+$("#miniViewAll").addEventListener("click", () => {
+  oppFilter = ovFilter; oppMonth = ovMonth; oppQuery = ""; $("#oppSearch").value = "";
+  buildOppFilters(); renderOpps(); switchTab("opps");
+});
 buildOppFilters();
 wireSort("#oppTable", oppSort, renderOpps);
 wireSort("#funderTable", funderSort, renderFunders);

@@ -172,6 +172,12 @@ def fetch_federal():
                 "homeownership keywords; verify eligibility, amounts, and the deadline on the "
                 "official page before investing time."
             ),
+            "pg_application": (
+                "As an Oregon-based 501(c)(3) Community Land Trust, Proud Ground may be an eligible "
+                f"applicant for this {agency} program supporting affordable housing and community development. "
+                "Confirm the specific eligibility, then tie the request to a current Proud Ground need "
+                "such as land acquisition, homebuyer support, or organizational capacity before applying."
+            ),
             "source": "Grants.gov",
             "category": "Federal",
         })
