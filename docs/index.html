@@ -209,6 +209,35 @@
     color:var(--brand-dk);background:var(--panel);cursor:pointer;font-family:inherit;margin-left:6px}
   .detail-btn:hover{border-color:var(--brand)}
 
+  /* ---- funder map ---- */
+  .map-wrap{position:relative;margin-top:12px;background:#eaf1ee;border:1px solid var(--line);border-radius:12px;overflow:hidden;max-width:600px}
+  #funderMap{display:block;width:100%;height:auto}
+  #funderMap .land{fill:#dde9e2;stroke:#b9cfc6;stroke-width:1}
+  #funderMap .water{fill:#dCEAF0}
+  #funderMap .dot{cursor:pointer;stroke:#fff;stroke-width:1.2;transition:r .1s}
+  #funderMap .dot:hover{r:9}
+  #funderMap .lbl{font-size:11px;fill:#46605c;font-weight:700}
+  .map-tip{position:absolute;pointer-events:none;background:var(--brand-dk);color:#fff;font-size:.78rem;
+    font-weight:600;padding:6px 10px;border-radius:8px;box-shadow:var(--shadow);transform:translate(-50%,-130%);white-space:nowrap;z-index:5}
+  .map-tip small{display:block;font-weight:500;color:#bcd8cf}
+  .map-note{font-size:.78rem;color:var(--ink-mute);margin:10px 2px 0}
+  .map-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.78rem;color:var(--ink-soft);margin:12px 2px 0}
+  .map-legend span{display:inline-flex;align-items:center;gap:6px}
+  .map-legend i{width:11px;height:11px;border-radius:50%;display:inline-block}
+
+  /* ---- news ---- */
+  .news-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+  .news-card{display:flex;flex-direction:column;gap:8px;background:var(--card);border:1px solid var(--line);
+    border-radius:13px;padding:18px;box-shadow:var(--shadow-sm);text-decoration:none;color:inherit;transition:transform .08s,box-shadow .15s,border-color .15s}
+  .news-card:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:var(--brand)}
+  .news-card .nt{font-weight:700;font-size:.95rem;line-height:1.35;color:var(--ink)}
+  .news-card .nm{margin-top:auto;display:flex;justify-content:space-between;align-items:center;font-size:.78rem;color:var(--ink-mute)}
+  .news-topic{font-size:.68rem;font-weight:800;padding:3px 8px;border-radius:6px;letter-spacing:.02em;width:fit-content}
+  .nt-Housing{background:#e7f0ed;color:var(--curated)}
+  .nt-Funding{background:#f6ecda;color:var(--prospect)}
+  .nt-Policy{background:#e6eef6;color:var(--fed)}
+  .nt-Government{background:#efe6f3;color:#6b3f86}
+
   @media(max-width:680px){
     .hide-sm{display:none}
     nav.tabs{order:3;width:100%}
@@ -224,6 +253,7 @@
       <button data-tab="overview" class="active">Overview</button>
       <button data-tab="opps">Opportunities</button>
       <button data-tab="funders">Local Funders</button>
+      <button data-tab="news">PNW News</button>
       <button data-tab="about">About</button>
     </nav>
     <div class="refresh">
@@ -303,6 +333,22 @@
   <!-- LOCAL FUNDERS -->
   <section class="tabpanel" id="tab-funders">
     <div class="note"><b>Prospecting list:</b> regional tax-exempt organizations surfaced automatically from IRS 990 data (via ProPublica). These are leads to research&mdash;not confirmed open grants. Open a profile to review what each one actually funds.</div>
+
+    <div class="panel">
+      <div class="mini-head">
+        <div>
+          <h2>Where the funders are</h2>
+          <p class="sub">Regional grantmakers across Oregon &amp; SW Washington &mdash; hover a dot for the name, click to open its 990 profile. Filters apply to the map and the list below.</p>
+        </div>
+      </div>
+      <div class="filters" id="funderCatFilters"></div>
+      <div class="map-wrap">
+        <svg id="funderMap" viewBox="0 0 520 460" role="img" aria-label="Map of regional funders"></svg>
+        <div class="map-tip" id="mapTip" hidden></div>
+      </div>
+      <p class="map-note" id="mapNote"></p>
+    </div>
+
     <div class="toolbar">
       <div class="filters"></div>
       <div class="search"><input id="funderSearch" type="search" placeholder="Search funders&hellip;" aria-label="Search funders"></div>
@@ -320,16 +366,27 @@
     </div>
   </section>
 
+  <!-- PNW NEWS -->
+  <section class="tabpanel" id="tab-news">
+    <div class="note"><b>Auto-scanned:</b> Pacific-Northwest housing, funding, and policy news relevant to a community land trust, pulled from Google News and refreshed each weekly build. Headlines link to the original source &mdash; always read the full article.</div>
+    <div class="toolbar">
+      <div class="filters" id="newsFilters"></div>
+      <div class="search"><input id="newsSearch" type="search" placeholder="Search news&hellip;" aria-label="Search news"></div>
+    </div>
+    <div class="news-grid" id="newsGrid"></div>
+  </section>
+
   <!-- ABOUT -->
   <section class="tabpanel" id="tab-about">
     <div class="panel" style="max-width:820px">
       <h2>About this dashboard</h2>
       <p class="sub" id="aboutMeta"></p>
-      <p style="font-size:.9rem;color:var(--ink-soft)">Everything here is generated from one data file (<code>grants-data.json</code>) that is rebuilt automatically on a schedule by a GitHub Action. Each run blends three sources:</p>
+      <p style="font-size:.9rem;color:var(--ink-soft)">Everything here is generated from one data file (<code>grants-data.json</code>) that is rebuilt automatically <b>once a week</b> by a GitHub Action. Each run blends four sources:</p>
       <ul style="font-size:.9rem;color:var(--ink-soft)">
         <li><b>Curated</b> &mdash; hand-researched, high-value local funders that have no public API.</li>
         <li><b>Federal</b> &mdash; live housing &amp; community-development opportunities from the Grants.gov API.</li>
-        <li><b>Prospects</b> &mdash; Oregon &amp; SW-Washington grantmakers pulled from IRS 990 data (ProPublica).</li>
+        <li><b>Prospects</b> &mdash; Oregon &amp; SW-Washington grantmakers pulled from IRS 990 data (ProPublica), plotted on the Local Funders map.</li>
+        <li><b>PNW News</b> &mdash; Pacific-Northwest housing, funding, and policy headlines scanned from Google News and curated by topic.</li>
       </ul>
       <p style="margin:16px 0"><a class="links primary" id="icsLink" href="proudground-grants.ics" download style="display:inline-block">&#128197; Download deadline calendar (.ics)</a></p>
       <p style="font-size:.82rem;color:var(--ink-mute);border-top:1px solid var(--line);padding-top:14px;margin-top:14px">
@@ -383,6 +440,6 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"
         integrity="sha384-9nhczxUqK87bcKHh20fSQcTGD4qq5GhayNYSYWqwBkINBhOfQLg/P5HG5lF1urn4"
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="app.js"></script>
+<script src="app.js?v=3"></script>
 </body>
 </html>

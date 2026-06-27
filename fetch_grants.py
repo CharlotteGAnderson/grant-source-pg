@@ -63,6 +63,63 @@ def _relevant(title, agency):
     return any(term in blob for term in FEDERAL_RELEVANCE)
 
 
+# Google News RSS queries for Pacific-Northwest housing/funding news (keyless).
+NEWS_QUERIES = [
+    ("Oregon affordable housing", "Housing"),
+    ("Portland affordable housing grant", "Funding"),
+    ("Oregon housing grant funding", "Funding"),
+    ("community land trust Oregon Washington", "Housing"),
+    ("Oregon housing policy legislature", "Policy"),
+    ("first-time homebuyer Oregon assistance", "Housing"),
+    ("Southwest Washington affordable housing Vancouver", "Housing"),
+    ("HUD Oregon housing", "Government"),
+]
+NEWS_RELEVANCE = (
+    "hous", "home", "rent", "afford", "grant", "fund", "hud", "land trust",
+    "homeless", "tenant", "mortgage", "down payment", "displace", "zoning",
+    "development", "shelter", "buyer", "equity",
+)
+MAX_NEWS = 30
+
+# Built-in coordinates for OR / SW-WA cities so the funder map needs no external
+# geocoder (keeps the build self-contained and the site CSP strict). Approximate
+# city centroids — fine for a stylized regional bubble map.
+CITY_COORDS = {
+    "portland": (45.52, -122.68), "beaverton": (45.487, -122.80), "hillsboro": (45.523, -122.99),
+    "gresham": (45.50, -122.43), "salem": (44.94, -123.04), "eugene": (44.05, -123.09),
+    "springfield": (44.05, -123.02), "corvallis": (44.56, -123.26), "albany": (44.64, -123.11),
+    "bend": (44.06, -121.31), "redmond": (44.27, -121.17), "medford": (42.33, -122.87),
+    "ashland": (42.19, -122.71), "central point": (42.38, -122.92), "grants pass": (42.44, -123.33),
+    "roseburg": (43.22, -123.34), "coos bay": (43.37, -124.22), "klamath falls": (42.22, -121.78),
+    "pendleton": (45.67, -118.79), "la grande": (45.32, -118.09), "astoria": (46.19, -123.83),
+    "newport": (44.64, -124.05), "tillamook": (45.46, -123.84), "the dalles": (45.59, -121.18),
+    "hood river": (45.71, -121.52), "hermiston": (45.84, -119.29), "ontario": (44.03, -116.96),
+    "baker city": (44.77, -117.83), "mcminnville": (45.21, -123.20), "newberg": (45.30, -122.97),
+    "forest grove": (45.52, -123.11), "banks": (45.62, -123.11), "hubbard": (45.18, -122.81),
+    "woodburn": (45.14, -122.86), "molalla": (45.15, -122.58), "canby": (45.26, -122.69),
+    "oregon city": (45.36, -122.61), "wilsonville": (45.30, -122.77), "tualatin": (45.38, -122.76),
+    "tigard": (45.43, -122.77), "lake oswego": (45.42, -122.67), "west linn": (45.37, -122.61),
+    "milwaukie": (45.45, -122.64), "sherwood": (45.36, -122.84), "carlton": (45.29, -123.18),
+    "dallas": (44.92, -123.32), "monmouth": (44.85, -123.23), "silverton": (45.00, -122.78),
+    "stayton": (44.80, -122.79), "lebanon": (44.54, -122.91), "sweet home": (44.40, -122.74),
+    "florence": (43.98, -124.10), "cottage grove": (43.80, -123.06), "sutherlin": (43.39, -123.31),
+    "brookings": (42.05, -124.28), "lincoln city": (44.96, -124.02), "seaside": (45.99, -123.92),
+    "st. helens": (45.86, -122.82), "st helens": (45.86, -122.82), "sandy": (45.40, -122.26),
+    "prineville": (44.30, -120.83), "madras": (44.63, -121.13), "sisters": (44.29, -121.55),
+    "burns": (43.59, -118.97), "enterprise": (45.43, -117.28), "john day": (44.42, -118.95),
+    "vancouver": (45.63, -122.66), "camas": (45.59, -122.40), "washougal": (45.58, -122.35),
+    "battle ground": (45.78, -122.53), "ridgefield": (45.81, -122.74), "longview": (46.14, -122.94),
+    "kelso": (46.15, -122.91), "olympia": (47.04, -122.90), "seattle": (47.61, -122.33),
+    "tacoma": (47.25, -122.44), "spokane": (47.66, -117.43), "bellingham": (48.75, -122.48),
+    "walla walla": (46.06, -118.34), "yakima": (46.60, -120.51), "wenatchee": (47.42, -120.31),
+    "aberdeen": (46.98, -123.82), "centralia": (46.72, -122.95),
+}
+
+
+def _coords(city):
+    return CITY_COORDS.get((city or "").strip().lower())
+
+
 def log(msg):
     print(f"[fetch_grants] {msg}", file=sys.stderr)
 
@@ -214,11 +271,16 @@ def fetch_prospects():
                 name = (o.get("name") or "").title().strip()
                 city = (o.get("city") or "").strip()
                 st = (o.get("state") or state).strip()
+                latlng = _coords(city)
                 out.append({
                     "id": f"prospect-{ein}",
                     "name": name,
                     "funder": name,
                     "location": ", ".join(p for p in [city, st] if p),
+                    "city": city,
+                    "state": st,
+                    "lat": latlng[0] if latlng else None,
+                    "lng": latlng[1] if latlng else None,
                     "ein": ein,
                     "url": f"https://projects.propublica.org/nonprofits/organizations/{ein}",
                     "matched_on": q,
@@ -234,7 +296,84 @@ def fetch_prospects():
                 if len(out) >= MAX_PROSPECTS:
                     break
     out.sort(key=lambda p: p["name"])
-    log(f"prospects: {len(out)} local funders")
+    log(f"prospects: {len(out)} local funders ({sum(1 for p in out if p['lat'])} mappable)")
+    return out
+
+
+# --------------------------------------------------------------------------- #
+# 4. Pacific-Northwest housing / funding news (Google News RSS, keyless)
+# --------------------------------------------------------------------------- #
+def _news_relevant(title):
+    t = (title or "").lower()
+    return any(term in t for term in NEWS_RELEVANCE)
+
+
+def _news_topic(title):
+    """Curate each story into a topic from its headline (not the query that found
+    it), so the News tab's filters are meaningful."""
+    t = (title or "").lower()
+    if any(k in t for k in ("grant", "fund", "million", "award", "invest", "financ", "bond", "$", "dollar")):
+        return "Funding"
+    if any(k in t for k in ("bill", "legislat", "policy", "senate", "lawmaker", "council", "measure", "zoning", "ballot", "governor", "ordinance")):
+        return "Policy"
+    if any(k in t for k in ("hud", "federal", "county", "city of", "government", "agency", "state of", "oregon housing")):
+        return "Government"
+    return "Housing"
+
+
+def fetch_news():
+    import xml.etree.ElementTree as ET
+    from email.utils import parsedate_to_datetime
+
+    seen = set()
+    out = []
+    per_query = 6  # cap each query so several topics/regions are represented
+    for query, _hint in NEWS_QUERIES:
+        url = ("https://news.google.com/rss/search?q="
+               + urllib.parse.quote(f"{query} when:30d")
+               + "&hl=en-US&gl=US&ceid=US:en")
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": UA})
+            with urllib.request.urlopen(req, timeout=TIMEOUT) as r:
+                root = ET.fromstring(r.read())
+        except (urllib.error.URLError, TimeoutError, ET.ParseError, OSError) as e:
+            log(f"WARNING news {query!r} failed: {e!r} — skipping")
+            continue
+        added = 0
+        for item in root.iter("item"):
+            if added >= per_query or len(out) >= MAX_NEWS:
+                break
+            title = html.unescape((item.findtext("title") or "").strip())
+            link = (item.findtext("link") or "").strip()
+            if not title or not link or not _news_relevant(title):
+                continue
+            key = title.lower()[:80]
+            if key in seen:
+                continue
+            seen.add(key)
+            src_el = item.find("source")
+            source = html.unescape((src_el.text or "").strip()) if src_el is not None else "Google News"
+            iso = ""
+            pub = item.findtext("pubDate")
+            if pub:
+                try:
+                    iso = parsedate_to_datetime(pub).date().isoformat()
+                except (TypeError, ValueError):
+                    iso = ""
+            out.append({
+                "id": f"news-{abs(hash(key)) % (10 ** 10)}",
+                "title": title,
+                "source": source,
+                "date": iso,
+                "url": link,
+                "topic": _news_topic(title),
+            })
+            added += 1
+        if len(out) >= MAX_NEWS:
+            break
+    out.sort(key=lambda n: n["date"], reverse=True)
+    log(f"news: {len(out)} PNW stories (topics: "
+        + ", ".join(sorted({n['topic'] for n in out})) + ")")
     return out
 
 
@@ -252,12 +391,15 @@ def main():
     grants = sorted(by_id.values(), key=lambda g: g.get("deadline", "9999-12-31"))
 
     prospects = fetch_prospects()
+    news = fetch_news()
 
     sources = ["curated"]
     if federal:
         sources.append("Grants.gov")
     if prospects:
         sources.append("ProPublica 990")
+    if news:
+        sources.append("Google News")
 
     org = dict(org)
     org["updated"] = datetime.date.today().isoformat()
@@ -272,9 +414,11 @@ def main():
             "curated": len(curated),
             "federal": len(federal),
             "prospects": len(prospects),
+            "news": len(news),
         },
         "grants": grants,
         "prospects": prospects,
+        "news": news,
     }
 
     payload = json.dumps(out, indent=2, ensure_ascii=False)
@@ -286,7 +430,7 @@ def main():
 
     log(f"WROTE {OUT_ROOT} and {OUT_DOCS}: "
         f"{len(grants)} grants ({len(curated)} curated + {len(federal)} federal), "
-        f"{len(prospects)} prospects")
+        f"{len(prospects)} prospects, {len(news)} news")
 
 
 if __name__ == "__main__":

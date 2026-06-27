@@ -29,17 +29,23 @@ https://<your-github-username>.github.io/<repo-name>/
 ## How it stays up to date
 
 This is a **static site**, so the page itself can't crawl the web. Instead, a
-**scheduled GitHub Action runs twice a day**, rebuilds the data file from live
-sources, and redeploys. The page also **re-fetches the data every 10 minutes**
-and shows a "last updated" badge, so an open tab stays current on its own.
+**scheduled GitHub Action runs once a week** (Mondays), rebuilds the data file
+from live sources, and redeploys. The page also **re-fetches the data every 10
+minutes** and shows a "last updated" badge, so an open tab stays current on its own.
 
-`fetch_grants.py` blends three sources into `grants-data.json`:
+`fetch_grants.py` blends four sources into `grants-data.json`:
 
 | Source | What it adds | API |
 |--------|--------------|-----|
 | **Curated** | hand-researched high-value local funders (`grants-curated.json`) | none — edit by hand |
 | **Federal** | live housing / community-development opportunities | [Grants.gov Search2](https://www.grants.gov/) (no key) |
-| **Prospects** | OR / SW-WA grantmakers to research (separate `prospects` list, no deadlines) | [ProPublica Nonprofit Explorer](https://projects.propublica.org/nonprofits/api) (no key) |
+| **Prospects** | OR / SW-WA grantmakers to research, geocoded for the Local Funders map (separate `prospects` list, no deadlines) | [ProPublica Nonprofit Explorer](https://projects.propublica.org/nonprofits/api) (no key) |
+| **PNW News** | Pacific-Northwest housing / funding / policy headlines, curated by topic (separate `news` list) | [Google News RSS](https://news.google.com/) (no key) |
+
+The dashboard surfaces this as five views: **Overview** (clickable KPIs + charts
+that filter a mini-table), **Opportunities** (sortable table; each row opens a
+detail modal with a downloadable Word summary), **Local Funders** (a self-contained
+SVG map of OR/SW-WA grantmakers + filterable list), **PNW News**, and **About**.
 
 The fetcher uses only the Python standard library and is resilient: if a remote
 source is down it logs a warning and falls back to the curated baseline, so a

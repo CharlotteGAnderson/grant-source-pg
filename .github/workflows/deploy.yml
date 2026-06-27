@@ -5,9 +5,9 @@ on:
     branches: [ main ]
   workflow_dispatch:
   schedule:
-    # Twice daily (UTC) ≈ early morning and late afternoon Pacific.
-    - cron: "0 14 * * *"
-    - cron: "0 1 * * *"
+    # Weekly — Mondays 14:00 UTC (~6–7am Pacific). Re-curates federal grants,
+    # local-funder prospects, and PNW news once a week.
+    - cron: "0 14 * * 1"
 
 permissions:
   contents: read

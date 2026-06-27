@@ -20,7 +20,10 @@ let ovMonth = null;      // overview mini-table month filter
 let modalGrant = null;   // grant currently shown in the detail modal
 let oppSort = { key: "deadline", dir: 1 };
 let funderQuery = "";
+let funderCat = "all";   // local-funder category filter (map + table)
 let funderSort = { key: "name", dir: 1 };
+let newsTopic = "all";
+let newsQuery = "";
 let charts = {};
 
 /* ---------- safety helpers ---------- */
@@ -269,9 +272,10 @@ function renderOpps() {
   }).join("");
 }
 
-/* ---------- funders table ---------- */
+/* ---------- funders table + map ---------- */
 function filteredFunders() {
   let list = [...DATA.prospects];
+  if (funderCat !== "all") list = list.filter((p) => (p.matched_on || "") === funderCat);
   if (funderQuery) {
     const q = funderQuery.toLowerCase();
     list = list.filter((p) => `${p.name} ${p.location} ${p.matched_on}`.toLowerCase().includes(q));
@@ -297,6 +301,108 @@ function renderFunders() {
       <td class="hide-sm funder">${esc(p.matched_on || "—")}</td>
       <td class="links"><a class="primary" href="${esc(safeUrl(p.url))}" target="_blank" rel="noopener noreferrer">990 profile ↗</a></td>
     </tr>`).join("");
+}
+
+const CAT_COLOR = {
+  "community foundation": "#2f6b5e", "housing foundation": "#8a5a16",
+  "charitable trust": "#2d5b86",
+};
+const CAT_LABEL = {
+  all: "All", "community foundation": "Community foundations",
+  "housing foundation": "Housing foundations", "charitable trust": "Charitable trusts",
+};
+// Rough OR / WA silhouettes (lat,lng) — stylized, projected with the dots.
+const OR_OUTLINE = [[46.26,-123.96],[46.15,-123.45],[46.18,-123.0],[45.92,-122.78],[45.65,-121.8],[45.7,-121.2],[45.6,-119.7],[45.93,-118.0],[46.0,-116.92],[44.3,-116.83],[42.9,-117.03],[42.0,-117.03],[42.0,-120.0],[42.0,-123.35],[42.0,-124.21],[42.84,-124.55],[43.34,-124.38],[44.27,-124.08],[45.05,-124.01],[45.77,-123.96],[46.26,-123.96]];
+const WA_OUTLINE = [[45.6,-123.96],[46.27,-124.06],[46.9,-124.1],[47.35,-124.42],[48.39,-124.73],[48.3,-123.1],[49.0,-123.0],[49.0,-117.03],[46.43,-117.04],[46.0,-116.92],[45.93,-118.0],[45.6,-119.7],[45.7,-121.2],[45.65,-121.8],[45.55,-122.25],[45.6,-122.78],[45.6,-123.96]];
+const MAP_BOX = { latMin: 41.8, latMax: 49.1, lngMin: -124.85, lngMax: -116.3, W: 520, H: 460, pad: 14 };
+const MAP_LANDMARKS = [["Portland",45.52,-122.68],["Eugene",44.05,-123.09],["Bend",44.06,-121.31],["Medford",42.33,-122.87],["Seattle",47.61,-122.33],["Spokane",47.66,-117.43]];
+
+function project(lat, lng) {
+  const b = MAP_BOX;
+  const x = b.pad + (lng - b.lngMin) / (b.lngMax - b.lngMin) * (b.W - 2 * b.pad);
+  const y = b.pad + (b.latMax - lat) / (b.latMax - b.latMin) * (b.H - 2 * b.pad);
+  return [x, y];
+}
+function polyPoints(pts) {
+  return pts.map(([la, ln]) => project(la, ln).map((n) => n.toFixed(1)).join(",")).join(" ");
+}
+
+function renderFunderMap() {
+  const svg = $("#funderMap");
+  if (!svg) return;
+  const list = filteredFunders().filter((p) => p.lat != null && p.lng != null);
+  const seen = {};
+  const dots = list.map((p) => {
+    let [x, y] = project(p.lat, p.lng);
+    const k = `${x.toFixed(0)},${y.toFixed(0)}`;        // spread out funders in the same town
+    const n = seen[k] = (seen[k] || 0) + 1;
+    if (n > 1) { const a = n * 2.2; x += Math.cos(a) * (4 + n); y += Math.sin(a) * (4 + n); }
+    const color = CAT_COLOR[p.matched_on] || "#2f6b5e";
+    return `<circle class="dot" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="6" fill="${color}"
+      data-name="${esc(p.name)}" data-loc="${esc(p.location || "")}" data-url="${esc(safeUrl(p.url))}">
+      <title>${esc(p.name)} — ${esc(p.location || "")}</title></circle>`;
+  }).join("");
+  const labels = MAP_LANDMARKS.map(([nm, la, ln]) => {
+    const [x, y] = project(la, ln);
+    return `<text class="lbl" x="${(x + 6).toFixed(1)}" y="${(y + 3).toFixed(1)}">${esc(nm)}</text>
+            <circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="2" fill="#46605c"/>`;
+  }).join("");
+  svg.innerHTML =
+    `<rect class="water" x="0" y="0" width="${MAP_BOX.W}" height="${MAP_BOX.H}"/>
+     <polygon class="land" points="${polyPoints(WA_OUTLINE)}"/>
+     <polygon class="land" points="${polyPoints(OR_OUTLINE)}"/>
+     ${labels}${dots}`;
+
+  const total = DATA.prospects.filter((p) => p.lat != null).length;
+  $("#mapNote").textContent =
+    `Showing ${list.length} mapped funder${list.length === 1 ? "" : "s"}` +
+    (funderCat === "all" ? ` of ${total} with known locations.` : ` in "${CAT_LABEL[funderCat]}".`) +
+    " Some funders without a recognized city are listed in the table only.";
+}
+
+function buildFunderCatFilters() {
+  const cats = ["all", "community foundation", "housing foundation", "charitable trust"];
+  $("#funderCatFilters").innerHTML = cats.map((c) => {
+    const dot = c === "all" ? "" : `<i style="display:inline-block;width:9px;height:9px;border-radius:50%;background:${CAT_COLOR[c]};margin-right:6px;vertical-align:middle"></i>`;
+    return `<button class="chip ${c === funderCat ? "active" : ""}" data-c="${esc(c)}">${dot}${esc(CAT_LABEL[c])}</button>`;
+  }).join("");
+  $("#funderCatFilters").querySelectorAll(".chip").forEach((b) =>
+    b.addEventListener("click", () => { funderCat = b.dataset.c; buildFunderCatFilters(); renderFunderMap(); renderFunders(); }));
+}
+
+/* ---------- PNW news ---------- */
+function filteredNews() {
+  let list = [...(DATA.news || [])];
+  if (newsTopic !== "all") list = list.filter((n) => n.topic === newsTopic);
+  if (newsQuery) {
+    const q = newsQuery.toLowerCase();
+    list = list.filter((n) => `${n.title} ${n.source}`.toLowerCase().includes(q));
+  }
+  return list;
+}
+
+function buildNewsFilters() {
+  const topics = ["all", "Housing", "Funding", "Policy", "Government"];
+  $("#newsFilters").innerHTML = topics.map((t) =>
+    `<button class="chip ${t === newsTopic ? "active" : ""}" data-t="${esc(t)}">${t === "all" ? "All topics" : esc(t)}</button>`).join("");
+  $("#newsFilters").querySelectorAll(".chip").forEach((b) =>
+    b.addEventListener("click", () => { newsTopic = b.dataset.t; buildNewsFilters(); renderNews(); }));
+}
+
+function renderNews() {
+  const grid = $("#newsGrid");
+  if (!grid) return;
+  const list = filteredNews();
+  if (!list.length) {
+    grid.innerHTML = '<div class="empty">No matching news. The weekly build scans Pacific-Northwest housing &amp; funding headlines.</div>';
+    return;
+  }
+  grid.innerHTML = list.map((n) => `
+    <a class="news-card" href="${esc(safeUrl(n.url))}" target="_blank" rel="noopener noreferrer">
+      <span class="news-topic nt-${esc(n.topic)}">${esc(n.topic)}</span>
+      <div class="nt">${esc(n.title)}</div>
+      <div class="nm"><span>${esc(n.source || "")}</span><span>${n.date ? fmtDate(n.date) : ""}</span></div>
+    </a>`).join("");
 }
 
 /* ---------- sorting headers ---------- */
@@ -355,7 +461,7 @@ function drawerEsc(e) { if (e.key === "Escape") closeDrawer(); }
 
 function renderAll() {
   renderKpis(); renderMini(); renderCharts();
-  renderOpps(); renderFunders(); renderMeta();
+  renderOpps(); renderFunders(); renderFunderMap(); renderNews(); renderMeta();
   if (modalGrant) { const g = DATA.grants.find((x) => x.id === modalGrant.id); if (g) fillModal(g); }
 }
 
@@ -500,7 +606,30 @@ $("#miniViewAll").addEventListener("click", () => {
   oppFilter = ovFilter; oppMonth = ovMonth; oppQuery = ""; $("#oppSearch").value = "";
   buildOppFilters(); renderOpps(); switchTab("opps");
 });
+$("#newsSearch").addEventListener("input", (e) => { newsQuery = e.target.value; renderNews(); });
+
+// Funder map: hover tooltip + click to open the 990 profile.
+(() => {
+  const map = $("#funderMap"), tip = $("#mapTip"), wrap = map.closest(".map-wrap");
+  const show = (e) => {
+    const dot = e.target.closest(".dot"); if (!dot) { tip.hidden = true; return; }
+    const r = wrap.getBoundingClientRect();
+    tip.innerHTML = `${esc(dot.dataset.name)}<small>${esc(dot.dataset.loc)}</small>`;
+    tip.style.left = (e.clientX - r.left) + "px";
+    tip.style.top = (e.clientY - r.top) + "px";
+    tip.hidden = false;
+  };
+  map.addEventListener("mousemove", show);
+  map.addEventListener("mouseleave", () => { tip.hidden = true; });
+  map.addEventListener("click", (e) => {
+    const dot = e.target.closest(".dot");
+    if (dot && dot.dataset.url && dot.dataset.url !== "#") window.open(dot.dataset.url, "_blank", "noopener,noreferrer");
+  });
+})();
+
 buildOppFilters();
+buildFunderCatFilters();
+buildNewsFilters();
 wireSort("#oppTable", oppSort, renderOpps);
 wireSort("#funderTable", funderSort, renderFunders);
 
