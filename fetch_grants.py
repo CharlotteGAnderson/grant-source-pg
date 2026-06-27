@@ -23,6 +23,7 @@ Design rules (match the repo conventions):
 
 import json
 import os
+import re
 import sys
 import html
 import datetime
@@ -133,8 +134,10 @@ def fetch_federal():
         deadline = _iso_from_mdy(h.get("closeDate"))
         if not deadline:
             continue  # no usable deadline -> not an actionable opportunity
-        opp_id = str(h.get("id") or h.get("number") or "").strip()
-        number = (h.get("number") or "").strip()
+        # Sanitize the id to a strict allowlist before it ever lands in a URL or
+        # the .ics file — never trust raw API strings in a constructed link.
+        opp_id = re.sub(r"[^A-Za-z0-9_-]", "", str(h.get("id") or h.get("number") or ""))
+        number = re.sub(r"[^A-Za-z0-9 ._/-]", "", (h.get("number") or "").strip())
         if not opp_id:
             continue
         agency = html.unescape((h.get("agency") or h.get("agencyCode") or "Federal agency").strip())

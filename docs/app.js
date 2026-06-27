@@ -260,7 +260,8 @@ function renderMeta() {
     `${org.name || "Proud Ground"} · ${org.type || ""} · data generated ${DATA.generated_at ? new Date(DATA.generated_at).toLocaleString() : "—"} · sources: ${(DATA.sources || []).join(", ")}`;
   $("#footer").innerHTML =
     `<b>${esc(org.name || "Proud Ground")}</b> — ${esc(org.type || "")}. ${esc(org.address || "")} · EIN ${esc(org.ein || "")}.
-     Data auto-refreshed on a schedule; this is a research aid, not advice — confirm every detail on the funder's official page.`;
+     Data auto-refreshed on a schedule; this is a research aid, not advice — confirm every detail on the funder's official page.
+     <div style="margin-top:10px">Built as <b>volunteer work</b> in support of Proud Ground · <a href="https://www.proudground.org/" target="_blank" rel="noopener noreferrer">proudground.org &#8599;</a></div>`;
 }
 
 function toast(msg) {

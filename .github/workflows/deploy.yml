@@ -35,7 +35,7 @@ jobs:
           node-version: "20"
 
       - name: Install Node deps
-        run: npm install docx --no-fund --no-audit
+        run: npm install --no-fund --no-audit --no-save docx@9.7.1
 
       - name: Fetch live data (curated + Grants.gov + ProPublica)
         run: python3 fetch_grants.py
