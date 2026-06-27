@@ -64,6 +64,11 @@
   .kpi.alert .n{color:var(--warn)}
   .kpi.fed .n{color:var(--fed)}
   .kpi.prospect .n{color:var(--prospect)}
+  .kpi.click{cursor:pointer;transition:transform .08s ease,box-shadow .15s ease,border-color .15s ease}
+  .kpi.click:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:var(--brand)}
+  .kpi.click:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+  .kpi .go{font-size:.7rem;color:var(--brand);font-weight:700;margin-top:8px;opacity:0;transition:opacity .15s}
+  .kpi.click:hover .go,.kpi.click:focus-visible .go{opacity:1}
 
   /* ---- panels / charts ---- */
   .cols{display:grid;grid-template-columns:1.4fr 1fr;gap:18px;margin-bottom:18px}
@@ -130,6 +135,39 @@
     background:var(--brand-dk);color:#fff;padding:11px 18px;border-radius:10px;font-size:.85rem;font-weight:600;
     box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.3s}
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .chart-box canvas{cursor:pointer}
+
+  /* ---- month-filter bar (set by clicking a chart bar) ---- */
+  .monthbar{display:flex;align-items:center;gap:10px;margin:0 2px 14px}
+  .monthbar .pill{display:inline-flex;align-items:center;gap:8px;background:#e7f0ed;color:var(--brand-dk);
+    border:1px solid #cfe0da;border-radius:999px;padding:6px 8px 6px 14px;font-size:.82rem;font-weight:700}
+  .monthbar .pill button{background:var(--brand-dk);color:#fff;border:0;border-radius:50%;width:20px;height:20px;
+    cursor:pointer;font-size:.8rem;line-height:1;display:flex;align-items:center;justify-content:center}
+
+  /* ---- calendar drawer ---- */
+  .drawer-overlay{position:fixed;inset:0;background:rgba(23,34,32,.42);z-index:90;
+    opacity:0;animation:fade .2s ease forwards}
+  .drawer{position:fixed;top:0;right:0;height:100%;width:380px;max-width:88vw;z-index:100;
+    background:var(--card);box-shadow:-12px 0 40px rgba(23,34,32,.22);
+    transform:translateX(100%);transition:transform .26s cubic-bezier(.22,.61,.36,1);
+    display:flex;flex-direction:column;overflow-y:auto}
+  .drawer.open{transform:translateX(0)}
+  .drawer-head{display:flex;align-items:center;justify-content:space-between;
+    padding:18px 20px;background:var(--brand-dk);color:#fff;position:sticky;top:0}
+  .drawer-head h2{margin:0;font-size:1.05rem;font-weight:800}
+  .drawer-head button{background:rgba(255,255,255,.14);border:0;color:#fff;width:30px;height:30px;
+    border-radius:8px;font-size:1.3rem;line-height:1;cursor:pointer}
+  .drawer-body{padding:20px;font-size:.9rem;color:var(--ink-soft)}
+  .drawer-body h3{font-size:.82rem;text-transform:uppercase;letter-spacing:.05em;color:var(--ink);
+    margin:22px 0 8px}
+  .drawer-body ol{margin:0;padding-left:20px}
+  .drawer-body ol li{margin:6px 0}
+  .drawer-body .muted{font-size:.8rem;color:var(--ink-mute);border-top:1px solid var(--line);
+    padding-top:14px;margin-top:18px}
+  .dl-btn{display:block;text-align:center;text-decoration:none;font-weight:700;font-size:.92rem;
+    padding:12px 16px;border-radius:10px;margin:12px 0;background:var(--accent);color:#fff;box-shadow:var(--shadow-sm)}
+  .dl-btn.ghost{background:var(--panel);color:var(--brand-dk);border:1px solid var(--line)}
+
   @media(max-width:680px){
     .hide-sm{display:none}
     nav.tabs{order:3;width:100%}
@@ -150,6 +188,7 @@
     <div class="refresh">
       <span class="dot" title="Live"></span>
       <span id="updatedLabel">Loading&hellip;</span>
+      <button id="calBtn" type="button">&#128197; Calendar</button>
       <button id="refreshBtn" type="button">Refresh</button>
     </div>
   </div>
@@ -191,6 +230,7 @@
       <div class="filters" id="oppFilters"></div>
       <div class="search"><input id="oppSearch" type="search" placeholder="Search opportunities&hellip;" aria-label="Search opportunities"></div>
     </div>
+    <div id="oppMonthBar"></div>
     <div class="table-wrap">
       <table id="oppTable">
         <thead><tr>
@@ -247,6 +287,35 @@
 
 <footer><div class="wrap" id="footer"></div></footer>
 <div class="toast" id="toast"></div>
+
+<!-- Calendar drawer (slides in from the right) -->
+<div class="drawer-overlay" id="drawerOverlay" hidden></div>
+<aside class="drawer" id="calDrawer" aria-hidden="true" aria-label="Grant deadline calendar" role="dialog" aria-modal="true">
+  <div class="drawer-head">
+    <h2>&#128197; Deadline calendar</h2>
+    <button id="calClose" type="button" aria-label="Close calendar panel">&times;</button>
+  </div>
+  <div class="drawer-body">
+    <p>Get every grant deadline as calendar events &mdash; each with a <b>30-day</b> and <b>7-day</b> reminder so nothing slips.</p>
+    <a class="dl-btn" href="proudground-grants.ics" download>&#11015; Download calendar (.ics)</a>
+    <a class="dl-btn ghost" href="https://calendar.google.com/calendar/r/settings/export" target="_blank" rel="noopener noreferrer">&#10133; Open Google Calendar import</a>
+
+    <h3>Add to Google Calendar</h3>
+    <ol>
+      <li>Download the <b>.ics</b> file above.</li>
+      <li>In Google Calendar, open <b>Settings &rarr; Import &amp; Export</b>.</li>
+      <li>Choose <b>Import</b>, select the downloaded file, pick a calendar, and import.</li>
+    </ol>
+
+    <h3>Apple Calendar / Outlook</h3>
+    <ol>
+      <li>Download the <b>.ics</b> file.</li>
+      <li>Double-click it (Apple Calendar), or in Outlook use <b>File &rarr; Open &amp; Export &rarr; Import</b>.</li>
+    </ol>
+
+    <p class="muted">Deadlines marked &ldquo;verify&rdquo; are recurring programs whose next exact date should be confirmed on the funder&rsquo;s site. Re-download anytime &mdash; the file refreshes with the data.</p>
+  </div>
+</aside>
 
 <!-- Pinned + Subresource Integrity: if the CDN file is ever tampered with, the
      browser refuses to run it (hash mismatch). crossorigin/referrer hardened. -->

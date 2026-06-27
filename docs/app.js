@@ -12,6 +12,8 @@ const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov
 let DATA = { grants: [], prospects: [] };
 let lastGenerated = null;
 let oppFilter = "all";
+let oppMonth = null;     // YYYY-MM set by clicking a chart bar
+let monthKeys = [];      // month buckets behind the deadlines chart (index -> YYYY-MM)
 let oppQuery = "";
 let oppSort = { key: "deadline", dir: 1 };
 let funderQuery = "";
@@ -80,15 +82,35 @@ function renderKpis() {
   const big = g.filter((x) => (x.amount_max || 0) >= 100000);
   const fed = g.filter((x) => x.source === "Grants.gov");
   const tiles = [
-    { n: g.length, l: "Open opportunities" },
-    { n: soon.length, l: "Closing within 120 days", cls: "alert" },
-    { n: big.length, l: "Awards of $100k+" },
-    { n: fed.length, l: "Live federal grants", cls: "fed" },
-    { n: DATA.prospects.length, l: "Local funder leads", cls: "prospect" },
+    { n: g.length, l: "Open opportunities", tab: "opps", filter: "all", go: "View all" },
+    { n: soon.length, l: "Closing within 120 days", cls: "alert", tab: "opps", filter: "soon", go: "View these" },
+    { n: big.length, l: "Awards of $100k+", tab: "opps", filter: "big", go: "View these" },
+    { n: fed.length, l: "Live federal grants", cls: "fed", tab: "opps", filter: "federal", go: "View these" },
+    { n: DATA.prospects.length, l: "Local funder leads", cls: "prospect", tab: "funders", go: "View leads" },
   ];
   $("#kpis").innerHTML = tiles.map((t) =>
-    `<div class="kpi ${t.cls || ""}"><div class="n">${esc(t.n)}</div><div class="l">${esc(t.l)}</div></div>`
+    `<div class="kpi click ${t.cls || ""}" role="button" tabindex="0"
+          data-tab="${esc(t.tab)}" data-filter="${esc(t.filter || "")}">
+       <div class="n">${esc(t.n)}</div><div class="l">${esc(t.l)}</div>
+       <div class="go">${esc(t.go)} &rarr;</div>
+     </div>`
   ).join("");
+}
+
+// Jump to the Opportunities tab with a given filter (also used by KPIs + charts).
+function goToOpps(filter) {
+  oppMonth = null;
+  oppFilter = filter || "all";
+  buildOppFilters();
+  renderOpps();
+  switchTab("opps");
+}
+
+function kpiActivate(e) {
+  const el = e.target.closest(".kpi.click");
+  if (!el) return;
+  if (el.dataset.tab === "funders") switchTab("funders");
+  else goToOpps(el.dataset.filter || "all");
 }
 
 function renderSoon() {
@@ -118,14 +140,18 @@ function renderCharts() {
     byMonth[key] = (byMonth[key] || 0) + 1;
   });
   const keys = Object.keys(byMonth).sort();
+  monthKeys = keys;
   const labels = keys.map((k) => { const [y, m] = k.split("-"); return `${MONTHS[+m - 1]} ${y.slice(2)}`; });
   const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+  const pointer = (e, els) => { e.native.target.style.cursor = els.length ? "pointer" : "default"; };
 
   charts.deadlines && charts.deadlines.destroy();
   charts.deadlines = new Chart($("#chartDeadlines"), {
     type: "bar",
     data: { labels, datasets: [{ data: keys.map((k) => byMonth[k]), backgroundColor: css("--brand"), borderRadius: 5, maxBarThickness: 38 }] },
     options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+      onHover: pointer,
+      onClick: (e, els) => { if (els.length) { oppMonth = monthKeys[els[0].index]; oppFilter = "all"; buildOppFilters(); renderOpps(); switchTab("opps"); } },
       scales: { y: { beginAtZero: true, ticks: { precision: 0 }, grid: { color: css("--line-soft") } }, x: { grid: { display: false } } } },
   });
 
@@ -140,6 +166,14 @@ function renderCharts() {
         backgroundColor: [css("--curated"), css("--fed"), css("--prospect")], borderWidth: 0 }],
     },
     options: { responsive: true, maintainAspectRatio: false, cutout: "62%",
+      onHover: pointer,
+      onClick: (e, els) => {
+        if (!els.length) return;
+        const i = els[0].index;
+        if (i === 0) goToOpps("curated");
+        else if (i === 1) goToOpps("federal");
+        else switchTab("funders");
+      },
       plugins: { legend: { position: "bottom", labels: { boxWidth: 12, font: { size: 12 } } } } },
   });
 }
@@ -151,11 +185,12 @@ function buildOppFilters() {
   $("#oppFilters").innerHTML = defs.map(([k, l]) =>
     `<button class="chip ${k === oppFilter ? "active" : ""}" data-f="${k}">${esc(l)}</button>`).join("");
   $("#oppFilters").querySelectorAll(".chip").forEach((b) =>
-    b.addEventListener("click", () => { oppFilter = b.dataset.f; buildOppFilters(); renderOpps(); }));
+    b.addEventListener("click", () => { oppMonth = null; oppFilter = b.dataset.f; buildOppFilters(); renderOpps(); }));
 }
 
 function filteredOpps() {
   let list = [...DATA.grants];
+  if (oppMonth) list = list.filter((g) => (g.deadline || "").slice(0, 7) === oppMonth);
   if (oppFilter === "curated") list = list.filter((g) => g.source === "curated");
   else if (oppFilter === "federal") list = list.filter((g) => g.source === "Grants.gov");
   else if (oppFilter === "soon") list = list.filter((g) => { const d = daysUntil(g.deadline); return d != null && d >= 0 && d <= 120; });
@@ -177,7 +212,17 @@ function filteredOpps() {
   return list;
 }
 
+function renderOppMonthBar() {
+  const bar = $("#oppMonthBar");
+  if (!oppMonth) { bar.innerHTML = ""; return; }
+  const [y, m] = oppMonth.split("-");
+  const label = `${MONTHS[+m - 1]} ${y}`;
+  bar.innerHTML = `<span class="pill">Deadlines in ${esc(label)} <button type="button" id="clearMonth" aria-label="Clear month filter">&times;</button></span>`;
+  $("#clearMonth").addEventListener("click", () => { oppMonth = null; renderOpps(); });
+}
+
 function renderOpps() {
+  renderOppMonthBar();
   const list = filteredOpps();
   const body = $("#oppBody");
   if (!list.length) { body.innerHTML = '<tr><td colspan="6"><div class="empty">No opportunities match.</div></td></tr>'; return; }
@@ -269,6 +314,21 @@ function toast(msg) {
   setTimeout(() => t.classList.remove("show"), 2600);
 }
 
+/* ---------- calendar drawer ---------- */
+function openDrawer() {
+  $("#calDrawer").classList.add("open");
+  $("#calDrawer").setAttribute("aria-hidden", "false");
+  $("#drawerOverlay").hidden = false;
+  document.addEventListener("keydown", drawerEsc);
+}
+function closeDrawer() {
+  $("#calDrawer").classList.remove("open");
+  $("#calDrawer").setAttribute("aria-hidden", "true");
+  $("#drawerOverlay").hidden = true;
+  document.removeEventListener("keydown", drawerEsc);
+}
+function drawerEsc(e) { if (e.key === "Escape") closeDrawer(); }
+
 function renderAll() {
   renderKpis(); renderSoon(); renderCharts();
   renderOpps(); renderFunders(); renderMeta();
@@ -301,6 +361,11 @@ $("#tabs").addEventListener("click", (e) => {
 $("#refreshBtn").addEventListener("click", () => load(true));
 $("#oppSearch").addEventListener("input", (e) => { oppQuery = e.target.value; renderOpps(); });
 $("#funderSearch").addEventListener("input", (e) => { funderQuery = e.target.value; renderFunders(); });
+$("#kpis").addEventListener("click", kpiActivate);
+$("#kpis").addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); kpiActivate(e); } });
+$("#calBtn").addEventListener("click", openDrawer);
+$("#calClose").addEventListener("click", closeDrawer);
+$("#drawerOverlay").addEventListener("click", closeDrawer);
 buildOppFilters();
 wireSort("#oppTable", oppSort, renderOpps);
 wireSort("#funderTable", funderSort, renderFunders);
