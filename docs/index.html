@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proud Ground &mdash; Grant &amp; Funding Tracker</title>
+<meta name="description" content="A living tracker of grant and funding opportunities relevant to Proud Ground, a Community Land Trust serving Oregon and SW Washington.">
+<style>
+  :root{
+    --ink:#1f2d2b; --ink-soft:#46605c; --paper:#f6f4ee; --card:#ffffff;
+    --line:#e2ded2; --brand:#2f6b5e; --brand-dk:#1d4940; --accent:#c8732f;
+    --warn:#b23b2e; --soon:#9c6b15; --ok:#2f6b5e;
+    --shadow:0 1px 2px rgba(31,45,43,.06),0 8px 24px rgba(31,45,43,.06);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:var(--brand-dk)}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+  header.hero{background:linear-gradient(160deg,var(--brand-dk),var(--brand));color:#f3f7f5;
+    padding:54px 0 46px;border-bottom:4px solid var(--accent)}
+  header.hero .wrap{display:flex;flex-direction:column;gap:14px}
+  .eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:.72rem;font-weight:700;
+    color:#bfe0d6}
+  header.hero h1{margin:0;font-size:2.1rem;line-height:1.15;font-weight:800}
+  header.hero p{margin:0;max-width:62ch;color:#dcebe2;color:#dfeee9}
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:6px;font-size:.85rem;color:#cfe6df}
+  .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
+  .btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:10px;
+    padding:11px 16px;font-weight:700;font-size:.92rem;cursor:pointer;text-decoration:none;
+    transition:transform .05s ease, box-shadow .15s ease}
+  .btn:active{transform:translateY(1px)}
+  .btn-primary{background:var(--accent);color:#fff;box-shadow:var(--shadow)}
+  .btn-ghost{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.35)}
+  main{padding:34px 0 70px}
+  .toolbar{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;
+    margin-bottom:22px}
+  .filters{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{border:1px solid var(--line);background:var(--card);color:var(--ink-soft);
+    border-radius:999px;padding:7px 14px;font-size:.82rem;font-weight:600;cursor:pointer}
+  .chip.active{background:var(--brand-dk);color:#fff;border-color:var(--brand-dk)}
+  .summary-stats{display:flex;gap:22px;flex-wrap:wrap;font-size:.85rem;color:var(--ink-soft)}
+  .summary-stats b{color:var(--ink);font-size:1.05rem}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:18px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;
+    box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px}
+  .card h3{margin:0;font-size:1.12rem;line-height:1.3}
+  .funder{font-size:.86rem;color:var(--ink-soft);font-weight:600}
+  .badges{display:flex;flex-wrap:wrap;gap:7px}
+  .badge{font-size:.72rem;font-weight:700;padding:4px 9px;border-radius:7px;letter-spacing:.02em}
+  .b-deadline{background:#f3ece0;color:var(--accent)}
+  .b-amount{background:#e7f0ed;color:var(--brand-dk)}
+  .status-now{color:#fff;background:var(--warn)}
+  .status-soon{color:#fff;background:var(--soon)}
+  .status-open{color:#fff;background:var(--ok)}
+  .countdown{font-size:.8rem;font-weight:700}
+  .fit{font-size:.85rem}
+  .fit b{color:var(--brand-dk)}
+  .card p.desc{margin:0;font-size:.9rem;color:var(--ink-soft)}
+  .card-foot{margin-top:auto;display:flex;flex-wrap:wrap;gap:10px;padding-top:6px}
+  .link-btn{font-size:.83rem;font-weight:700;text-decoration:none;padding:8px 12px;border-radius:9px;
+    border:1px solid var(--line);color:var(--brand-dk);background:#fbfaf6}
+  .link-btn.primary{background:var(--brand-dk);color:#fff;border-color:var(--brand-dk)}
+  details.more{border-top:1px dashed var(--line);padding-top:10px;font-size:.86rem}
+  details.more summary{cursor:pointer;font-weight:700;color:var(--brand-dk);font-size:.84rem}
+  details.more ul{margin:8px 0 0;padding-left:18px;color:var(--ink-soft)}
+  details.more .row{margin-top:8px}
+  details.more .row b{color:var(--ink)}
+  footer{border-top:1px solid var(--line);padding:26px 0;font-size:.82rem;color:var(--ink-soft);
+    background:#efece3}
+  .note{background:#fff7ec;border:1px solid #f0dcc0;border-radius:12px;padding:14px 16px;
+    font-size:.85rem;color:#7a5418;margin-bottom:24px}
+  .note b{color:#5e3f10}
+  @media(max-width:560px){header.hero h1{font-size:1.7rem}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Funding Intelligence &middot; Community Land Trust</span>
+    <h1>Proud Ground Grant &amp; Funding Tracker</h1>
+    <p>A living list of grant and funding opportunities matched to Proud Ground&rsquo;s mission&mdash;affordable homeownership for first-time and BIPOC buyers across Oregon and SW Washington. Each opportunity links to where to apply, what&rsquo;s needed, and a downloadable summary.</p>
+    <div class="meta-row" id="metaRow"></div>
+    <div class="actions">
+      <a class="btn btn-primary" href="proudground-grants.ics" download>&#128197; Download calendar (.ics)</a>
+      <a class="btn btn-ghost" href="https://calendar.google.com/calendar/r/settings/export" target="_blank" rel="noopener">&#10133; Add to Google Calendar</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="note">
+      <b>How to use the calendar:</b> Download the <b>.ics</b> file above, then in Google Calendar go to
+      <b>Settings &rarr; Import &amp; Export &rarr; Import</b> and select the file. Every grant deadline
+      (with a 30-day reminder) drops into your calendar. Deadlines marked &ldquo;verify&rdquo; are recurring
+      programs whose next exact date should be confirmed on the funder&rsquo;s site.
+    </div>
+
+    <div class="toolbar">
+      <div class="filters" id="filters"></div>
+      <div class="summary-stats" id="stats"></div>
+    </div>
+
+    <section class="grid" id="grid"></section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p style="margin:0 0 6px"><b>Disclaimer:</b> This tracker is a research aid, not legal or financial advice. Deadlines, amounts, and eligibility change frequently&mdash;always confirm details on the funder&rsquo;s official page before applying. Several entries are recurring programs whose next cycle dates are estimated from the most recent published round.</p>
+    <p style="margin:0">Built for Proud Ground (EIN 93-1290320), a 501(c)(3) Community Land Trust. Data compiled June 26, 2026. Edit <code>grants-data.json</code> to update; the site, stats, and calendar all read from it.</p>
+  </div>
+</footer>
+
+<script>
+let DATA = null;
+const $ = s => document.querySelector(s);
+const monthNames = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+function fmtDate(iso){
+  const d = new Date(iso + "T00:00:00");
+  return monthNames[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
+}
+function daysUntil(iso){
+  const now = new Date(); now.setHours(0,0,0,0);
+  const d = new Date(iso + "T00:00:00");
+  return Math.round((d - now)/86400000);
+}
+function statusClass(g){
+  const du = daysUntil(g.deadline);
+  if(du < 0) return "status-soon";
+  if(du <= 45) return "status-now";
+  if(du <= 120) return "status-soon";
+  return "status-open";
+}
+function countdownText(g){
+  const du = daysUntil(g.deadline);
+  if(du < 0) return "Recurring &middot; next cycle est.";
+  if(du === 0) return "Due today";
+  if(du === 1) return "Due tomorrow";
+  return "Due in " + du + " days";
+}
+
+function render(filter){
+  const grid = $("#grid");
+  grid.innerHTML = "";
+  let list = [...DATA.grants].sort((a,b)=> new Date(a.deadline) - new Date(b.deadline));
+  if(filter && filter !== "all"){
+    if(filter === "soon") list = list.filter(g => { const d=daysUntil(g.deadline); return d>=0 && d<=120; });
+    else if(filter === "high") list = list.filter(g => /High/i.test(g.fit));
+    else if(filter === "big") list = list.filter(g => (g.amount_max||0) >= 100000);
+  }
+  list.forEach(g=>{
+    const card = document.createElement("div");
+    card.className = "card";
+    const needed = (g.needed||[]).map(n=>`<li>${n}</li>`).join("");
+    card.innerHTML = `
+      <div class="badges">
+        <span class="badge ${statusClass(g)}">${g.status}</span>
+        <span class="badge b-amount">${g.amount}</span>
+      </div>
+      <h3>${g.name}</h3>
+      <div class="funder">${g.funder}</div>
+      <div class="badges">
+        <span class="badge b-deadline">&#128197; ${fmtDate(g.deadline)}</span>
+        <span class="countdown" style="color:var(--accent)">${countdownText(g)}</span>
+      </div>
+      <div class="fit"><b>Fit:</b> ${g.fit}</div>
+      <p class="desc">${g.summary}</p>
+      <details class="more">
+        <summary>Eligibility, uses &amp; what&rsquo;s needed</summary>
+        <div class="row"><b>Deadline detail:</b> ${g.deadline_note}</div>
+        <div class="row"><b>Eligibility:</b> ${g.eligibility}</div>
+        <div class="row"><b>Eligible uses:</b> ${g.use}</div>
+        <div class="row"><b>What you&rsquo;ll need:</b><ul>${needed}</ul></div>
+      </details>
+      <div class="card-foot">
+        <a class="link-btn primary" href="${g.url}" target="_blank" rel="noopener">Apply / funder page &rarr;</a>
+        <a class="link-btn" href="grant-summaries/${g.id}.docx" download>&#128196; Word summary</a>
+      </div>`;
+    grid.appendChild(card);
+  });
+  if(list.length === 0) grid.innerHTML = '<p style="color:var(--ink-soft)">No opportunities match this filter.</p>';
+}
+
+function buildFilters(){
+  const defs = [["all","All opportunities"],["soon","Deadline within 120 days"],["high","Strong fit"],["big","$100k+"]];
+  const wrap = $("#filters");
+  defs.forEach(([k,label],i)=>{
+    const b = document.createElement("button");
+    b.className = "chip" + (i===0?" active":"");
+    b.textContent = label;
+    b.onclick = ()=>{ document.querySelectorAll(".chip").forEach(c=>c.classList.remove("active"));
+      b.classList.add("active"); render(k); };
+    wrap.appendChild(b);
+  });
+}
+function buildStats(){
+  const n = DATA.grants.length;
+  const soon = DATA.grants.filter(g=>{const d=daysUntil(g.deadline);return d>=0&&d<=120;}).length;
+  const big = DATA.grants.filter(g=>(g.amount_max||0)>=100000).length;
+  $("#stats").innerHTML =
+    `<span><b>${n}</b> opportunities</span><span><b>${soon}</b> closing &le;120 days</span><span><b>${big}</b> at $100k+</span>`;
+}
+function buildMeta(){
+  $("#metaRow").innerHTML =
+    `<span>&#127968; ${DATA.org.type}</span><span>&#128205; ${DATA.org.address}</span><span>&#128221; EIN ${DATA.org.ein}</span><span>&#128260; Updated ${fmtDate(DATA.org.updated)}</span>`;
+}
+
+fetch("grants-data.json")
+  .then(r=>r.json())
+  .then(d=>{ DATA=d; buildMeta(); buildFilters(); buildStats(); render("all"); })
+  .catch(e=>{ $("#grid").innerHTML = '<p style="color:var(--warn)">Could not load grants-data.json. If viewing locally, run a local server (e.g. <code>python3 -m http.server</code>) so the browser can fetch the JSON.</p>'; });
+</script>
+</body>
+</html>

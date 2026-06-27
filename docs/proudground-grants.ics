@@ -1,0 +1,331 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Proud Ground//Grant Tracker//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Proud Ground Grant Deadlines
+X-WR-TIMEZONE:America/Los_Angeles
+X-WR-CALDESC:Grant and funding deadlines relevant to Proud Ground (CLT).
+BEGIN:VEVENT
+UID:58036bf9b81a268f@proudground
+DTSTAMP:20260627T004834Z
+DTSTART;VALUE=DATE:20260626
+DTEND;VALUE=DATE:20260627
+SUMMARY:Grant deadline: Oregon Capacity Building & Community Grant Progra
+ m (Land Trust Alliance)
+DESCRIPTION:Funder: Land Trust Alliance / Coalition of Oregon Land Trusts
+  / Oregon Community Foundation\nAmount: $15\,000 – $35\,000 (program a
+ wards up to $560\,000 total)\nStatus: Closing now / annual\nFit: High 
+ – directly aimed at Oregon land trusts for capacity building and commu
+ nity engagement.\n\nDeadline detail: Applications accepted through June 
+ 26\, 2026. Notifications by Sept 11\, 2026. Grant period Oct 1\, 2026 
+ – Dec 1\, 2027.\n\nEligibility: Oregon land trusts. 2025 recipients ar
+ e still eligible to reapply.\n\nApply: https://landtrustalliance.org/res
+ ources/connect/field-services/west/oregon-community-and-capacity-buildin
+ g-grant-program
+URL:https://landtrustalliance.org/resources/connect/field-services/west/o
+ regon-community-and-capacity-building-grant-program
+TRANSP:TRANSPARENT
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P30D
+ACTION:DISPLAY
+DESCRIPTION:30 days until Oregon Capacity Building & Community Grant Prog
+ ram deadline
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:1 week until Oregon Capacity Building & Community Grant Progr
+ am deadline
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:ae05141d905d9f71@proudground
+DTSTAMP:20260627T004834Z
+DTSTART;VALUE=DATE:20260815
+DTEND;VALUE=DATE:20260816
+SUMMARY:Grant deadline: Fall Community Grants Cycle (Oregon Community Fou
+ ndation (OCF))
+DESCRIPTION:Funder: Oregon Community Foundation (OCF)\nAmount: Program & 
+ project grants\, capacity building\, small capital under $500k\nStatus: 
+ Upcoming – verify exact date\nFit: High – OCF funds pressing communi
+ ty needs statewide including housing and capacity building.\n\nDeadline 
+ detail: Fall 2026 cycle. New applicants must create a Nonprofit Account 
+ well in advance (prior cycle required setup ~weeks ahead). Confirm exact
+  deadline on MyOCF portal.\n\nEligibility: Oregon 501(c)(3) nonprofits. 
+ First-time applicants must set up a MyOCF Nonprofit Account before apply
+ ing.\n\nApply: https://oregoncf.org/grants-and-scholarships/grants/commu
+ nity-grant-program
+URL:https://oregoncf.org/grants-and-scholarships/grants/community-grant-p
+ rogram
+TRANSP:TRANSPARENT
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P30D
+ACTION:DISPLAY
+DESCRIPTION:30 days until Fall Community Grants Cycle deadline
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:1 week until Fall Community Grants Cycle deadline
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:d0c88c14c280cb85@proudground
+DTSTAMP:20260627T004834Z
+DTSTART;VALUE=DATE:20261231
+DTEND;VALUE=DATE:20270101
+SUMMARY:Grant deadline: Housing Program — General Operating & Project S
+ upport (Meyer Memorial Trust)
+DESCRIPTION:Funder: Meyer Memorial Trust\nAmount: Multi-year general oper
+ ating support (Meyer distributes $30M+/yr)\nStatus: Verify current windo
+ w\nFit: Very High – Meyer explicitly funds affordable housing producti
+ on\, preservation\, policy\, and prioritizes BIPOC-led / BIPOC-serving o
+ rganizations.\n\nDeadline detail: Rolling/invitation and cyclical fundin
+ g windows. Confirm current open call on Meyer's site\; timing varies yea
+ r to year.\n\nEligibility: Oregon nonprofits\; prioritizes organizations
+  led by or serving communities most impacted by systemic inequity.\n\nAp
+ ply: https://mmt.org/
+URL:https://mmt.org/
+TRANSP:TRANSPARENT
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P30D
+ACTION:DISPLAY
+DESCRIPTION:30 days until Housing Program — General Operating & Project
+  Support deadline
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:1 week until Housing Program — General Operating & Project 
+ Support deadline
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:158d66ee6b61a3f1@proudground
+DTSTAMP:20260627T004834Z
+DTSTART;VALUE=DATE:20270501
+DTEND;VALUE=DATE:20270502
+SUMMARY:Grant deadline: Competitive Affordable Housing Program (AHP) (Fed
+ eral Home Loan Bank of Des Moines)
+DESCRIPTION:Funder: Federal Home Loan Bank of Des Moines\nAmount: Up to $
+ 3\,000\,000 per project ($150\,000 max subsidy per unit)\nStatus: Next r
+ ound ~April 2027\nFit: Very High – one of the nation's largest sources
+  of affordable housing project grants\; covers purchase\, construction\,
+  and rehab of homeownership units.\n\nDeadline detail: 2026 round closed
+  May 1\, 2026 (awards announced Dec 2026). 2027 round expected to open ~
+ April 1\, 2027. Requires partnership with an FHLB member bank.\n\nEligib
+ ility: Nonprofit sponsors must partner with an FHLB Des Moines member fi
+ nancial institution to apply.\n\nApply: https://www.fhlbdm.com/products-
+ services/affordable-housing/ahp-sponsors/
+URL:https://www.fhlbdm.com/products-services/affordable-housing/ahp-spons
+ ors/
+TRANSP:TRANSPARENT
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P30D
+ACTION:DISPLAY
+DESCRIPTION:30 days until Competitive Affordable Housing Program (AHP) de
+ adline
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:1 week until Competitive Affordable Housing Program (AHP) dea
+ dline
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:b0e314b107a79a0c@proudground
+DTSTAMP:20260627T004834Z
+DTSTART;VALUE=DATE:20270515
+DTEND;VALUE=DATE:20270516
+SUMMARY:Grant deadline: Housing Affordability Breakthrough Challenge (Wel
+ ls Fargo)
+DESCRIPTION:Funder: Wells Fargo / Enterprise Community Partners\nAmount: 
+ $2\,000\,000 each to five winning organizations\nStatus: Next cycle ~spr
+ ing 2027\nFit: Medium-High – rewards scalable\, innovative housing sol
+ utions\; the CLT shared-equity model could qualify under Finance or Serv
+ ice & Delivery.\n\nDeadline detail: 2026 cycle ran April 1 – May 15\, 
+ 2026 (closed). Next cycle expected ~spring 2027. Three-round competition
+ .\n\nEligibility: Nonprofit and for-profit orgs with demonstrated early 
+ results and a strategy to scale. Priority scoring for organizations in s
+ elect states.\n\nApply: https://www.enterprisecommunity.org/housing-affo
+ rdability-breakthrough-challenge/national-grant-competition
+URL:https://www.enterprisecommunity.org/housing-affordability-breakthroug
+ h-challenge/national-grant-competition
+TRANSP:TRANSPARENT
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P30D
+ACTION:DISPLAY
+DESCRIPTION:30 days until Housing Affordability Breakthrough Challenge de
+ adline
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:1 week until Housing Affordability Breakthrough Challenge dea
+ dline
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:59d06f4e7ec761e0@proudground
+DTSTAMP:20260627T004834Z
+DTSTART;VALUE=DATE:20270701
+DTEND;VALUE=DATE:20270702
+SUMMARY:Grant deadline: Neighborhood Builders® (Bank of America Charitab
+ le Foundation)
+DESCRIPTION:Funder: Bank of America Charitable Foundation\nAmount: $100\,
+ 000 – $400\,000 over two years (capped at 10% of annual revenue)\nStat
+ us: Annual – next ~June 2027\nFit: High – explicitly funds creation/
+ preservation of affordable housing and homeownership opportunities\, plu
+ s leadership development.\n\nDeadline detail: 2026 application window wa
+ s June 1 – July 1\, 2026. Recurs annually around the same window. Conf
+ irm your local market is selected.\n\nEligibility: 501(c)(3) nonprofits 
+ in selected markets. Cannot have received Neighborhood Builders/Champion
+ s funding since Oct 2019. Grant capped at 10% of most recent annual reve
+ nue.\n\nApply: https://about.bankofamerica.com/en/making-an-impact/neigh
+ borhood-builders-eligibility-criteria
+URL:https://about.bankofamerica.com/en/making-an-impact/neighborhood-buil
+ ders-eligibility-criteria
+TRANSP:TRANSPARENT
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P30D
+ACTION:DISPLAY
+DESCRIPTION:30 days until Neighborhood Builders® deadline
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:1 week until Neighborhood Builders® deadline
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:bfae72a7336facc6@proudground
+DTSTAMP:20260627T004834Z
+DTSTART;VALUE=DATE:20261231
+DTEND;VALUE=DATE:20270101
+SUMMARY:Grant deadline: Housing Development Grant Program (HDGP / Trust F
+ und) (Oregon Housing and Community Services (OHCS))
+DESCRIPTION:Funder: Oregon Housing and Community Services (OHCS)\nAmount:
+  Varies by NOFA round\nStatus: Monitor for next NOFA\nFit: Medium – HD
+ GP centers on multifamily/rental\, but OHCS administers multiple homeown
+ ership and development resources worth tracking.\n\nDeadline detail: Awa
+ rded via competitive Notice of Funding Availability (NOFA) rounds announ
+ ced periodically. Monitor OHCS for the next NOFA.\n\nEligibility: Nonpro
+ fit housing developers\, local housing authorities\, Tribal housing enti
+ ties\, and for/nonprofit sponsors depending on program.\n\nApply: https:
+ //www.oregon.gov/ohcs/development/pages/grants-tax-credit-programs.aspx
+URL:https://www.oregon.gov/ohcs/development/pages/grants-tax-credit-progr
+ ams.aspx
+TRANSP:TRANSPARENT
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P30D
+ACTION:DISPLAY
+DESCRIPTION:30 days until Housing Development Grant Program (HDGP / Trust
+  Fund) deadline
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:1 week until Housing Development Grant Program (HDGP / Trust 
+ Fund) deadline
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:4c3700bee5694065@proudground
+DTSTAMP:20260627T004834Z
+DTSTART;VALUE=DATE:20261231
+DTEND;VALUE=DATE:20270101
+SUMMARY:Grant deadline: Strategic Projects: Program & Staff / Equipment &
+  Technology Grants (M.J. Murdock Charitable Trust)
+DESCRIPTION:Funder: M.J. Murdock Charitable Trust\nAmount: Capacity-build
+ ing grants\; recipient cofunds at least 50% of costs\nStatus: Rolling in
+ quiry\nFit: Medium-High – PNW-focused funder of 501(c)(3) capacity bui
+ lding\; values diversified funding and community flourishing.\n\nDeadlin
+ e detail: Rolling consideration\; Murdock uses an inquiry-then-proposal 
+ process. Confirm current process on Murdock's site.\n\nEligibility: 501(
+ c)(3) nonprofits and tribal entities in the Pacific Northwest. Requires 
+ recipient to cover at least 50% of project costs.\n\nApply: https://murd
+ ocktrust.org/
+URL:https://murdocktrust.org/
+TRANSP:TRANSPARENT
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P30D
+ACTION:DISPLAY
+DESCRIPTION:30 days until Strategic Projects: Program & Staff / Equipment
+  & Technology Grants deadline
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:1 week until Strategic Projects: Program & Staff / Equipment 
+ & Technology Grants deadline
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:f9c1ec0e8956efef@proudground
+DTSTAMP:20260627T004834Z
+DTSTART;VALUE=DATE:20261231
+DTEND;VALUE=DATE:20270101
+SUMMARY:Grant deadline: Tenant & Housing Justice Grant (Social Justice Fu
+ nd Northwest)
+DESCRIPTION:Funder: Social Justice Fund Northwest\nAmount: Grassroots org
+ anizing support\nStatus: Annual – verify window\nFit: Medium – cente
+ rs tenant/housing-justice organizing\; relevance depends on Proud Ground
+ 's advocacy/organizing activities.\n\nDeadline detail: Annual cycle. Con
+ firm 2026/2027 open window on SJF NW's site.\n\nEligibility: Grassroots 
+ organizations in ID\, MT\, OR\, WA\, and/or WY using a community-organiz
+ ing framework\; prioritizes communities underrepresented in traditional 
+ grantmaking.\n\nApply: https://www.socialjusticefund.org/
+URL:https://www.socialjusticefund.org/
+TRANSP:TRANSPARENT
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P30D
+ACTION:DISPLAY
+DESCRIPTION:30 days until Tenant & Housing Justice Grant deadline
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:1 week until Tenant & Housing Justice Grant deadline
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:0c82898e69347b8e@proudground
+DTSTAMP:20260627T004834Z
+DTSTART;VALUE=DATE:20261231
+DTEND;VALUE=DATE:20270101
+SUMMARY:Grant deadline: Community Grants & Sponsorships (OnPoint Communit
+ y Credit Union)
+DESCRIPTION:Funder: OnPoint Community Credit Union\nAmount: Varies\nStatu
+ s: Rolling – verify\nFit: Medium – local PNW credit union funding ec
+ onomic opportunity and community development\, including financial educa
+ tion and community development.\n\nDeadline detail: Rolling/periodic. Co
+ nfirm current open application on OnPoint's community giving page.\n\nEl
+ igibility: Nonprofits aligned with Economic Opportunity and Community Vi
+ tality focus areas (PNW).\n\nApply: https://www.onpointcu.com/about/comm
+ unity/
+URL:https://www.onpointcu.com/about/community/
+TRANSP:TRANSPARENT
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P30D
+ACTION:DISPLAY
+DESCRIPTION:30 days until Community Grants & Sponsorships deadline
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:1 week until Community Grants & Sponsorships deadline
+END:VALARM
+END:VEVENT
+END:VCALENDAR

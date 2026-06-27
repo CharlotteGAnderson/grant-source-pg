@@ -1,0 +1,29 @@
+# --- Node (build_docs.js pulls in the `docx` package at build time) ---
+node_modules/
+package-lock.json
+package.json
+npm-debug.log*
+
+# --- Python (build_ics.py) ---
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# --- macOS / editor cruft ---
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+*.swp
+*~
+.idea/
+.vscode/
+
+# --- Local secrets / env (none used today; guard against future mistakes) ---
+.env
+.env.*
+*.local
+
+# --- Build/distribution artifacts that should never be committed ---
+*.zip
