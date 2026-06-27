@@ -7,7 +7,7 @@
     "address": "541 NE 20th Ave., Ste. 220, Portland, OR 97232",
     "updated": "2026-06-26"
   },
-  "generated_at": "2026-06-27T06:23:07Z",
+  "generated_at": "2026-06-27T06:33:56Z",
   "sources": [
     "curated",
     "Grants.gov",
@@ -15,8 +15,8 @@
     "Google News"
   ],
   "counts": {
-    "grants": 23,
-    "curated": 10,
+    "grants": 28,
+    "curated": 15,
     "federal": 13,
     "prospects": 30,
     "news": 30
@@ -44,6 +44,31 @@
       ],
       "summary": "A program specifically designed to strengthen the capacity of Oregon land trusts to engage communities in stewardship of land and housing. Awards typically range $15K–$35K, with partnership-focused projects able to request extended grant periods. As a CLT, Proud Ground is squarely within the eligible applicant pool. Note this is the closest deadline—confirm exact submission cutoff time on the portal.",
       "pg_application": "As an Oregon community land trust, Proud Ground sits squarely in this program's target applicant pool and can use the award to strengthen stewardship and community-engagement capacity. A strong request would frame the work around deepening BIPOC homebuyer outreach or staff capacity for managing its growing portfolio of land-trust homes.",
+      "source": "curated",
+      "category": "Local / curated"
+    },
+    {
+      "id": "spirit-mountain-community-fund",
+      "name": "Community Grants",
+      "funder": "Spirit Mountain Community Fund (Confederated Tribes of Grand Ronde)",
+      "amount": "Varies — see funder page",
+      "amount_min": 0,
+      "amount_max": 0,
+      "deadline": "2026-07-03",
+      "status": "Community grants cycle",
+      "deadline_note": "Community grants cycle deadline ~July 3, 2026 — confirm on the funder's calendar.",
+      "fit": "High – funds nonprofits across 11 NW Oregon counties for community well-being, including housing.",
+      "url": "https://thecommunityfund.com/",
+      "eligibility": "501(c)(3) nonprofits (and qualifying entities) serving the fund's 11-county NW Oregon service area — confirm coverage on the funder site.",
+      "use": "Community well-being projects including housing/essential services — confirm current priorities.",
+      "needed": [
+        "Letter of inquiry / eligibility check",
+        "501(c)(3) verification",
+        "Project budget & narrative",
+        "Final report on any prior grant"
+      ],
+      "summary": "The philanthropic arm of the Confederated Tribes of Grand Ronde, granting to nonprofits across 11 Northwest Oregon counties. Imported from Proud Ground's 2026 grant calendar — verify service-area coverage and the current cycle on the funder's site.",
+      "pg_application": "Proud Ground's NW-Oregon footprint overlaps Spirit Mountain's service area, making it a plausible applicant for community well-being funding. Center the request on affordable homeownership as a driver of family and community stability.",
       "source": "curated",
       "category": "Local / curated"
     },
@@ -166,6 +191,31 @@
       "pg_application": "As an Oregon-based 501(c)(3) Community Land Trust, Proud Ground may be an eligible applicant for this Office on Violence Against Women program supporting affordable housing and community development. Confirm the specific eligibility, then tie the request to a current Proud Ground need such as land acquisition, homebuyer support, or organizational capacity before applying.",
       "source": "Grants.gov",
       "category": "Federal"
+    },
+    {
+      "id": "collins-foundation-go",
+      "name": "Collins Foundation GO Grants",
+      "funder": "The Collins Foundation",
+      "amount": "Varies — see funder page",
+      "amount_min": 0,
+      "amount_max": 0,
+      "deadline": "2026-07-15",
+      "status": "GO Grants – next deadline",
+      "deadline_note": "Next GO Grants (responsive grantmaking) deadline ~July 15, 2026 — confirm on the funder site; deadlines vary by program.",
+      "fit": "High – major statewide Oregon funder supporting quality-of-life and equity work; CLT housing fits its community focus.",
+      "url": "https://www.collinsfoundation.org/grants-program",
+      "eligibility": "501(c)(3) public charities (or OR/local/Tribal government units) with Oregon staff/leadership and work that benefits Oregon residents; current OR DOJ & Secretary of State registration; 4+ independent board members.",
+      "use": "Broad: community quality of life, equity, capacity — confirm housing/CLT fit with program staff.",
+      "needed": [
+        "Letter of inquiry / eligibility check",
+        "501(c)(3) verification",
+        "Project budget & narrative",
+        "Final report on any prior grant"
+      ],
+      "summary": "One of Oregon's larger general-purpose foundations; its GO Grants (responsive grantmaking) support a broad range of community work. Imported from Proud Ground's 2026 grant calendar — verify the current deadline and confirm housing/CLT fit on the funder's site.",
+      "pg_application": "Proud Ground meets Collins' Oregon eligibility and can position permanently affordable, equity-centered homeownership as a community quality-of-life investment. A request emphasizing BIPOC first-time buyers and lasting affordability aligns with Collins' equity priorities.",
+      "source": "curated",
+      "category": "Local / curated"
     },
     {
       "id": "fed-362826",
@@ -361,6 +411,31 @@
       "category": "Federal"
     },
     {
+      "id": "autzen-foundation",
+      "name": "Autzen Foundation Grant",
+      "funder": "The Autzen Foundation",
+      "amount": "Typically small grants (varies) — see funder page",
+      "amount_min": 0,
+      "amount_max": 0,
+      "deadline": "2026-09-04",
+      "status": "Summer cycle – LOI",
+      "deadline_note": "Summer Community Grants cycle: LOI window opens ~Aug 1, closes ~Sept 4 (confirm exact dates on the funder site). One request per 12 months.",
+      "fit": "High – funds small Oregon & SW-Washington (Clark County) nonprofits; Proud Ground is squarely eligible.",
+      "url": "https://www.autzenfoundation.org/",
+      "eligibility": "501(c)(3) for 2+ years (or government/qualifying religious org) serving Oregon or SW Washington (Clark County) residents. No individuals, fiscal-sponsored orgs, or lobbying.",
+      "use": "One-year projects/programs across social services and community quality of life. No multi-year grants.",
+      "needed": [
+        "Letter of inquiry / eligibility check",
+        "501(c)(3) verification",
+        "Project budget & narrative",
+        "Final report on any prior grant"
+      ],
+      "summary": "Oregon family foundation making one-year grants to small nonprofits serving Oregon and SW Washington (Clark County). Imported from Proud Ground's 2026 grant calendar — begin with a letter of inquiry to confirm eligibility, and verify the current cycle dates on the funder's site.",
+      "pg_application": "As a small-to-mid Oregon 501(c)(3) serving Oregon and SW Washington, Proud Ground fits Autzen's geographic and organizational eligibility for a one-year project grant. Frame a discrete, fundable project (e.g., homebuyer education or stewardship capacity) rather than general operating support, and start with the letter of inquiry.",
+      "source": "curated",
+      "category": "Local / curated"
+    },
+    {
       "id": "meyer-housing-2026",
       "name": "Housing Program — General Operating & Project Support",
       "funder": "Meyer Memorial Trust",
@@ -480,6 +555,56 @@
       ],
       "summary": "OnPoint is a Portland-based credit union that funds economic opportunity and community vitality, including financial education and community development. Proud Ground's homebuyer education and financial-readiness programming aligns well. A good local relationship-building funder; confirm the current application window on their community giving page.",
       "pg_application": "OnPoint's community grants align with Proud Ground's financial-education and community-development activities for first-time and first-generation buyers. A request framed around homebuyer financial readiness or workforce and community development would resonate with OnPoint's priorities.",
+      "source": "curated",
+      "category": "Local / curated"
+    },
+    {
+      "id": "marie-lamfrom-foundation",
+      "name": "Marie Lamfrom Charitable Foundation Grant",
+      "funder": "Marie Lamfrom Charitable Foundation",
+      "amount": "Varies — see funder page",
+      "amount_min": 0,
+      "amount_max": 0,
+      "deadline": "2027-02-23",
+      "status": "Annual – verify window",
+      "deadline_note": "Annual cycle — calendar notes a ~February window and an earlier 'submit early' recommendation; confirm the exact current deadline on the funder site.",
+      "fit": "Medium–High – Oregon/SW-Washington family foundation supporting health, housing, and social services.",
+      "url": "https://www.marielamfrom.org/",
+      "eligibility": "501(c)(3) nonprofits in the foundation's OR/SW-WA focus area — confirm on the funder site.",
+      "use": "Health, housing, and social-service projects — confirm housing/CLT eligibility.",
+      "needed": [
+        "Letter of inquiry / eligibility check",
+        "501(c)(3) verification",
+        "Project budget & narrative",
+        "Final report on any prior grant"
+      ],
+      "summary": "A regional family foundation supporting health, housing, and social-service nonprofits in Oregon and SW Washington. Imported from Proud Ground's 2026 grant calendar — submitting early is recommended; verify the current deadline on the funder's site.",
+      "pg_application": "Proud Ground's affordable-housing mission fits within the foundation's housing and social-service interests for the region. A concise project request submitted early in the cycle improves the odds given limited windows.",
+      "source": "curated",
+      "category": "Local / curated"
+    },
+    {
+      "id": "cfsww-focus-grants",
+      "name": "Focus Grants",
+      "funder": "Community Foundation for Southwest Washington",
+      "amount": "Varies — see funder page",
+      "amount_min": 0,
+      "amount_max": 0,
+      "deadline": "2027-03-31",
+      "status": "Annual – verify window",
+      "deadline_note": "Annual Focus Grants cycle (last documented deadline ~March 31). Confirm the next cycle's exact dates on the funder site.",
+      "fit": "High – serves SW Washington (Clark County and surrounding), part of Proud Ground's service area.",
+      "url": "https://www.cfsww.org/grant-programs/focus-grants",
+      "eligibility": "Nonprofits serving Southwest Washington — confirm county coverage and focus areas on the funder site.",
+      "use": "Community-focused project grants — confirm housing/homeownership eligibility for the current cycle.",
+      "needed": [
+        "Letter of inquiry / eligibility check",
+        "501(c)(3) verification",
+        "Project budget & narrative",
+        "Final report on any prior grant"
+      ],
+      "summary": "The regional community foundation for Southwest Washington, offering Focus Grants to local nonprofits. Imported from Proud Ground's 2026 grant calendar — directly relevant to Proud Ground's SW-Washington footprint; verify the current cycle on the funder's site.",
+      "pg_application": "Proud Ground's work in Southwest Washington makes it a geographically eligible candidate for CFSWW Focus Grants. Tie the request to homeownership outcomes for SW-Washington households to match the foundation's local focus.",
       "source": "curated",
       "category": "Local / curated"
     },
@@ -1067,7 +1192,7 @@
   ],
   "news": [
     {
-      "id": "news-8326607799",
+      "id": "news-9848640887",
       "title": "New affordable homes paired with services open in the heart of Portland’s Central Eastside - oregonmetro.gov",
       "source": "oregonmetro.gov",
       "date": "2026-06-24",
@@ -1075,7 +1200,7 @@
       "topic": "Housing"
     },
     {
-      "id": "news-3789617235",
+      "id": "news-8590644789",
       "title": "Dwight Capital Refis Oregon Apartments With $39M HUD Loan - Commercial Observer",
       "source": "Commercial Observer",
       "date": "2026-06-24",
@@ -1083,7 +1208,7 @@
       "topic": "Funding"
     },
     {
-      "id": "news-1604403239",
+      "id": "news-8014174371",
       "title": "We don’t have to compromise land use laws to have housing - Capital Press",
       "source": "Capital Press",
       "date": "2026-06-23",
@@ -1091,7 +1216,7 @@
       "topic": "Housing"
     },
     {
-      "id": "news-7347881538",
+      "id": "news-4286590418",
       "title": "Senate passes housing legislative package in overwhelming bipartisan fashion - MyCentralOregon.com",
       "source": "MyCentralOregon.com",
       "date": "2026-06-23",
@@ -1099,7 +1224,7 @@
       "topic": "Policy"
     },
     {
-      "id": "news-2535050545",
+      "id": "news-2394029698",
       "title": "How many people live in subsidized housing in Oregon County, MO? - USAFacts",
       "source": "USAFacts",
       "date": "2026-06-19",
@@ -1107,7 +1232,7 @@
       "topic": "Government"
     },
     {
-      "id": "news-859149542",
+      "id": "news-7075249010",
       "title": "Recent State Actions Related to Immigrants’ Access to Services and Immigration Enforcement - KFF",
       "source": "KFF",
       "date": "2026-06-16",
@@ -1115,7 +1240,7 @@
       "topic": "Funding"
     },
     {
-      "id": "news-9798075307",
+      "id": "news-4918439507",
       "title": "Podcast: How Missing Middle Housing Can Help Close Affordability Gap - National Association of Home Builders | NAHB",
       "source": "National Association of Home Builders | NAHB",
       "date": "2026-06-16",
@@ -1123,7 +1248,7 @@
       "topic": "Housing"
     },
     {
-      "id": "news-767799427",
+      "id": "news-7356745466",
       "title": "Oregon’s Sen. Wyden brings back housing affordability bill - The News Guard",
       "source": "The News Guard",
       "date": "2026-06-15",
@@ -1131,7 +1256,7 @@
       "topic": "Policy"
     },
     {
-      "id": "news-4728489738",
+      "id": "news-1335289429",
       "title": "Central Oregon Nonprofits Receive Funding from OnPoint - The Source - Bend, Oregon - The Source - Bend, Oregon",
       "source": "The Source - Bend, Oregon",
       "date": "2026-06-12",
@@ -1139,7 +1264,7 @@
       "topic": "Funding"
     },
     {
-      "id": "news-6506654234",
+      "id": "news-2032667981",
       "title": "COVID Mortage Help Deadline Approaches For Oregon Homeowners - FM News 101 KXL",
       "source": "FM News 101 KXL",
       "date": "2026-06-12",
@@ -1147,7 +1272,7 @@
       "topic": "Housing"
     },
     {
-      "id": "news-8694621037",
+      "id": "news-8636653870",
       "title": "Oregon’s Sen. Wyden brings back housing affordability bill - Oregon Capital Chronicle",
       "source": "Oregon Capital Chronicle",
       "date": "2026-06-11",
@@ -1155,7 +1280,7 @@
       "topic": "Policy"
     },
     {
-      "id": "news-3231001856",
+      "id": "news-840886986",
       "title": "Data: 13% of Vancouver-Portland homes less than half-mile from bus, rail stop - Camas-Washougal Post-Record",
       "source": "Camas-Washougal Post-Record",
       "date": "2026-06-11",
@@ -1163,7 +1288,7 @@
       "topic": "Housing"
     },
     {
-      "id": "news-1220054116",
+      "id": "news-415878805",
       "title": "Section 8 Project-Based Rental Assistance - Center on Budget and Policy Priorities",
       "source": "Center on Budget and Policy Priorities",
       "date": "2026-06-11",
@@ -1171,7 +1296,7 @@
       "topic": "Policy"
     },
     {
-      "id": "news-6954250254",
+      "id": "news-2317073050",
       "title": "Major Portland affordable housing provider could close in 6 months, leader tells city - OregonLive.com",
       "source": "OregonLive.com",
       "date": "2026-06-09",
@@ -1179,7 +1304,7 @@
       "topic": "Housing"
     },
     {
-      "id": "news-6672333496",
+      "id": "news-1580668406",
       "title": "Mayor Wilson warns Portland’s affordable housing system is on verge of financial collapse - KOIN.com",
       "source": "KOIN.com",
       "date": "2026-06-08",
@@ -1187,7 +1312,7 @@
       "topic": "Funding"
     },
     {
-      "id": "news-6080885394",
+      "id": "news-2189807492",
       "title": "Nearly 75 Southern Oregon nonprofits reap $2.25 million in Walker Fund grants; see list - Rogue Valley Times",
       "source": "Rogue Valley Times",
       "date": "2026-06-05",
@@ -1195,7 +1320,7 @@
       "topic": "Funding"
     },
     {
-      "id": "news-6965896514",
+      "id": "news-3247523029",
       "title": "OCF grant will help transitional housing in Jackson County - kobi5.com",
       "source": "kobi5.com",
       "date": "2026-06-05",
@@ -1203,7 +1328,7 @@
       "topic": "Funding"
     },
     {
-      "id": "news-6143245608",
+      "id": "news-7851047540",
       "title": "Harger: HUD pulls funding from Housing First. King County spent 20 years and billions on it. It got worse - MyNorthwest.com",
       "source": "MyNorthwest.com",
       "date": "2026-06-05",
@@ -1211,7 +1336,7 @@
       "topic": "Funding"
     },
     {
-      "id": "news-8142127044",
+      "id": "news-9145984920",
       "title": "A low-income housing program is pouring big money into housing many Oregonians can’t afford - Oregon Public Broadcasting - OPB",
       "source": "Oregon Public Broadcasting - OPB",
       "date": "2026-06-03",
@@ -1219,7 +1344,7 @@
       "topic": "Housing"
     },
     {
-      "id": "news-5282135606",
+      "id": "news-7831782928",
       "title": "Clackamas County, Metro break ground on Clackamas Heights redevelopment - Clackamas County",
       "source": "Clackamas County",
       "date": "2026-06-03",
@@ -1227,7 +1352,7 @@
       "topic": "Government"
     },
     {
-      "id": "news-3852379922",
+      "id": "news-3372235689",
       "title": "Partners for Affordable Housing Working to Ensure Homes for Everyone - The Source - Bend, Oregon",
       "source": "The Source - Bend, Oregon",
       "date": "2026-06-03",
@@ -1235,7 +1360,7 @@
       "topic": "Housing"
     },
     {
-      "id": "news-3486270469",
+      "id": "news-7114331233",
       "title": "After Months of “Political Football,” Council Funds Housing for Black Portlanders - Portland Mercury",
       "source": "Portland Mercury",
       "date": "2026-06-03",
@@ -1243,7 +1368,7 @@
       "topic": "Funding"
     },
     {
-      "id": "news-3885400757",
+      "id": "news-6200331177",
       "title": "City Council Allots $2.5 Million to Housing Projects in North and Northeast Portland - Willamette Week",
       "source": "Willamette Week",
       "date": "2026-06-03",
@@ -1251,7 +1376,7 @@
       "topic": "Funding"
     },
     {
-      "id": "news-8452000332",
+      "id": "news-6212772175",
       "title": "Rising rents drive demand for affordable housing solutions - The Clackamas Print",
       "source": "The Clackamas Print",
       "date": "2026-06-03",
@@ -1259,7 +1384,7 @@
       "topic": "Housing"
     },
     {
-      "id": "news-9303962253",
+      "id": "news-1216808481",
       "title": "NEWS RELEASE: City and County Bolster Emergency Rent Assistance Efforts with $5M - Multnomah County",
       "source": "Multnomah County",
       "date": "2026-06-02",
@@ -1267,7 +1392,7 @@
       "topic": "Funding"
     },
     {
-      "id": "news-2247726489",
+      "id": "news-3369225343",
       "title": "Old Saco church poised to become affordable housing - The Portland Press Herald",
       "source": "The Portland Press Herald",
       "date": "2026-06-02",
@@ -1275,7 +1400,7 @@
       "topic": "Housing"
     },
     {
-      "id": "news-9616155673",
+      "id": "news-7606077806",
       "title": "Rent and utility aid available for 2020 wildfire survivors in eight Oregon counties - KTVZ",
       "source": "KTVZ",
       "date": "2026-06-01",
@@ -1283,7 +1408,7 @@
       "topic": "Housing"
     },
     {
-      "id": "news-6024107544",
+      "id": "news-4164958027",
       "title": "New affordable housing community in Wilsonville features ground level food bank, transit center and food hall - oregonmetro.gov",
       "source": "oregonmetro.gov",
       "date": "2026-05-29",
@@ -1291,7 +1416,7 @@
       "topic": "Housing"
     },
     {
-      "id": "news-6583783618",
+      "id": "news-5399101227",
       "title": "HUD Launches Investigation of Portland-Area County Over Race-Based Homelessness Programs - freebeacon.com",
       "source": "freebeacon.com",
       "date": "2026-05-29",
@@ -1299,7 +1424,7 @@
       "topic": "Funding"
     },
     {
-      "id": "news-3972308166",
+      "id": "news-7119195189",
       "title": "Nearly 1,000 Oregon households bought homes with this lending program last year - theoutlookonline.com",
       "source": "theoutlookonline.com",
       "date": "2026-05-28",

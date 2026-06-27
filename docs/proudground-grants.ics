@@ -8,7 +8,7 @@ X-WR-TIMEZONE:America/Los_Angeles
 X-WR-CALDESC:Grant and funding deadlines relevant to Proud Ground (CLT).
 BEGIN:VEVENT
 UID:58036bf9b81a268f@proudground
-DTSTAMP:20260627T021001Z
+DTSTAMP:20260627T063356Z
 DTSTART;VALUE=DATE:20260626
 DTEND;VALUE=DATE:20260627
 SUMMARY:Grant deadline: Oregon Capacity Building & Community Grant Progra
@@ -41,8 +41,37 @@ DESCRIPTION:1 week until Oregon Capacity Building & Community Grant Progr
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
+UID:f39869e47a5f93d7@proudground
+DTSTAMP:20260627T063356Z
+DTSTART;VALUE=DATE:20260703
+DTEND;VALUE=DATE:20260704
+SUMMARY:Grant deadline: Community Grants (Spirit Mountain Community Fund 
+ (Confederated Tribes of Grand Ronde))
+DESCRIPTION:Funder: Spirit Mountain Community Fund (Confederated Tribes o
+ f Grand Ronde)\nAmount: Varies — see funder page\nStatus: Community gr
+ ants cycle\nFit: High – funds nonprofits across 11 NW Oregon counties 
+ for community well-being\, including housing.\n\nDeadline detail: Commun
+ ity grants cycle deadline ~July 3\, 2026 — confirm on the funder's cal
+ endar.\n\nEligibility: 501(c)(3) nonprofits (and qualifying entities) se
+ rving the fund's 11-county NW Oregon service area — confirm coverage o
+ n the funder site.\n\nApply: https://thecommunityfund.com/
+URL:https://thecommunityfund.com/
+TRANSP:TRANSPARENT
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P30D
+ACTION:DISPLAY
+DESCRIPTION:30 days until Community Grants deadline
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:1 week until Community Grants deadline
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 UID:6546792f34c5b511@proudground
-DTSTAMP:20260627T021001Z
+DTSTAMP:20260627T063356Z
 DTSTART;VALUE=DATE:20260706
 DTEND;VALUE=DATE:20260707
 SUMMARY:Grant deadline: FY 2025 Rural Capacity Building for Community Dev
@@ -74,7 +103,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:b792af16efd1fcc7@proudground
-DTSTAMP:20260627T021001Z
+DTSTAMP:20260627T063356Z
 DTSTART;VALUE=DATE:20260706
 DTEND;VALUE=DATE:20260707
 SUMMARY:Grant deadline: Section 4 Capacity Building for Community Develop
@@ -106,7 +135,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:f05d44f59621f1c5@proudground
-DTSTAMP:20260627T021001Z
+DTSTAMP:20260627T063356Z
 DTSTART;VALUE=DATE:20260713
 DTEND;VALUE=DATE:20260714
 SUMMARY:Grant deadline: Project Rental Assistance Program of Section 811 
@@ -138,7 +167,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:8a340da8720bc8c6@proudground
-DTSTAMP:20260627T021001Z
+DTSTAMP:20260627T063356Z
 DTSTART;VALUE=DATE:20260713
 DTEND;VALUE=DATE:20260714
 SUMMARY:Grant deadline: Mass Market Solutions for Leveraging Robotics and
@@ -170,7 +199,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:79f12f1e60fe41c1@proudground
-DTSTAMP:20260627T021001Z
+DTSTAMP:20260627T063356Z
 DTSTART;VALUE=DATE:20260714
 DTEND;VALUE=DATE:20260715
 SUMMARY:Grant deadline: OVW Fiscal Year 2026 Transitional Housing Assista
@@ -204,8 +233,39 @@ DESCRIPTION:1 week until OVW Fiscal Year 2026 Transitional Housing Assist
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
+UID:59740ade8cde5515@proudground
+DTSTAMP:20260627T063356Z
+DTSTART;VALUE=DATE:20260715
+DTEND;VALUE=DATE:20260716
+SUMMARY:Grant deadline: Collins Foundation GO Grants (The Collins Foundat
+ ion)
+DESCRIPTION:Funder: The Collins Foundation\nAmount: Varies — see funder
+  page\nStatus: GO Grants – next deadline\nFit: High – major statewid
+ e Oregon funder supporting quality-of-life and equity work\; CLT housing
+  fits its community focus.\n\nDeadline detail: Next GO Grants (responsiv
+ e grantmaking) deadline ~July 15\, 2026 — confirm on the funder site\;
+  deadlines vary by program.\n\nEligibility: 501(c)(3) public charities (
+ or OR/local/Tribal government units) with Oregon staff/leadership and wo
+ rk that benefits Oregon residents\; current OR DOJ & Secretary of State 
+ registration\; 4+ independent board members.\n\nApply: https://www.colli
+ nsfoundation.org/grants-program
+URL:https://www.collinsfoundation.org/grants-program
+TRANSP:TRANSPARENT
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P30D
+ACTION:DISPLAY
+DESCRIPTION:30 days until Collins Foundation GO Grants deadline
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:1 week until Collins Foundation GO Grants deadline
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 UID:4702063bbb8f4f0e@proudground
-DTSTAMP:20260627T021001Z
+DTSTAMP:20260627T063356Z
 DTSTART;VALUE=DATE:20260715
 DTEND;VALUE=DATE:20260716
 SUMMARY:Grant deadline: Self-Help Homeownership Opportunity Program (SHOP
@@ -236,7 +296,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:8692945cc0354b11@proudground
-DTSTAMP:20260627T021001Z
+DTSTAMP:20260627T063356Z
 DTSTART;VALUE=DATE:20260720
 DTEND;VALUE=DATE:20260721
 SUMMARY:Grant deadline: Housing Policy Research Grant Notice of Funding O
@@ -268,7 +328,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:44c17df71abbbdb8@proudground
-DTSTAMP:20260627T021001Z
+DTSTAMP:20260627T063356Z
 DTSTART;VALUE=DATE:20260723
 DTEND;VALUE=DATE:20260724
 SUMMARY:Grant deadline: Continuum of Care Builds (CoC Builds) (Department
@@ -297,7 +357,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:bd7fb65273a3a2bb@proudground
-DTSTAMP:20260627T021001Z
+DTSTAMP:20260627T063356Z
 DTSTART;VALUE=DATE:20260803
 DTEND;VALUE=DATE:20260804
 SUMMARY:Grant deadline: FY26 Pathways to Removing Obstacles to Housing (P
@@ -329,7 +389,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:0149a7c70890cce0@proudground
-DTSTAMP:20260627T021001Z
+DTSTAMP:20260627T063356Z
 DTSTART;VALUE=DATE:20260803
 DTEND;VALUE=DATE:20260804
 SUMMARY:Grant deadline: Lead-Safe and Healthy Homes Financing Demonstrati
@@ -360,7 +420,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:5fa57edfd8efa401@proudground
-DTSTAMP:20260627T021001Z
+DTSTAMP:20260627T063356Z
 DTSTART;VALUE=DATE:20260810
 DTEND;VALUE=DATE:20260811
 SUMMARY:Grant deadline: Youth Homelessness NOFO for FY2024 and FY2025 (De
@@ -391,7 +451,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:ae05141d905d9f71@proudground
-DTSTAMP:20260627T021001Z
+DTSTAMP:20260627T063356Z
 DTSTART;VALUE=DATE:20260815
 DTEND;VALUE=DATE:20260816
 SUMMARY:Grant deadline: Fall Community Grants Cycle (Oregon Community Fou
@@ -423,7 +483,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:7a29237e3435dbe7@proudground
-DTSTAMP:20260627T021001Z
+DTSTAMP:20260627T063356Z
 DTSTART;VALUE=DATE:20260826
 DTEND;VALUE=DATE:20260827
 SUMMARY:Grant deadline: FY 2026 Continuum of Care Competition and Youth H
@@ -454,8 +514,37 @@ DESCRIPTION:1 week until FY 2026 Continuum of Care Competition and Youth
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
+UID:0e6f836bf1f51a73@proudground
+DTSTAMP:20260627T063356Z
+DTSTART;VALUE=DATE:20260904
+DTEND;VALUE=DATE:20260905
+SUMMARY:Grant deadline: Autzen Foundation Grant (The Autzen Foundation)
+DESCRIPTION:Funder: The Autzen Foundation\nAmount: Typically small grants
+  (varies) — see funder page\nStatus: Summer cycle – LOI\nFit: High 
+ – funds small Oregon & SW-Washington (Clark County) nonprofits\; Proud
+  Ground is squarely eligible.\n\nDeadline detail: Summer Community Grant
+ s cycle: LOI window opens ~Aug 1\, closes ~Sept 4 (confirm exact dates o
+ n the funder site). One request per 12 months.\n\nEligibility: 501(c)(3)
+  for 2+ years (or government/qualifying religious org) serving Oregon or
+  SW Washington (Clark County) residents. No individuals\, fiscal-sponsor
+ ed orgs\, or lobbying.\n\nApply: https://www.autzenfoundation.org/
+URL:https://www.autzenfoundation.org/
+TRANSP:TRANSPARENT
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P30D
+ACTION:DISPLAY
+DESCRIPTION:30 days until Autzen Foundation Grant deadline
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:1 week until Autzen Foundation Grant deadline
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 UID:d0c88c14c280cb85@proudground
-DTSTAMP:20260627T021001Z
+DTSTAMP:20260627T063356Z
 DTSTART;VALUE=DATE:20261231
 DTEND;VALUE=DATE:20270101
 SUMMARY:Grant deadline: Housing Program — General Operating & Project S
@@ -487,7 +576,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:bfae72a7336facc6@proudground
-DTSTAMP:20260627T021001Z
+DTSTAMP:20260627T063356Z
 DTSTART;VALUE=DATE:20261231
 DTEND;VALUE=DATE:20270101
 SUMMARY:Grant deadline: Housing Development Grant Program (HDGP / Trust F
@@ -520,7 +609,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:4c3700bee5694065@proudground
-DTSTAMP:20260627T021001Z
+DTSTAMP:20260627T063356Z
 DTSTART;VALUE=DATE:20261231
 DTEND;VALUE=DATE:20270101
 SUMMARY:Grant deadline: Strategic Projects: Program & Staff / Equipment &
@@ -552,7 +641,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:f9c1ec0e8956efef@proudground
-DTSTAMP:20260627T021001Z
+DTSTAMP:20260627T063356Z
 DTSTART;VALUE=DATE:20261231
 DTEND;VALUE=DATE:20270101
 SUMMARY:Grant deadline: Tenant & Housing Justice Grant (Social Justice Fu
@@ -581,7 +670,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:0c82898e69347b8e@proudground
-DTSTAMP:20260627T021001Z
+DTSTAMP:20260627T063356Z
 DTSTART;VALUE=DATE:20261231
 DTEND;VALUE=DATE:20270101
 SUMMARY:Grant deadline: Community Grants & Sponsorships (OnPoint Communit
@@ -609,8 +698,68 @@ DESCRIPTION:1 week until Community Grants & Sponsorships deadline
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
+UID:40aa3de86101db8e@proudground
+DTSTAMP:20260627T063356Z
+DTSTART;VALUE=DATE:20270223
+DTEND;VALUE=DATE:20270224
+SUMMARY:Grant deadline: Marie Lamfrom Charitable Foundation Grant (Marie 
+ Lamfrom Charitable Foundation)
+DESCRIPTION:Funder: Marie Lamfrom Charitable Foundation\nAmount: Varies 
+ — see funder page\nStatus: Annual – verify window\nFit: Medium–Hig
+ h – Oregon/SW-Washington family foundation supporting health\, housing
+ \, and social services.\n\nDeadline detail: Annual cycle — calendar no
+ tes a ~February window and an earlier 'submit early' recommendation\; co
+ nfirm the exact current deadline on the funder site.\n\nEligibility: 501
+ (c)(3) nonprofits in the foundation's OR/SW-WA focus area — confirm on
+  the funder site.\n\nApply: https://www.marielamfrom.org/
+URL:https://www.marielamfrom.org/
+TRANSP:TRANSPARENT
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P30D
+ACTION:DISPLAY
+DESCRIPTION:30 days until Marie Lamfrom Charitable Foundation Grant deadl
+ ine
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:1 week until Marie Lamfrom Charitable Foundation Grant deadli
+ ne
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:a1b604645b2b66b5@proudground
+DTSTAMP:20260627T063356Z
+DTSTART;VALUE=DATE:20270331
+DTEND;VALUE=DATE:20270401
+SUMMARY:Grant deadline: Focus Grants (Community Foundation for Southwest 
+ Washington)
+DESCRIPTION:Funder: Community Foundation for Southwest Washington\nAmount
+ : Varies — see funder page\nStatus: Annual – verify window\nFit: Hig
+ h – serves SW Washington (Clark County and surrounding)\, part of Prou
+ d Ground's service area.\n\nDeadline detail: Annual Focus Grants cycle (
+ last documented deadline ~March 31). Confirm the next cycle's exact date
+ s on the funder site.\n\nEligibility: Nonprofits serving Southwest Washi
+ ngton — confirm county coverage and focus areas on the funder site.\n\
+ nApply: https://www.cfsww.org/grant-programs/focus-grants
+URL:https://www.cfsww.org/grant-programs/focus-grants
+TRANSP:TRANSPARENT
+STATUS:CONFIRMED
+BEGIN:VALARM
+TRIGGER:-P30D
+ACTION:DISPLAY
+DESCRIPTION:30 days until Focus Grants deadline
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:1 week until Focus Grants deadline
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 UID:158d66ee6b61a3f1@proudground
-DTSTAMP:20260627T021001Z
+DTSTAMP:20260627T063356Z
 DTSTART;VALUE=DATE:20270501
 DTEND;VALUE=DATE:20270502
 SUMMARY:Grant deadline: Competitive Affordable Housing Program (AHP) (Fed
@@ -644,7 +793,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:b0e314b107a79a0c@proudground
-DTSTAMP:20260627T021001Z
+DTSTAMP:20260627T063356Z
 DTSTART;VALUE=DATE:20270515
 DTEND;VALUE=DATE:20270516
 SUMMARY:Grant deadline: Housing Affordability Breakthrough Challenge (Wel
@@ -678,7 +827,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:2e7b53652cd4f615@proudground
-DTSTAMP:20260627T021001Z
+DTSTAMP:20260627T063356Z
 DTSTART;VALUE=DATE:20270609
 DTEND;VALUE=DATE:20270610
 SUMMARY:Grant deadline: Authority to Accept Unsolicited Proposals for Res
@@ -710,7 +859,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:59d06f4e7ec761e0@proudground
-DTSTAMP:20260627T021001Z
+DTSTAMP:20260627T063356Z
 DTSTART;VALUE=DATE:20270701
 DTEND;VALUE=DATE:20270702
 SUMMARY:Grant deadline: Neighborhood Builders® (Bank of America Charitab

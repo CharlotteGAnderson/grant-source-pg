@@ -27,3 +27,13 @@ Thumbs.db
 
 # --- Build/distribution artifacts that should never be committed ---
 *.zip
+
+# --- Internal source spreadsheets / exports: may contain donor + major-gift
+#     PII and internal notes. NEVER commit to this public repo. Only the
+#     vetted public-grant fields belong in grants-curated.json. ---
+*.xlsx
+*.xls
+*.xlsm
+*.numbers
+*.csv
+*.tsv
