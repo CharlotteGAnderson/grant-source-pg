@@ -311,114 +311,52 @@ const CAT_LABEL = {
   all: "All", "community foundation": "Community foundations",
   "housing foundation": "Housing foundations", "charitable trust": "Charitable trusts",
 };
-// Rough OR / WA silhouettes (lat,lng) — stylized, projected with the dots.
-const OR_OUTLINE = [[46.26,-123.96],[46.15,-123.45],[46.18,-123.0],[45.92,-122.78],[45.65,-121.8],[45.7,-121.2],[45.6,-119.7],[45.93,-118.0],[46.0,-116.92],[44.3,-116.83],[42.9,-117.03],[42.0,-117.03],[42.0,-120.0],[42.0,-123.35],[42.0,-124.21],[42.84,-124.55],[43.34,-124.38],[44.27,-124.08],[45.05,-124.01],[45.77,-123.96],[46.26,-123.96]];
-const WA_OUTLINE = [[45.6,-123.96],[46.27,-124.06],[46.9,-124.1],[47.35,-124.42],[48.39,-124.73],[48.3,-123.1],[49.0,-123.0],[49.0,-117.03],[46.43,-117.04],[46.0,-116.92],[45.93,-118.0],[45.6,-119.7],[45.7,-121.2],[45.65,-121.8],[45.55,-122.25],[45.6,-122.78],[45.6,-123.96]];
-const MAP_BOX = { latMin: 41.8, latMax: 49.1, lngMin: -124.85, lngMax: -116.3, W: 520, H: 460, pad: 14 };
-const MAP_LANDMARKS = [["Portland",45.52,-122.68],["Eugene",44.05,-123.09],["Bend",44.06,-121.31],["Medford",42.33,-122.87],["Seattle",47.61,-122.33],["Spokane",47.66,-117.43]];
+// Esri World Imagery — satellite basemap, no API key required (attribution req'd).
+const ESRI_IMAGERY = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
+const ESRI_ATTR = "Imagery &copy; Esri, Maxar, Earthstar Geographics &amp; the GIS User Community";
+let funderMapObj = null;        // the Leaflet map instance
+let funderLayer = null;         // layer group holding the current markers
 
-function project(lat, lng) {
-  const b = MAP_BOX;
-  const x = b.pad + (lng - b.lngMin) / (b.lngMax - b.lngMin) * (b.W - 2 * b.pad);
-  const y = b.pad + (b.latMax - lat) / (b.latMax - b.latMin) * (b.H - 2 * b.pad);
-  return [x, y];
-}
-function polyPoints(pts) {
-  return pts.map(([la, ln]) => project(la, ln).map((n) => n.toFixed(1)).join(",")).join(" ");
+function ensureFunderMap() {
+  if (funderMapObj || !window.L || !$("#funderMap")) return funderMapObj;
+  funderMapObj = L.map("funderMap", {
+    center: [44.9, -122.0], zoom: 7, minZoom: 5, maxZoom: 18,
+    scrollWheelZoom: true, worldCopyJump: false,
+  });
+  L.tileLayer(ESRI_IMAGERY, { attribution: ESRI_ATTR, maxZoom: 18, maxNativeZoom: 19 }).addTo(funderMapObj);
+  funderLayer = L.layerGroup().addTo(funderMapObj);
+  return funderMapObj;
 }
 
 function renderFunderMap() {
-  const svg = $("#funderMap");
-  if (!svg) return;
+  if (!ensureFunderMap()) return;
+  funderLayer.clearLayers();
   const list = filteredFunders().filter((p) => p.lat != null && p.lng != null);
-  const seen = {};
-  const dots = list.map((p) => {
-    let [x, y] = project(p.lat, p.lng);
-    const k = `${x.toFixed(0)},${y.toFixed(0)}`;        // spread out funders in the same town
-    const n = seen[k] = (seen[k] || 0) + 1;
-    if (n > 1) { const a = n * 2.2; x += Math.cos(a) * (4 + n); y += Math.sin(a) * (4 + n); }
+  const pts = [];
+  list.forEach((p) => {
     const color = CAT_COLOR[p.matched_on] || "#2f6b5e";
-    return `<circle class="dot" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="6" fill="${color}"
-      data-name="${esc(p.name)}" data-loc="${esc(p.location || "")}" data-url="${esc(safeUrl(p.url))}"
-      data-cat="${esc(CAT_LABEL[p.matched_on] || p.matched_on || "")}" data-ein="${esc(p.ein || "")}"
-      data-summary="${esc(p.summary || "")}">
-      <title>${esc(p.name)} — ${esc(p.location || "")}</title></circle>`;
-  }).join("");
-  const labels = MAP_LANDMARKS.map(([nm, la, ln]) => {
-    const [x, y] = project(la, ln);
-    return `<text class="lbl" x="${(x + 6).toFixed(1)}" y="${(y + 3).toFixed(1)}">${esc(nm)}</text>
-            <circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="2" fill="#46605c"/>`;
-  }).join("");
-  svg.innerHTML =
-    `<rect class="water" x="0" y="0" width="${MAP_BOX.W}" height="${MAP_BOX.H}"/>
-     <polygon class="land" points="${polyPoints(WA_OUTLINE)}"/>
-     <polygon class="land" points="${polyPoints(OR_OUTLINE)}"/>
-     ${labels}${dots}`;
-
-  mapView = { x: 0, y: 0, w: MAP_BOX.W, h: MAP_BOX.H };  // reset zoom on (re)render
-  applyMapView();
-  closeFunderPopup();
+    const m = L.circleMarker([p.lat, p.lng], {
+      radius: 7, color: "#fff", weight: 2, fillColor: color, fillOpacity: 0.95,
+    });
+    const profile = (p.url && safeUrl(p.url) !== "#")
+      ? `<a class="m-btn primary" href="${esc(safeUrl(p.url))}" target="_blank" rel="noopener noreferrer">Open 990 profile &#8599;</a>` : "";
+    m.bindPopup(
+      `<div class="fp-cat">${esc(CAT_LABEL[p.matched_on] || p.matched_on || "Local funder")}</div>
+       <h4>${esc(p.name)}</h4>
+       <div class="fp-loc">&#128205; ${esc(p.location || "")}${p.ein ? " &middot; EIN " + esc(p.ein) : ""}</div>
+       <p class="fp-sum">${esc(p.summary || "")}</p>${profile}`,
+      { maxWidth: 260 });
+    m.bindTooltip(esc(p.name));
+    m.addTo(funderLayer);
+    pts.push([p.lat, p.lng]);
+  });
+  if (pts.length) funderMapObj.fitBounds(pts, { padding: [40, 40], maxZoom: 11 });
 
   const total = DATA.prospects.filter((p) => p.lat != null).length;
   $("#mapNote").textContent =
     `Showing ${list.length} mapped funder${list.length === 1 ? "" : "s"}` +
     (funderCat === "all" ? ` of ${total} with known locations.` : ` in "${CAT_LABEL[funderCat]}".`) +
-    " Scroll or use +/− to zoom, drag to pan, and click a dot for details.";
-}
-
-/* ---------- funder map: zoom / pan / popup ---------- */
-let mapView = { x: 0, y: 0, w: MAP_BOX.W, h: MAP_BOX.H };
-
-function applyMapView() {
-  const svg = $("#funderMap"); if (!svg) return;
-  const v = mapView;
-  svg.setAttribute("viewBox", `${v.x.toFixed(2)} ${v.y.toFixed(2)} ${v.w.toFixed(2)} ${v.h.toFixed(2)}`);
-  const s = v.w / MAP_BOX.W;  // keep dots/labels a roughly constant on-screen size
-  svg.querySelectorAll(".dot").forEach((d) => d.setAttribute("r", (6 * s).toFixed(2)));
-  svg.querySelectorAll(".lbl").forEach((t) => t.setAttribute("font-size", (11 * s).toFixed(2)));
-}
-function clampMapView() {
-  const v = mapView;
-  v.w = Math.max(8, Math.min(MAP_BOX.W, v.w));
-  v.h = v.w * (MAP_BOX.H / MAP_BOX.W);
-  v.x = Math.max(0, Math.min(MAP_BOX.W - v.w, v.x));
-  v.y = Math.max(0, Math.min(MAP_BOX.H - v.h, v.y));
-}
-function mapZoom(factor, cx, cy) {
-  const v = mapView;
-  cx = cx == null ? v.x + v.w / 2 : cx;
-  cy = cy == null ? v.y + v.h / 2 : cy;
-  const rx = (cx - v.x) / v.w, ry = (cy - v.y) / v.h;
-  v.w *= factor; clampMapView();
-  v.x = cx - rx * v.w; v.y = cy - ry * v.h; clampMapView();
-  applyMapView();
-}
-function clientToSvg(svg, clientX, clientY) {
-  const r = svg.getBoundingClientRect(), v = mapView;
-  return [v.x + (clientX - r.left) / r.width * v.w, v.y + (clientY - r.top) / r.height * v.h];
-}
-function closeFunderPopup() { const p = $("#funderPop"); if (p) p.hidden = true; }
-function openFunderPopup(dot, clientX, clientY) {
-  const pop = $("#funderPop"), wrap = $("#funderMap").closest(".map-wrap");
-  if (!pop) return;
-  const d = dot.dataset;
-  const profile = d.url && d.url !== "#"
-    ? `<a class="m-btn primary" href="${esc(d.url)}" target="_blank" rel="noopener noreferrer">Open 990 profile &#8599;</a>` : "";
-  pop.innerHTML =
-    `<button class="fp-close" type="button" aria-label="Close">&times;</button>
-     <div class="fp-cat">${esc(d.cat || "Local funder")}</div>
-     <h4>${esc(d.name)}</h4>
-     <div class="fp-loc">&#128205; ${esc(d.loc || "")}${d.ein ? " &middot; EIN " + esc(d.ein) : ""}</div>
-     <p class="fp-sum">${esc(d.summary || "")}</p>
-     ${profile}`;
-  const r = wrap.getBoundingClientRect();
-  let left = clientX - r.left, top = clientY - r.top;
-  left = Math.max(8, Math.min(r.width - 248, left));
-  top = Math.max(8, Math.min(r.height - 40, top));
-  pop.style.left = left + "px";
-  pop.style.top = top + "px";
-  pop.hidden = false;
-  pop.querySelector(".fp-close").addEventListener("click", closeFunderPopup);
+    " Scroll or use +/− to zoom into the satellite imagery, drag to pan, and click a marker for details.";
 }
 
 function buildFunderCatFilters() {
@@ -487,6 +425,10 @@ function switchTab(name) {
   document.querySelectorAll(".tabpanel").forEach((p) => p.classList.toggle("active", p.id === `tab-${name}`));
   window.scrollTo(0, 0);
   if (name === "overview") renderCharts();
+  if (name === "funders" && funderMapObj) {
+    // Leaflet must recalc size now that the (previously display:none) map is visible.
+    setTimeout(() => { funderMapObj.invalidateSize(); renderFunderMap(); }, 60);
+  }
 }
 
 function renderMeta() {
@@ -668,56 +610,6 @@ $("#miniViewAll").addEventListener("click", () => {
   buildOppFilters(); renderOpps(); switchTab("opps");
 });
 $("#newsSearch").addEventListener("input", (e) => { newsQuery = e.target.value; renderNews(); });
-
-// Funder map: scroll/buttons to zoom, drag to pan, click a dot for a popup.
-(() => {
-  const map = $("#funderMap"), tip = $("#mapTip"), wrap = map.closest(".map-wrap");
-  let dragging = false, moved = false, sx = 0, sy = 0, sView = null;
-
-  map.addEventListener("wheel", (e) => {
-    e.preventDefault();
-    const [cx, cy] = clientToSvg(map, e.clientX, e.clientY);
-    mapZoom(e.deltaY < 0 ? 1 / 1.25 : 1.25, cx, cy);
-    tip.hidden = true;
-  }, { passive: false });
-
-  map.addEventListener("mousedown", (e) => {
-    dragging = true; moved = false; sx = e.clientX; sy = e.clientY;
-    sView = { ...mapView }; map.style.cursor = "grabbing";
-  });
-  window.addEventListener("mousemove", (e) => {
-    if (dragging) {
-      const r = map.getBoundingClientRect();
-      const dx = e.clientX - sx, dy = e.clientY - sy;
-      if (Math.abs(dx) + Math.abs(dy) > 4) moved = true;
-      mapView.x = sView.x - dx / r.width * sView.w;
-      mapView.y = sView.y - dy / r.height * sView.h;
-      clampMapView(); applyMapView();
-      tip.hidden = true;
-      return;
-    }
-    const dot = e.target.closest && e.target.closest(".dot");  // hover name tooltip
-    if (!dot) { tip.hidden = true; return; }
-    const r = wrap.getBoundingClientRect();
-    tip.innerHTML = `${esc(dot.dataset.name)}<small>${esc(dot.dataset.loc)}</small>`;
-    tip.style.left = (e.clientX - r.left) + "px";
-    tip.style.top = (e.clientY - r.top) + "px";
-    tip.hidden = false;
-  });
-  window.addEventListener("mouseup", () => { if (dragging) { dragging = false; map.style.cursor = "grab"; } });
-  map.addEventListener("mouseleave", () => { tip.hidden = true; });
-
-  map.addEventListener("click", (e) => {
-    if (moved) return;                       // was a pan, not a click
-    const dot = e.target.closest(".dot");
-    if (dot) { tip.hidden = true; openFunderPopup(dot, e.clientX, e.clientY); }
-    else closeFunderPopup();
-  });
-
-  $("#mapZoomIn").addEventListener("click", () => mapZoom(1 / 1.4));
-  $("#mapZoomOut").addEventListener("click", () => mapZoom(1.4));
-  $("#mapReset").addEventListener("click", () => { mapView = { x: 0, y: 0, w: MAP_BOX.W, h: MAP_BOX.H }; applyMapView(); closeFunderPopup(); });
-})();
 
 buildOppFilters();
 buildFunderCatFilters();

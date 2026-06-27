@@ -37,6 +37,9 @@ Out of scope (please report to the relevant owner instead):
   this project reads from. We do not control them.
 - **cdn.jsdelivr.net** — the CDN that serves Chart.js (pinned with Subresource
   Integrity in this project).
+- **server.arcgisonline.com** — Esri World Imagery satellite tiles for the Local
+  Funders map. Only raster image tiles are loaded (allowed via `img-src`); no
+  API key is used and no data is sent to Esri beyond the tile coordinates.
 - Inaccurate, outdated, or incomplete grant data. This is a research aid, not
   authoritative — always confirm details on the funder's official page. Data
   accuracy issues are bugs, not security vulnerabilities; please open a normal
@@ -58,6 +61,9 @@ For transparency, the measures already in place:
   connection sources; there are no inline scripts.
 - **Subresource Integrity.** The single external script (Chart.js) is pinned to
   an exact version with an SRI hash, so a tampered CDN file will not execute.
+- **No third-party map JS.** The map library (Leaflet) is self-hosted, so the
+  only cross-origin requests the map makes are for satellite image tiles. No
+  Google Maps / Street View API key is used anywhere.
 - **Least-privilege CI.** The deploy workflow requests only the permissions it
   needs (`contents: read`, `pages: write`, `id-token: write`) and is not
   triggered by pull requests from forks.

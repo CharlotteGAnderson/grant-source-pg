@@ -8,7 +8,8 @@
 <!-- Content Security Policy: only our own files + the Chart.js CDN may load.
      No inline event handlers, no third-party data exfiltration paths. -->
 <meta http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'">
+      content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://server.arcgisonline.com https://*.arcgisonline.com; connect-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'">
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css">
 <style>
   :root{
     --ink:#172220; --ink-soft:#46605c; --ink-mute:#7c8c88;
@@ -209,34 +210,17 @@
     color:var(--brand-dk);background:var(--panel);cursor:pointer;font-family:inherit;margin-left:6px}
   .detail-btn:hover{border-color:var(--brand)}
 
-  /* ---- funder map ---- */
-  .map-wrap{position:relative;margin-top:12px;background:#eaf1ee;border:1px solid var(--line);border-radius:12px;overflow:hidden;max-width:600px}
-  #funderMap{display:block;width:100%;height:auto;cursor:grab;touch-action:none}
-  #funderMap:active{cursor:grabbing}
-  .map-zoom{position:absolute;top:10px;right:10px;display:flex;flex-direction:column;gap:6px;z-index:6}
-  .map-zoom button{width:32px;height:32px;border-radius:8px;border:1px solid var(--line);background:#fff;
-    color:var(--ink);font-size:1.1rem;font-weight:700;line-height:1;cursor:pointer;box-shadow:var(--shadow-sm)}
-  .map-zoom button:hover{border-color:var(--brand);color:var(--brand-dk)}
-  .funder-pop{position:absolute;z-index:7;width:240px;background:var(--card);border:1px solid var(--line);
-    border-radius:12px;box-shadow:0 12px 34px rgba(23,34,32,.24);padding:14px 14px 12px;transform:translate(-50%,-108%)}
-  .funder-pop .fp-close{position:absolute;top:6px;right:8px;background:none;border:0;font-size:1.2rem;line-height:1;cursor:pointer;color:var(--ink-mute)}
-  .funder-pop .fp-cat{font-size:.66rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--prospect)}
-  .funder-pop h4{margin:3px 0 4px;font-size:.95rem;line-height:1.25;color:var(--ink);padding-right:14px}
-  .funder-pop .fp-loc{font-size:.78rem;color:var(--ink-soft);margin-bottom:8px}
-  .funder-pop .fp-sum{font-size:.8rem;color:var(--ink-soft);margin:0 0 12px;max-height:160px;overflow:auto}
-  .funder-pop .m-btn{display:inline-flex;width:100%;justify-content:center;font-size:.82rem;padding:9px 12px}
-  #funderMap .land{fill:#dde9e2;stroke:#b9cfc6;stroke-width:1}
-  #funderMap .water{fill:#dCEAF0}
-  #funderMap .dot{cursor:pointer;stroke:#fff;stroke-width:1.2;transition:r .1s}
-  #funderMap .dot:hover{r:9}
-  #funderMap .lbl{font-size:11px;fill:#46605c;font-weight:700}
-  .map-tip{position:absolute;pointer-events:none;background:var(--brand-dk);color:#fff;font-size:.78rem;
-    font-weight:600;padding:6px 10px;border-radius:8px;box-shadow:var(--shadow);transform:translate(-50%,-130%);white-space:nowrap;z-index:5}
-  .map-tip small{display:block;font-weight:500;color:#bcd8cf}
+  /* ---- funder map (Leaflet + Esri satellite) ---- */
+  .map-wrap{position:relative;margin-top:12px;background:#dfe7e3;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  #funderMap{width:100%;height:480px}
+  .leaflet-container{background:#dfe7e3;font:inherit}
+  .leaflet-popup-content{margin:12px 14px;font-size:.85rem;color:var(--ink)}
+  .leaflet-popup-content .fp-cat{font-size:.64rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--prospect)}
+  .leaflet-popup-content h4{margin:3px 0 4px;font-size:.98rem;line-height:1.25;color:var(--ink)}
+  .leaflet-popup-content .fp-loc{font-size:.78rem;color:var(--ink-soft);margin-bottom:8px}
+  .leaflet-popup-content .fp-sum{font-size:.8rem;color:var(--ink-soft);margin:0 0 12px}
+  .leaflet-popup-content .m-btn{display:inline-flex;width:100%;justify-content:center;font-size:.82rem;padding:9px 12px;box-sizing:border-box}
   .map-note{font-size:.78rem;color:var(--ink-mute);margin:10px 2px 0}
-  .map-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.78rem;color:var(--ink-soft);margin:12px 2px 0}
-  .map-legend span{display:inline-flex;align-items:center;gap:6px}
-  .map-legend i{width:11px;height:11px;border-radius:50%;display:inline-block}
 
   /* ---- news ---- */
   .news-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
@@ -351,19 +335,12 @@
       <div class="mini-head">
         <div>
           <h2>Where the funders are</h2>
-          <p class="sub">Regional grantmakers across Oregon &amp; SW Washington. Scroll or use +/&minus; to zoom in, drag to pan, and click a dot for a description. Filters apply to the map and the list below.</p>
+          <p class="sub">Regional grantmakers across Oregon &amp; SW Washington on satellite imagery. Scroll or use +/&minus; to zoom to street level, drag to pan, and click a marker for a description. Filters apply to the map and the list below.</p>
         </div>
       </div>
       <div class="filters" id="funderCatFilters"></div>
       <div class="map-wrap">
-        <svg id="funderMap" viewBox="0 0 520 460" role="img" aria-label="Map of regional funders"></svg>
-        <div class="map-zoom">
-          <button id="mapZoomIn" type="button" aria-label="Zoom in">+</button>
-          <button id="mapZoomOut" type="button" aria-label="Zoom out">&minus;</button>
-          <button id="mapReset" type="button" aria-label="Reset view">&#8634;</button>
-        </div>
-        <div class="map-tip" id="mapTip" hidden></div>
-        <div class="funder-pop" id="funderPop" hidden></div>
+        <div id="funderMap" role="img" aria-label="Satellite map of regional funders"></div>
       </div>
       <p class="map-note" id="mapNote"></p>
     </div>
@@ -459,6 +436,9 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"
         integrity="sha384-9nhczxUqK87bcKHh20fSQcTGD4qq5GhayNYSYWqwBkINBhOfQLg/P5HG5lF1urn4"
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="app.js?v=4"></script>
+<!-- Self-hosted Leaflet (no third-party JS executes; only Esri satellite tile
+     images are loaded cross-origin, allowed via img-src in the CSP above). -->
+<script src="vendor/leaflet/leaflet.js"></script>
+<script src="app.js?v=5"></script>
 </body>
 </html>
